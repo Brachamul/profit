@@ -1,0 +1,383 @@
+@import url(reset.css); /* resets all styles */
+
+@font-face {
+    font-family: 'Berkshire Swash';
+    src: url('fonts/berkshireswash-regular-webfont.eot');
+    src: url('fonts/berkshireswash-regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/berkshireswash-regular-webfont.woff') format('woff'),
+    url('fonts/berkshireswash-regular-webfont.ttf') format('truetype'),
+    url('fonts/berkshireswash-regular-webfont.svg#berkshire_swashregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Average';
+    src: url('fonts/average-regular-webfont.eot');
+    src: url('fonts/average-regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/average-regular-webfont.woff') format('woff'),
+    url('fonts/average-regular-webfont.ttf') format('truetype'),
+    url('fonts/average-regular-webfont.svg#averageregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*
+ * General Formatting
+ *
+ */
+
+html {
+    background-color: black;
+    font-size: 100%;
+    height: 100%;
+    width: 100vw;
+
+}
+
+body {
+    font-family: "Average";
+    font-weight: 100;
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    line-height: 1;
+    overflow-x: hidden;
+}
+
+div {
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box; /* Firefox, other Gecko */
+    box-sizing: border-box; /* Opera/IE 8+ */
+}
+
+h1, h2, h3, h4 {
+    font-family: "Berkshire Swash", serif;
+    line-height: 1.2;
+    margin-top: 1em;
+    margin-bottom: .2em;
+}
+
+h1 {font-size: 2.0rem;}
+h2 {font-size: 1.6rem;}
+h3 {font-size: 1.2rem;}
+h4 {font-size: 0.8rem;
+    text-transform: uppercase;}
+
+li:before {
+    content: "- ";
+}
+
+ul.links li:before {
+    content: "+ ";
+}
+
+li {
+    font-size: 1em;
+}
+
+.big {
+    font-size: 1.2rem;
+}
+
+.bigger {
+    font-size: 1.4rem;
+}
+
+
+strong {
+    font-weight: bold;
+}
+
+p {
+    line-height: 1.5;
+    font-family: "Average", serif;
+}
+
+p img {
+    height: 1em;
+    vertical-align: bottom;
+}
+
+p + p,
+p + form {
+    margin-top: 1rem;
+}
+
+.icon {
+    height: 1rem;
+    vertical-align: bottom;
+
+}
+
+/*
+ * Header
+ *
+ */
+
+header {
+    color: white;
+    text-align: center;
+    padding: 1.25rem 0; /* Fallback */
+    padding: 2.5vw 0;
+    width: 100%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+header div:nth-child(1) {
+    font-size: 3em;
+    font-family: "Berkshire Swash", serif;
+}
+
+header div:nth-child(2) {
+    font-size: 1.4em;
+    margin-top: .2em;
+}
+
+
+
+/*
+ * Header
+ *
+ */
+
+div.message {
+    background-color: white;
+    text-align: center;
+    padding-top: 1rem;
+    font-style: italic;
+}
+
+
+
+/*
+ * Layout
+ *
+ */
+
+div#content {
+    padding: 2rem 1rem; /* Fallback */
+    padding: 4vh 1rem;
+    margin: 0 auto;
+    clear: both;
+    max-width: 1008px; /* 56rem * 18px */
+    overflow: contain;
+}
+
+div.white-wrapper {
+    background-color: white;
+    width: 100%;
+}
+
+/*
+ * Sections
+ *
+ */
+
+hr {
+    margin-top: 1rem;
+}
+
+section {
+    float: left;
+    text-align: left;
+    padding: 0 1.5rem;
+    width: 24rem;
+    vertical-align: top;
+}
+
+section + section {
+    padding-top: 2rem;
+}
+
+/* Used when I want two columns of text that merge seamlessly on low resolution */
+section + section.fake-column {
+    padding-top: 0;
+}
+
+
+
+/*
+ * Placeholders
+ *
+ */
+
+.placeholder {
+    background-color: gray;
+    padding: .5rem;
+    text-align: center;
+}
+
+/*
+ * Form Styling
+ *
+ */
+
+form {
+    line-height: 1.5;
+}
+
+form .formline {
+    overflow: hidden;
+    margin-bottom: .2rem;
+}
+
+form .formline label {
+    float: left;
+}
+
+form .formline span {
+    display: block;
+    overflow: hidden;
+    padding: 0 5px;
+}
+
+label {
+    font-family: 'Berkshire Swash', serif;
+    text-transform: lowercase;
+    padding-left: 2rem;
+}
+
+input {
+    background-color: white;
+    border: none;
+    font-family: 'Average', serif;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+input[type=text],
+input[type=email],
+input[type=password] {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    display: inline;
+    font-size: 1rem;
+    text-align: right;
+}
+
+input[type=button],
+input[type=submit] {
+    float: right;
+    font-size: 1.5rem;
+    margin: 1rem 1rem 0 1rem;
+    padding: 1rem;
+    line-height: 1;
+    font-family: 'Berkshire Swash', serif;
+    cursor: pointer;
+}
+
+
+
+/* Login Box */
+
+.loginbox {
+    border: 0.100rem solid black;
+    border-radius: .2rem;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box; /* Firefox, other Gecko */
+    box-sizing: border-box; /* Opera/IE 8+ */
+    margin: 1rem;
+    box-shadow: 0 0 0.200em black;
+    display: inline-block;
+    padding: .5rem;
+}
+
+.loginbox h2 {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.loginbox > div {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 0.2rem;
+}
+
+.loginbox .fields {
+    min-width: 16rem;
+}
+
+/*
+ * User Page
+ *
+ */
+
+.trophies {
+    width: 100%;
+    height: 3rem;
+    margin-bottom: .2rem;
+}
+
+.avatar {
+    float: right;
+    width: 10rem;
+    display: inline-block;
+    height: 10rem;
+}
+
+.resumay {
+    width: 19rem;
+    display: inline-block;
+    min-height: 10rem;
+}
+
+.mapthumbnail {
+    width: 100%;
+    height: 12rem;
+    margin-bottom: .25rem;
+}
+
+
+div.end-float {
+    clear: both;
+    height: 1px;
+}
+
+/* TEMP */
+section.citylist {
+    display: none;
+}
+
+
+
+
+/*
+ * Footer
+ *
+ */
+
+
+footer {
+    background-color: black;
+    height: 1rem;
+    color: white;
+    text-align: center;
+}
+
+
+
+/*
+ * Responsive !
+ *
+ * Size of screen is 56rem
+ * Container padding : 1 + 1
+ * Section padding : 1.5 + 1.5 + 1.5 + 1.5
+ * Section width : 24 + 24
+ *
+ */
+
+html { font-size: 18px; }
+
+@media (max-width: 1008px) {
+    html { font-size: 14px;
+           font-size: 1.784vw; }
+}
+
+@media (max-width: 800px) {
+    html { font-size: 12px;
+           font-size: 3.370vw; }
+}

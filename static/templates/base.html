@@ -1,0 +1,40 @@
+{% load staticfiles %}
+
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="/static/style.css" media="screen" />
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' /> <!-- Prevents autozoom on mobile devices -->
+</head>
+
+
+<body>
+
+<header class="title">
+    <div>Profit</div>
+    <div>The game where greed is good</div>
+</header>
+
+{% if messages %}
+    {% for message in messages %}
+        <div {% if message.tags == "success" %} class="message" {% endif %} >{{ message }}</div>
+    {% endfor %}
+{% endif %}
+
+
+<div class="white-wrapper">
+<div id="content">
+    {% block content %}
+    No data to display !
+    {% endblock content %}
+    <div class="end-float"></div>
+</div>
+</div>
+
+</body>
+
+<footer>
+
+</footer>
+
+</html>

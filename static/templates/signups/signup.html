@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <section>
+
+        <p>“I can't believe it's been so many years already !</p>
+
+        <p>Oh,  I remember when you first walked in here and cleaned out my purse while I was doing the paperwork.<br>I guess this degree deserved you eh ?</p>
+
+        <p>You're a fully trained Financier now, you can legally hire, buy, build and sell anything you want. But you'll need money for that, won't you ?</p>
+
+        <p>Ah, I'm just messing with you. The king's men are going to be here in a few days with your <em>complementary</em> chestful of gold. I'm told they've already assigned you to a place. It's a minuscule settlement, quite far away from here. I'm sure you'll find profitable endeavours there though, even among those peasants.</p>
+
+    </section>
+
+    <section class="fake-column">
+
+        <p>Be warned, you will not be alone. Other Financiers are being sent, and they will attempt to reap the benefits of this soon-to-be growing town. Competition is bad for business, you know, so you <em>might</em> want to do something about that.</p>
+
+        <p>I'll send you a note when the gold arrives and you can make ready. Just fill in your contact details !”</p>
+
+        <br><br><br>
+
+        <form method="post" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Sign">
+        </form>
+
+    </section>
+
+    <br><br><br><br>
+
+{% endblock content %}
