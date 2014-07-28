@@ -20,13 +20,16 @@
 
         <p>I'll send you a note when the gold arrives and you can make ready. Just fill in your contact details !”</p>
 
-        <br><br><br>
+        <br><br>
 
-        <form method="post" action="">
+        <form class="newsletter-form" method="post" action="">
+            <br>
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Sign">
         </form>
+
+        <p class="yay-newsletter">Alright, thank you !<br>I'll be in touch with further details.</p>
 
     </section>
 

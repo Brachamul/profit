@@ -99,7 +99,8 @@ p img {
 }
 
 p + p,
-p + form {
+p + form,
+*:not(p) + p {
     margin-top: 1rem;
 }
 
@@ -268,6 +269,25 @@ input[type=submit] {
     line-height: 1;
     font-family: 'Berkshire Swash', serif;
     cursor: pointer;
+}
+
+/* Newsletter form confirm message ! */
+
+.message {
+    display: none;
+}
+
+.message + div div form.newsletter-form {
+    display: none;
+}
+
+.message + div div p.yay-newsletter {
+    display: block;
+}
+
+p.yay-newsletter {
+    display: none;
+    font-weight: bold;
 }
 
 
