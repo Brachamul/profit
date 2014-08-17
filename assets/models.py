@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils.encoding import smart_text
 from django.core.exceptions import ValidationError
 
 # Create your models here.
@@ -8,6 +7,7 @@ from django.core.exceptions import ValidationError
 
 class Item(models.Model):
 	name = models.CharField(max_length=255)
+	description = models.TextField(max_length=255)
 #	illustration = models.ImageField(upload_to=)
 
 	def __str__(self):
@@ -41,7 +41,7 @@ class DevelopmentProject(models.Model):
 
 
 
-def validate_material_quantity(talue):
+def validate_material_quantity(value):
 	if value % 10 != 0:
 		raise ValidationError('Please input a multiple of 10.')
 
