@@ -1,21 +1,30 @@
 from django.contrib import admin
-from django.forms.models import inlineformset_factory
 
 # Register your models here.
 
 from .models import Item, Feature, RequiredMaterial, DevelopmentProject
+from .forms import DevelopmentProjectFormSet
 
 
 class ItemAdmin(admin.ModelAdmin):
 	model = Item
+	list_display = ("name", "description")
 
 admin.site.register(Item, ItemAdmin)
 
 
 
+class DevelopmentProjectBecomes(admin.StackedInline):
+	# For each feature, display development projects that can lead to it
+    model = DevelopmentProject
+    fk_name = 'becomes'
+    formset = DevelopmentProjectFormSet
+    extra = 0
+
 class FeatureAdmin(admin.ModelAdmin):
 	model = Feature
-#	DevelopmentProjectFormSet = inlineformset_factory(Feature,DevelopmentProject)
+	list_display = ("name", "description")
+	inlines = [DevelopmentProjectBecomes, ]
 
 admin.site.register(Feature, FeatureAdmin)
 
