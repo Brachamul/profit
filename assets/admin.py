@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 
 from .models import Item, Feature, RequiredMaterial, DevelopmentProject
-from .forms import DevelopmentProjectFormSet
+
 
 
 class ItemAdmin(admin.ModelAdmin):
@@ -16,10 +16,10 @@ admin.site.register(Item, ItemAdmin)
 
 class DevelopmentProjectBecomes(admin.StackedInline):
 	# For each feature, display development projects that can lead to it
-    model = DevelopmentProject
-    fk_name = 'becomes'
-    formset = DevelopmentProjectFormSet
-    extra = 0
+	model = DevelopmentProject
+	fk_name = 'becomes'
+#	formset = DevelopmentProjectFormSet - just a reminder to come back and fix this one day
+	extra = 0
 
 class FeatureAdmin(admin.ModelAdmin):
 	model = Feature
