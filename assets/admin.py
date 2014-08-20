@@ -9,7 +9,7 @@ from .forms import DevelopmentProjectInlineForm
 
 class ItemAdmin(admin.ModelAdmin):
 	model = Item
-	list_display = ("name", "description")
+	list_display = ("name", "pk", "description")
 
 admin.site.register(Item, ItemAdmin)
 

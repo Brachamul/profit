@@ -30,7 +30,7 @@ class DevelopmentProject(models.Model):
 	# Development projects can be applied to features in order to improve them.
 	was = models.ForeignKey(Feature, related_name='Project Source')
 	becomes = models.ForeignKey(Feature, related_name='Project Result')
-	materials_needed = models.ManyToManyField(Item, through='RequiredMaterial')
+	required_materials = models.ManyToManyField(Item, through='RequiredMaterial')
 #	illustration = models.ImageField(upload_to=)
 
 	def development_project(self):
@@ -46,7 +46,7 @@ def validate_material_quantity(value):
 		raise ValidationError('Please input a multiple of 10.')
 
 class RequiredMaterial(models.Model):
-	project = models.ForeignKey(DevelopmentProject)
+	development_project = models.ForeignKey(DevelopmentProject)
 	item = models.ForeignKey(Item)
 	quantity = models.PositiveSmallIntegerField(default=0, validators=[validate_material_quantity])
 

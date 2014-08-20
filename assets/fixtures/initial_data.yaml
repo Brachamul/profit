@@ -1,8 +1,0 @@
-- model: assets.item
-  pk: 1
-  fields:
-    name: wood
-- model: assets.item
-  pk: 2
-  fields:
-    name: clay
