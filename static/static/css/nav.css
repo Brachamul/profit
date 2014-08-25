@@ -1,0 +1,19 @@
+/* Styles for the navigation buttons */
+
+nav .button {
+	font-family: "Symbols";
+	display: inline-block;
+	height: 2.5rem;
+	width: 2.5rem;
+	padding: .5rem;
+	color: black;
+	background-color: white;
+	text-align: center;
+	font-size: 1.3rem;
+}
+
+nav .button:hover {
+	color: black;
+	background-color: white;
+	border-bottom: .250rem solid black;
+}

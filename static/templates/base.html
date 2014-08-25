@@ -3,7 +3,7 @@
 <html>
 
 <head>
-<link rel="stylesheet" type="text/css" href="/static/style.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/static/base.css" media="screen" />
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' /> <!-- Prevents autozoom on mobile devices -->
 </head>
 
@@ -15,25 +15,41 @@
     <div>The game where greed is good</div>
 </header>
 
-{% if messages %}
-    {% for message in messages %}
-        <div {% if message.tags == "success" %} class="message" {% endif %} >{{ message }}</div>
-    {% endfor %}
-{% endif %}
-
-
 <div class="white-wrapper">
-<div id="content">
-    {% block content %}
-    No data to display !
-    {% endblock content %}
-    <div class="end-float"></div>
-</div>
-</div>
+
+	{% if messages %}
+	    {% for message in messages %}
+	        <div {% if message.tags == "success" %} class="message" {% endif %} >{{ message }}</div>
+	    {% endfor %}
+	{% endif %}
+
+	<nav class="content">
+		{% if user.is_authenticated %}
+		<a href="/u/{{ user.username }}/">
+			<div class="login button">&#xe602;</div></a>
+		{% else %}
+		<a href="/u/login/">
+			<div class="login button">&#xe603;</div></a>
+		{% endif %}
+	</nav>	
+	
+	<div class="content">
+	    {% block content %}
+	    No data to display !
+	    {% endblock content %}
+	    <div class="anchor"></div>
+	</div>
+
+</div> <!-- white-wrapper -->
 
 </body>
 
 <footer>
+
+	{% if user.is_authenticated %}
+	<a href="/u/logout/">
+		Sign Out</a>
+	{% endif %}
 
 </footer>
 

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>
+    {{ user_object.username | capfirst }}, the Brave <!--title-->
+</h1>
+
+<div class="avatar placeholder">
+    {% if user_object == user %}
+    Click here to upload your avatar.<!--avatar-->
+    {% else %}
+    {{ user_object.username | capfirst }} has not uploaded an avatar.
+    {% endif %}
+
+</div>
+
+<div class="resumay">
+
+    <div class="trophies placeholder">
+        {% if user_object == user %}
+        You have not acquired trophies.
+        {% else %}
+        {{ user_object.username | capfirst }} has not acquired any trophies.
+        {% endif %}
+    </div>
+
+    <ul>
+    <li>Active for {{ user_object.date_joined | timesince }}.</li>
+    <li>Last seen {{ user_object.last_login | timesince }} ago.</li>
+    <li>Holds {{ user_profile.cash }} gold.</li> <!--cash-->
+    <li>Settled in 12 places.</li> <!--history-->
+    </ul>
+
+</div>
+
+
+<h3>
+    Current residence : Hartlepool <!--residence-->
+</h3>
+
+<div class="mapthumbnail placeholder">
+Current map unavailable.<!--map-->
+</div>
+
+<ul class="links">
+<li>(some statistics)</li>
+<li>Leave city</li>
+</ul>
+
+<h3>
+    Replenish coffers
+</h3>
+
+
+{% endblock content %}
+
