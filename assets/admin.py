@@ -14,6 +14,8 @@ class ItemAdmin(admin.ModelAdmin):
 admin.site.register(Item, ItemAdmin)
 
 
+
+
 class DevelopmentProjectWas(admin.TabularInline):
 	# For each feature, display development projects that can lead to it
 	model = DevelopmentProject
@@ -26,13 +28,13 @@ class DevelopmentProjectBecomes(admin.TabularInline):
 	model = DevelopmentProject
 	fk_name = 'becomes'
 	form = DevelopmentProjectInlineForm
-#	formset = DevelopmentProjectFormSet - just a reminder to come back and fix this one day
 	extra = 0
 
 class FeatureAdmin(admin.ModelAdmin):
 	model = Feature
 	list_display = ("name", "description")
 	inlines = [DevelopmentProjectBecomes, DevelopmentProjectWas, ]
+	prepopulated_fields = {"slug": ("name",)}
 
 admin.site.register(Feature, FeatureAdmin)
 

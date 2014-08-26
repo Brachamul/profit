@@ -11,27 +11,38 @@
 <body>
 
 <header class="title">
-    <div>Profit</div>
-    <div>The game where greed is good</div>
+    <div><a href="/">Profit</a></div>
+    <div><a href="/">The game where greed is good</a></div>
 </header>
 
 <div class="white-wrapper">
+
+	<nav class="content">
+
+		{% if user.is_authenticated %}
+
+			{% if user.is_staff %}
+			<a href="/admin/">
+				<div class="button">&#xe606;</div></a>
+			{% endif %}
+
+		<a href="/u/{{ user.username }}/">
+			<div class="button">&#xe602;</div></a>
+
+		{% else %}
+
+		<a href="/u/login/">
+			<div class="button">&#xe603;</div></a>
+
+		{% endif %}
+		
+	</nav>
 
 	{% if messages %}
 	    {% for message in messages %}
 	        <div {% if message.tags == "success" %} class="message" {% endif %} >{{ message }}</div>
 	    {% endfor %}
 	{% endif %}
-
-	<nav class="content">
-		{% if user.is_authenticated %}
-		<a href="/u/{{ user.username }}/">
-			<div class="login button">&#xe602;</div></a>
-		{% else %}
-		<a href="/u/login/">
-			<div class="login button">&#xe603;</div></a>
-		{% endif %}
-	</nav>	
 	
 	<div class="content">
 	    {% block content %}
@@ -46,10 +57,27 @@
 
 <footer>
 
-	{% if user.is_authenticated %}
-	<a href="/u/logout/">
-		Sign Out</a>
-	{% endif %}
+	<ul>
+
+		<li><a href="/">
+			Home</a></li>
+
+		{% if user.is_authenticated %}
+
+		<li><a href="/u/logout/">
+			Sign Out</a></li>
+
+		{% else %}
+
+		<li><a href="/u/login/">
+			Log In</a></li>
+
+		<li><a href="/u/signup/">
+			Sign Up</a></li>
+
+		{% endif %}
+
+	</ul>
 
 </footer>
 

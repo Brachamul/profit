@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'signups',
     'assets',
     'maps',
+    'welcome',
 )
 
 MIDDLEWARE_CLASSES = (

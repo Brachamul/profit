@@ -9,8 +9,6 @@ from django.http import Http404
 
 from django.views.generic.base import TemplateView
 
-from django.contrib.auth.models import User
-
 class ProfileView(TemplateView):
 	template_name = 'profiles/profile.html'
  
@@ -129,8 +127,20 @@ from django.contrib.auth.decorators import login_required
 # Use the login_required() decorator to ensure only those logged in can access the view.
 @login_required
 def user_logout(request):
-    # Since we know the user is logged in, we can now just log them out.
-    logout(request)
+	# Since we know the user is logged in, we can now just log them out.
+	logout(request)
 
-    # Take the user back to the homepage.
-    return HttpResponseRedirect('/')
+	# Take the user back to the homepage.
+	return HttpResponseRedirect('/')
+
+
+### myprofile
+
+from django.contrib.auth.models import User
+
+def myprofile(request):
+	if request.user.is_authenticated() :
+		username = request.user.username
+		return HttpResponseRedirect('/u/%s' % username)
+	else :
+		return HttpResponseRedirect('/u/login/')

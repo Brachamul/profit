@@ -14,6 +14,7 @@ class MapLayoutAdmin(admin.ModelAdmin):
 	model = MapLayout
 	inlines = (SlotInline,)
 	list_display = ("name", "description")
+	prepopulated_fields = {"slug": ("name",)}
 
 admin.site.register(MapLayout, MapLayoutAdmin)
 
@@ -21,6 +22,6 @@ admin.site.register(MapLayout, MapLayoutAdmin)
 
 class SlotAdmin(admin.ModelAdmin):
 	model = Slot
-	list_display = ("map_layout", "number", "latitude", "longitude", "starting_feature")
+	list_display = ("map_layout", "number", "longitude", "latitude", "starting_feature")
 
 admin.site.register(Slot, SlotAdmin)

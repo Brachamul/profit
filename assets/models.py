@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+import os
 
 # Create your models here.
 
@@ -18,8 +19,16 @@ class Item(models.Model):
 class Feature(models.Model):
 	# A feature is what occupies a slot, it can be a man-made constuct or natural terrain.
 	name = models.CharField(max_length=255)
-	description = models.TextField(max_length=255)
-#	illustration = models.ImageField(upload_to=)
+	description = models.TextField(max_length=255, blank=True)
+	shape = models.CharField(max_length=255, blank=True, default='30,0,61,15,31,31,0,16') # Coordinates of the HTML map polygon
+	slug = models.SlugField() # Used to name image folder and as a css class for rendering
+
+	def upload_details(instance, filename):
+		path = "features/" # Upload location
+		format = instance.slug + '.png' # Filename
+		return os.path.join(path, format)
+
+	illustration = models.ImageField(upload_to=upload_details, blank=True)
 
 	def __str__(self):
 		return self.name
@@ -48,7 +57,7 @@ def validate_material_quantity(value):
 class RequiredMaterial(models.Model):
 	development_project = models.ForeignKey(DevelopmentProject)
 	item = models.ForeignKey(Item)
-	quantity = models.PositiveSmallIntegerField(default=0, validators=[validate_material_quantity])
+	quantity = models.PositiveSmallIntegerField(default=0, validators=[validate_material_quantity], blank=True)
 
 	def __str__(self):
 		quantity_of_items = str(self.item) + ', ' + str(self.quantity)
