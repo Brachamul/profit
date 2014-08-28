@@ -46,7 +46,7 @@ class DevelopmentProject(models.Model):
 		return ("[%s] ⇒ [%s]" % (str(self.was), str(self.becomes)))
 
 	def types_of_materials_needed(self):
-		return ",\n".join([r.name for r in self.materials_needed.all()])
+		return ",\n".join([r.name for r in self.required_materials.all()])
 
 
 

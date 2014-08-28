@@ -5,13 +5,11 @@ import os
 # Create your models here.
 
 
-def map_storage_folder(map_layout_name):
-		return 'maps/%s' % (map_layout_name)
 
 class MapLayout(models.Model):
 	name = models.CharField(max_length=255)
 	description = models.TextField(max_length=255)
-	slug = models.SlugField()
+	slug = models.SlugField(max_length=255)
 	
 
 	def upload_details(instance, filename):
