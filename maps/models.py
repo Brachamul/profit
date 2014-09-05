@@ -25,7 +25,6 @@ class MapLayout(models.Model):
 
 
 class Slot(models.Model):
-	# A feature is what occupies a slot, it can be a man-made constuct or natural terrain.
 	map_layout = models.ForeignKey(MapLayout)
 	number = models.PositiveSmallIntegerField()
 	longitude = models.PositiveSmallIntegerField()

@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'assets',
     'maps',
     'welcome',
+    'towns',
 )
 
 MIDDLEWARE_CLASSES = (
