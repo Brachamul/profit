@@ -1,0 +1,92 @@
+<html>
+
+<head>
+
+    <title>Map</title>
+
+    <meta charset="utf-8">
+
+    <!-- Prevents autozoom on mobile devices -->
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' /> 
+
+    <link rel="stylesheet" type="text/css" href="/static/css/town.css" media="screen" />
+
+    <!-- Script to enable drag and scroll -->
+    <script type="text/javascript" src="/static/modules/drag-and-scroll/jquery-1.js"></script>
+    <script type="text/javascript" src="/static/modules/drag-and-scroll/scrollsync.js"></script>
+    <script type="text/javascript" src="/static/modules/drag-and-scroll/dragscrollable.js"></script>
+    <script type="text/javascript">
+        $(function() {
+        // Set drag scroll on first descendant of class dragger on both selected elements
+        $('#viewport').
+            dragscrollable({dragSelector: '.dragger:first', acceptPropagatedEvent: false});
+        });
+
+    </script>
+
+</head>
+
+<body>
+
+<div id="viewport">
+
+
+    <div class="fixed-container">
+
+        <!-- Top status bar -->
+        <div class="screen-wide status-bar">
+            <p style="margin-top:auto; margin-bottom: auto; line-height: 1;">Brachamul | 430 &#8517; | Warning &#9888; | Coffee &#9749;</p>
+            <img class="menu" src="/static/images/gear.svg">
+            <div class="menu-submenu">
+                <ul class="borderized">
+                    <li>My Office</li>
+                    <li>Sign Out</li>
+                </ul>
+            </div>
+        </div>
+    
+        <!-- Coordinates and shapes of map slot 3 -->
+        <map id="1044-273" name="slot3">
+            <area href="#1044-273" shape="poly" coords="30,0,61,15,31,31,0,16" alt="Slot Name">
+        </map>
+
+        <!-- Tooltip content for map slot 3 -->
+        <div class="screen-wide tooltip-bar">
+            <a href="#_"><img class="close-tooltip" src="/static/images/cross.svg"></a>
+            <table><tr><td>
+                <h1>Workshop</h1>
+                Owned by Brachamul | 
+                Workers : 5 &#9874;
+            </td></tr></table>
+        </div>
+
+        <!-- Coordinates and shapes of map slot 4 -->
+        <map id="1000-300" name="slot4">
+            <area href="#1000-300" shape="poly" coords="30,0,61,15,31,31,0,16" alt="Slot Name">
+        </map>
+
+        <!-- Tooltip content for map slot 3 -->
+        <div class="screen-wide tooltip-bar">
+            <a href="#_"><img class="close-tooltip" src="/static/images/cross.svg"></a>
+            <table><tr><td>
+                <h1>Field</h1>
+                Owned by Brachamul | 
+                Workers : 3 &#9874;
+            </td></tr></table>
+        </div>
+    
+    </div> <!-- fixed-container -->
+
+
+
+    <div id="base" class="mastermap dragger" style="background-image: url('/static/images/map.png');">
+        <!-- Images for map slots -->
+        <img class="single" style="margin-left: 1044; margin-top: 273;" src="/static/images/slot.png" usemap="#slot3"/>
+        <img class="single" style="margin-left: 1000; margin-top: 300;" src="/static/images/slot.png" usemap="#slot4"/>
+    </div>
+
+</div> <!-- viewport -->
+    
+</body>
+
+</html>

@@ -15,6 +15,7 @@ urlpatterns = patterns('',
 	url(r'^u/', include('profiles.urls'), name='profiles'),
 	url(r'^welcome/', include('welcome.urls'), name='welcome'),
 	url(r'^admin/', include(admin.site.urls)),
+    url(r'^town/', include('towns.urls')),
 #	url(r'^blog/', include('blog.urls'), name='blog'),
 	url(r'^$', RedirectView.as_view(permanent=False, url='/welcome/')),
 )

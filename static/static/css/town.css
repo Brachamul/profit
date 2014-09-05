@@ -1,0 +1,253 @@
+@import url(/static/css/reset.css); /* resets all styles */
+
+@import url(/static/modules/drag-and-scroll/style.css); /* styling of elements for scrolling */
+
+@font-face {
+  font-family: 'Berkshire Swash';
+  src: url('/static/fonts/BerkshireSwash-Regular.ttf');
+}
+
+
+/*
+ * General Formatting
+ *
+ */
+
+body {
+	/* background-image: url('map_section.png'); */
+	background-color: white;
+	font-family: "Berkshire Swash";
+	font-weight: 100;
+	font-size: 16px;
+	-webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
+}
+
+.tooltip-bar{
+	font-size: 16px;
+}
+
+@media (max-width: 980px) {
+	body,
+	.tooltip-bar{
+		font-size: 14px;
+	}
+}
+
+@media (max-width: 480px) {
+	body,
+	.tooltip-bar{
+		font-size: 12px;
+	}
+}
+
+strong {
+	font-weight: bold;
+}
+
+p {
+	line-height: 1.5;
+}
+
+p img {
+	height: 1em;
+	vertical-align: bottom;
+}
+
+h1 {
+	font-size: 1.600em;
+}
+
+
+
+/*
+ * Vertical Positioning (z-index)
+ *
+ */
+
+
+map area {
+	z-index: 1;
+}
+
+.fixed-container {
+	z-index: 2;
+}
+
+.status-bar,
+.tooltip-bar {
+	z-index: 3;
+}
+
+
+
+/*
+ * Bars
+ *
+ */
+
+[class*="-bar"] {
+	/* Used to format most bars. */
+	background-image: url('/static/images/parchment.jpg');
+	background-size: cover;
+	padding: 0.500em 0.650em;
+	color: black;
+	pointer-events: auto; /* Makes the bar clickable */
+	border: 0.100em solid black;
+	border-radius: 0em; /* 0.400em */
+	box-shadow: 0 0 0.200em black;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+[class*="-bar"] table {
+	width: 100%;
+	height: 100%;
+	margin-top: -0.100em;
+}
+
+[class*="-bar"] td {
+	vertical-align: middle;
+	text-align: center;
+	line-height: 1.5;
+}
+
+.screen-wide {
+	margin-left: 2vw;
+}
+							.screen-wide {	width: 95vw; } /* Fallback */
+							.screen-wide {	width: calc(96vw - 17px); }
+@media (max-width: 980px) {	.screen-wide {	width: 96vw } }
+/* Compensate for the scrollbar on larger screens. */ 
+
+
+.fixed-container {
+	position: fixed;
+	pointer-events: none; /* Makes the container click-through */
+	width: 100%;
+	height: 100%;
+}
+
+
+.status-bar {
+	top: 2vw;
+	min-height: 2.200em;
+	display: inline-block;
+	vertical-align: middle;
+	position: absolute;
+}
+
+.status-bar .menu {
+	height: 1.200em;
+	vertical-align: bottom;
+	position: absolute;
+	right: 0.800em;
+	top: 0.450em;
+}
+
+.menu-submenu {
+	display: none;
+	/* Displays only when menu is hovered. */
+	position: fixed;
+	color: black;
+	width: auto;
+	min-width: 10em;
+	right: 2vw;
+}
+
+@media (max-width: 1200px) 	{.menu-submenu 	{right: 1%;}}
+@media (max-width: 600px) 	{.menu-submenu 	{right: 2%;}}
+
+.menu-submenu ul {
+	background-image: url('/static/images/parchment.jpg');
+	background-size: 100%;
+	padding: 0.500em;
+	padding-left: 1em;
+	margin-top: 1em;
+	line-height: 1.5;
+}
+
+.status-bar .menu:hover + .menu-submenu,
+.menu-submenu:hover {
+	display: block;
+}
+
+
+/****************/
+/* Tooltip Area */
+/****************/
+
+.tooltip-bar {
+	text-align: center;
+	vertical-align: middle;
+	position: absolute;
+}
+
+							.tooltip-bar {	height: 16vh; }
+@media (max-width: 980px) {	.tooltip-bar {	height: 24vh; } }
+@media (max-width: 480px) {	.tooltip-bar {	height: 40vh; } }
+/* Resizes the tooltip bar depending on screen width */
+
+							.tooltip-bar {	bottom: 3vw; } /* Fallback */
+							.tooltip-bar {	bottom: calc(2vw + 17px); }
+@media (max-width: 980px) {	.tooltip-bar {	bottom: 2vw; } }
+/* Scrollbar offset */
+
+
+.tooltip-bar {
+	visibility: hidden;
+	opacity:0;
+	transition: visibility 0s linear 0.1s, opacity 0.1s linear;
+}
+ 
+.close-tooltip { 
+	/* Styles the icon which closes a tooltip. */
+	height: 1em;
+	vertical-align: bottom;
+	position: absolute;
+	right: 0.450em;
+	top: 0.450em;
+}
+
+
+/*
+ * Map
+ *
+ */
+ 
+.mastermap {
+	font-size: 0px;
+	width: 2000px;
+	height: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+}
+
+.mastermap img {
+	position: relative;
+}
+
+.mastermap .line {
+	margin-bottom: -16px;
+}
+
+.mastermap .odd {
+	margin-left: 31px;
+}
+
+.mastermap .single {
+	height: 32px;
+	width: 62px;
+	margin-left: -15px;
+	display: inline-block;
+	position: absolute;
+}
+
+map:hover + .tooltip-bar,
+map:target + .tooltip-bar {
+	/* The tooltip is shown upon hover or click of the feature. */
+	visibility: visible;
+	opacity:1;
+	transition-delay:0s;
+}
