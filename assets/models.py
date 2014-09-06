@@ -7,7 +7,7 @@ import os
 
 
 class Item(models.Model):
-	name = models.CharField(max_length=255)
+	name = models.CharField(max_length=255, unique=True)
 	description = models.TextField(max_length=255)
 #	illustration = models.ImageField(upload_to=)
 
@@ -18,10 +18,10 @@ class Item(models.Model):
 
 class Feature(models.Model):
 	# A feature is what occupies a slot, it can be a man-made constuct or natural terrain.
-	name = models.CharField(max_length=255)
+	name = models.CharField(max_length=255, unique=True)
 	description = models.TextField(max_length=255, blank=True)
 	shape = models.CharField(max_length=255, blank=True, default='30,0,61,15,31,31,0,16') # Coordinates of the HTML map polygon
-	slug = models.SlugField() # Used to name image folder and as a css class for rendering
+	slug = models.SlugField(max_length=255, unique=True) # Used to name image folder and as a css class for rendering
 
 	def upload_details(instance, filename):
 		path = "features/" # Upload location

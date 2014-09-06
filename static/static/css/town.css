@@ -1,11 +1,4 @@
-@import url(/static/css/reset.css); /* resets all styles */
-
 @import url(/static/modules/drag-and-scroll/style.css); /* styling of elements for scrolling */
-
-@font-face {
-  font-family: 'Berkshire Swash';
-  src: url('/static/fonts/BerkshireSwash-Regular.ttf');
-}
 
 
 /*
@@ -245,6 +238,7 @@ map area {
 }
 
 map:hover + .tooltip-bar,
+.tooltip-bar:hover, /* Don't flicker bar if it's displayed from hovering a feature underneath it. */
 map:target + .tooltip-bar {
 	/* The tooltip is shown upon hover or click of the feature. */
 	visibility: visible;

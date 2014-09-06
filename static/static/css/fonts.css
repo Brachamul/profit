@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'Berkshire Swash';
+    src: url('/static/fonts/berkshireswash-regular-webfont.eot');
+    src: url('/static/fonts/berkshireswash-regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/static/fonts/berkshireswash-regular-webfont.woff') format('woff'),
+    url('/static/fonts/berkshireswash-regular-webfont.ttf') format('truetype'),
+    url('/static/fonts/berkshireswash-regular-webfont.svg#berkshire_swashregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Average';
+    src: url('/static/fonts/average-regular-webfont.eot');
+    src: url('/static/fonts/average-regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/static/fonts/average-regular-webfont.woff') format('woff'),
+    url('/static/fonts/average-regular-webfont.ttf') format('truetype'),
+    url('/static/fonts/average-regular-webfont.svg#averageregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Symbols';
+    src: url('/static/fonts/icomoon.eot');
+    src: url('/static/fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+    url('/static/fonts/icomoon.woff') format('woff'),
+    url('/static/fonts/icomoon.ttf') format('truetype'),
+    url('/static/fonts/icomoon.svg#averageregular') format('svg');
+}

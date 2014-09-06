@@ -1,32 +1,32 @@
-<html>
+{% extends "meta.html" %}
 
-<head>
 
-    <title>Map</title>
+{% block head %}
 
-    <meta charset="utf-8">
+<title>Map</title>
 
-    <!-- Prevents autozoom on mobile devices -->
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' /> 
 
-    <link rel="stylesheet" type="text/css" href="/static/css/town.css" media="screen" />
+<!-- Prevents autozoom on mobile devices -->
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' /> 
 
-    <!-- Script to enable drag and scroll -->
-    <script type="text/javascript" src="/static/modules/drag-and-scroll/jquery-1.js"></script>
-    <script type="text/javascript" src="/static/modules/drag-and-scroll/scrollsync.js"></script>
-    <script type="text/javascript" src="/static/modules/drag-and-scroll/dragscrollable.js"></script>
-    <script type="text/javascript">
-        $(function() {
-        // Set drag scroll on first descendant of class dragger on both selected elements
-        $('#viewport').
-            dragscrollable({dragSelector: '.dragger:first', acceptPropagatedEvent: false});
-        });
+<link rel="stylesheet" type="text/css" href="/static/css/town.css" media="screen" />
 
-    </script>
+<!-- Script to enable drag and scroll -->
+<script type="text/javascript" src="/static/modules/drag-and-scroll/jquery-1.js"></script>
+<script type="text/javascript" src="/static/modules/drag-and-scroll/scrollsync.js"></script>
+<script type="text/javascript" src="/static/modules/drag-and-scroll/dragscrollable.js"></script>
+<script type="text/javascript">
+    $(function() {
+    // Set drag scroll on first descendant of class dragger on both selected elements
+    $('#viewport').
+        dragscrollable({dragSelector: '.dragger:first', acceptPropagatedEvent: false});
+    });
+</script>
 
-</head>
+{% endblock head %}
 
-<body>
+
+{% block content %}
 
 <div id="viewport">
 
@@ -35,7 +35,7 @@
 
         <!-- Top status bar -->
         <div class="screen-wide status-bar">
-            <p style="margin-top:auto; margin-bottom: auto; line-height: 1;">Brachamul | 430 &#8517; | Warning &#9888; | Coffee &#9749;</p>
+            <p style="margin-top:auto; margin-bottom: auto; line-height: 1;">{{ town_object.name }} | 430 &#8517; | Warning &#9888; | Coffee &#9749;</p>
             <img class="menu" src="/static/images/gear.svg">
             <div class="menu-submenu">
                 <ul class="borderized">
@@ -87,6 +87,4 @@
 
 </div> <!-- viewport -->
     
-</body>
-
-</html>
+{% endblock content %}

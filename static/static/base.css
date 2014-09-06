@@ -1,37 +1,4 @@
-@import url(reset.css); /* resets all styles */
-@import url(css/nav.css); /* Import styles for the navigation buttons */
-
-@font-face {
-	font-family: 'Berkshire Swash';
-	src: url('fonts/berkshireswash-regular-webfont.eot');
-	src: url('fonts/berkshireswash-regular-webfont.eot?#iefix') format('embedded-opentype'),
-	url('fonts/berkshireswash-regular-webfont.woff') format('woff'),
-	url('fonts/berkshireswash-regular-webfont.ttf') format('truetype'),
-	url('fonts/berkshireswash-regular-webfont.svg#berkshire_swashregular') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'Average';
-	src: url('fonts/average-regular-webfont.eot');
-	src: url('fonts/average-regular-webfont.eot?#iefix') format('embedded-opentype'),
-	url('fonts/average-regular-webfont.woff') format('woff'),
-	url('fonts/average-regular-webfont.ttf') format('truetype'),
-	url('fonts/average-regular-webfont.svg#averageregular') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'Symbols';
-	src: url('fonts/icomoon.eot');
-	src: url('fonts/icomoon.eot?#iefix') format('embedded-opentype'),
-	url('fonts/icomoon.woff') format('woff'),
-	url('fonts/icomoon.ttf') format('truetype'),
-	url('fonts/icomoon.svg#averageregular') format('svg');
-}
-
+@import url(/static/css/nav.css); /* Import styles for the navigation buttons */
 
 
 /*

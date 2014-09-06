@@ -9,6 +9,10 @@ from django.http import Http404
 
 from django.views.generic.base import TemplateView
 
+
+
+### Profile
+
 class ProfileView(TemplateView):
 	template_name = 'profiles/profile.html'
  
@@ -16,12 +20,7 @@ class ProfileView(TemplateView):
 		context = super(ProfileView, self).get_context_data()
 		user = get_object_or_404(User, username=self.kwargs['username'])
 		context['user_object'] = user
-#		context['user_profile'] = get_object_or_404(UserProfile, user=user)
 		return context
-
-from django.views.generic.edit import CreateView
-from django.contrib import auth
-from django.contrib.auth.forms import UserCreationForm
 
 
 
