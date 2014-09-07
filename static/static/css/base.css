@@ -1,4 +1,4 @@
-@import url(/static/css/nav.css); /* Import styles for the navigation buttons */
+@import url(nav.css); /* Import styles for the navigation buttons */
 
 
 /*
@@ -126,7 +126,7 @@ header div:nth-child(2) {
 
 
 /*
- * Header
+ * Message
  *
  */
 

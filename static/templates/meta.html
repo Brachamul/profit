@@ -1,19 +1,26 @@
-{% load staticfiles %}
+{% load static %}
 
 <html>
 
 <head>
-<link rel="stylesheet" type="text/css" href="/static/css/reset.css" media="screen" /> 
-<link rel="stylesheet" type="text/css" href="/static/css/fonts.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/reset.css" media="screen" /> 
+<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/fonts.css" media="screen" />
 <meta charset="utf-8">
-    {% block head %}
-    {% endblock head %}
+	{% block head %}{% endblock head %}
 </head>
 
+<header>
+	{% block header %}{% endblock header %}
+</header>
+
 <body>
-    {% block content %}
-    No data to display !
-    {% endblock content %}
+	{% block upper_body %}{% endblock upper_body %}
+    {% block content %}{% endblock content %}
+    {% block lower_body %}{% endblock lower_body %}
 </body>
+
+<footer>
+	{% block footer %}{% endblock footer %}
+</footer>
 
 </html>

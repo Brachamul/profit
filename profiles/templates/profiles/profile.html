@@ -1,4 +1,15 @@
 {% extends "base.html" %}
+{% load static %}
+
+
+
+{% block head %}{{ block.super }}
+
+<title>{{ user_object.username | capfirst }}</title>
+
+{% endblock head %}
+
+
 
 {% block content %}
 
@@ -34,24 +45,29 @@
 
 </div>
 
+{% if player == not_in_game %}
+
+<div class="important-button">Join a new town</div>
+
+{% else %}
 
 <h3>
-    Current residence : Hartlepool <!--residence-->
+    Current residence : <a href="{% url 'town_map' player.town.slug %}">{{ player.town.name }}</a> <!--residence-->
 </h3>
 
+<!--
 <div class="mapthumbnail placeholder">
-Current map unavailable.<!--map-->
+Current map unavailable.map
 </div>
+
 
 <ul class="links">
 <li>(some statistics)</li>
 <li>Leave city</li>
 </ul>
+-->
 
-<h3>
-    Replenish coffers
-</h3>
-
+{% endif %}
 
 {% endblock content %}
 

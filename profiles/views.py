@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, HttpRequest
 from django.core.urlresolvers import reverse
+from django.core.exceptions import ObjectDoesNotExist
 from django.views import generic
 
 from django.contrib.auth.models import User
@@ -9,17 +10,28 @@ from django.http import Http404
 
 from django.views.generic.base import TemplateView
 
+from towns.models import Player
 
 
 ### Profile
 
 class ProfileView(TemplateView):
+
 	template_name = 'profiles/profile.html'
  
 	def get_context_data(self, **kwargs):
+
 		context = super(ProfileView, self).get_context_data()
-		user = get_object_or_404(User, username=self.kwargs['username'])
+
+		user = get_object_or_404(User, username=self.kwargs['username']) # find the User instance with this username
 		context['user_object'] = user
+
+		try:
+			player = Player.objects.filter(user=user, left=None).latest('joined') # finds the current player
+			context['player'] = player
+		except ObjectDoesNotExist:
+			context['player'] = 'not_in_game' # for new players or people who just finished a game
+
 		return context
 
 

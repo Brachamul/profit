@@ -1,4 +1,4 @@
-@import url(/static/modules/drag-and-scroll/style.css); /* styling of elements for scrolling */
+@import url(../modules/drag-and-scroll/style.css); /* styling of elements for scrolling */
 
 
 /*
@@ -50,6 +50,13 @@ h1 {
 	font-size: 1.600em;
 }
 
+a:link, a:hover, a:visited, a:active {
+	color: inherit;
+	text-decoration: inherit;
+}
+
+a:hover        { border-bottom: .150em solid black; }
+footer a:hover { border-bottom: .150em solid white; }
 
 
 /*
@@ -80,7 +87,7 @@ map area {
 
 [class*="-bar"] {
 	/* Used to format most bars. */
-	background-image: url('/static/images/parchment.jpg');
+	background-image: url('../images/parchment.jpg');
 	background-size: cover;
 	padding: 0.500em 0.650em;
 	color: black;
@@ -130,6 +137,16 @@ map area {
 	position: absolute;
 }
 
+.status-bar ul {
+	margin-top: auto;
+	margin-bottom: auto;
+	line-height: 1;
+}
+
+.status-bar > ul li { display: inline-block; }
+.status-bar > ul li:before { content: "\2022 \0020"; }
+.status-bar > ul li:first-child:before { content: none; }
+
 .status-bar .menu {
 	height: 1.200em;
 	vertical-align: bottom;
@@ -152,7 +169,7 @@ map area {
 @media (max-width: 600px) 	{.menu-submenu 	{right: 2%;}}
 
 .menu-submenu ul {
-	background-image: url('/static/images/parchment.jpg');
+	background-image: url('../images/parchment.jpg');
 	background-size: 100%;
 	padding: 0.500em;
 	padding-left: 1em;

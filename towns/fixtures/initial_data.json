@@ -1,1 +1,51 @@
-[{"pk": 1, "model": "maps.maplayout", "fields": {"name": "Sausset-les-Pins", "image": "maps/map.png", "description": "A beach on the blue coast !"}}, {"pk": 2, "model": "maps.maplayout", "fields": {"name": "Carry-le-rouet", "image": "maps/map_1.png", "description": "Pas loin de la mer, il fait beau."}}, {"pk": 1, "model": "maps.slot", "fields": {"map_layout": 2, "longitude": 302, "latitude": 245, "number": 1, "starting_feature": 1}}, {"pk": 2, "model": "maps.slot", "fields": {"map_layout": 1, "longitude": 1044, "latitude": 273, "number": 1, "starting_feature": 1}}, {"pk": 3, "model": "maps.slot", "fields": {"map_layout": 1, "longitude": 1000, "latitude": 300, "number": 2, "starting_feature": 2}}]
+[
+{
+    "fields": {
+        "name": "Townsville",
+        "map_layout": 1,
+        "slug": "townsville"
+    },
+    "model": "towns.town",
+    "pk": 1
+},
+{
+    "fields": {
+        "name": "Citytown",
+        "map_layout": 1,
+        "slug": "citytown"
+    },
+    "model": "towns.town",
+    "pk": 2
+},
+{
+    "fields": {
+        "name": "Hartlepool",
+        "map_layout": 1,
+        "slug": "best-city-in-town"
+    },
+    "model": "towns.town",
+    "pk": 3
+},
+{
+    "fields": {
+        "town": 1,
+        "left": "2014-09-06T01:52:31Z",
+        "cash": 10000,
+        "user": 1,
+        "joined": "2014-09-01T16:19:19.176Z"
+    },
+    "model": "towns.player",
+    "pk": 1
+},
+{
+    "fields": {
+        "town": 2,
+        "left": null,
+        "cash": 10000,
+        "user": 1,
+        "joined": "2014-09-06T01:46:31.919Z"
+    },
+    "model": "towns.player",
+    "pk": 2
+}
+]

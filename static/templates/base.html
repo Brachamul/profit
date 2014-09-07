@@ -1,19 +1,24 @@
-{% load staticfiles %}
+{% extends "meta.html" %}
+{% load static %}
 
-<html>
+{% block head %}
 
-<head>
-<link rel="stylesheet" type="text/css" href="/static/base.css" media="screen" />
-<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' /> <!-- Prevents autozoom on mobile devices -->
-</head>
+<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/base.css" media="screen" />
+
+{% endblock head %}
 
 
-<body>
 
-<header class="title">
-    <div><a href="/">Profit</a></div>
-    <div><a href="/">The game where greed is good</a></div>
-</header>
+{% block header %}
+
+<div><a href="/">Profit</a></div>
+<div><a href="/">The game where greed is good</a></div>
+
+{% endblock header %}
+
+
+
+{% block upper_body %}
 
 <div class="white-wrapper">
 
@@ -39,23 +44,37 @@
 	</nav>
 
 	{% if messages %}
-	    {% for message in messages %}
-	        <div {% if message.tags == "success" %} class="message" {% endif %} >{{ message }}</div>
-	    {% endfor %}
+		{% for message in messages %}
+			<div {% if message.tags == "success" %} class="message" {% endif %} >{{ message }}</div>
+		{% endfor %}
 	{% endif %}
 	
 	<div class="content">
-	    {% block content %}
-	    No data to display !
-	    {% endblock content %}
-	    <div class="anchor"></div>
+
+{% endblock upper_body %}
+
+
+
+{% block content %}
+
+<!-- Main content displayed here -->
+
+{% endblock content %}
+
+
+
+{% block lower_body %}
+
+		 <div class="anchor"></div>
 	</div>
 
 </div> <!-- white-wrapper -->
 
-</body>
+{% endblock lower_body %}
 
-<footer>
+
+
+{% block footer %}
 
 	<ul>
 
@@ -79,6 +98,6 @@
 
 	</ul>
 
-</footer>
+{% endblock footer %}
 
 </html>

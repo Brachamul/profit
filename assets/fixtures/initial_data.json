@@ -13,8 +13,8 @@
 {"model": "assets.item","pk": 11,"fields": {"name": "Skins","description": ""}},
 {"model": "assets.item","pk": 12,"fields": {"name": "Clothing","description": ""}},
 
-{"model": "assets.feature","pk": 1,"fields": {"name": "Empty slot","description": "There's nothing here so far."}},
-{"model": "assets.feature","pk": 2,"fields": {"name": "Bonfire","description": "Not much else to do here than stare at the burning embers. The people sitting around here probably agree. They say they have the best ghost stories in town."}},
-{"model": "assets.feature","pk": 3,"fields": {"name": "Humble abode","description": "A handful of people live here. They don't seem to have much, but they look like a cheerful bunch. Perhaps they can't yet fathom all the wonderful things they <em>could</em> have ?"}}
+{"model": "assets.feature","pk": 1,"fields": {"name": "Empty slot","slug": "empty-slot","description": "There's nothing here so far."}},
+{"model": "assets.feature","pk": 2,"fields": {"name": "Bonfire","slug": "bonfire","description": "Not much else to do here than stare at the burning embers. The people sitting around here probably agree. They say they have the best ghost stories in town."}},
+{"model": "assets.feature","pk": 3,"fields": {"name": "Humble abode","slug": "humble-abode","description": "A handful of people live here. They don't seem to have much, but they look like a cheerful bunch. Perhaps they can't yet fathom all the wonderful things they <em>could</em> have ?"}}
 
 ]
