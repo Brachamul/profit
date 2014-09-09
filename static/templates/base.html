@@ -22,26 +22,26 @@
 
 <div class="white-wrapper">
 
-	<nav class="content">
+	<nav class="content"><ul>
 
 		{% if user.is_authenticated %}
 
 			{% if user.is_staff %}
 			<a href="/admin/">
-				<div class="button">&#xe606;</div></a>
+				<li>&#xe606;</li></a>
 			{% endif %}
 
 		<a href="/u/{{ user.username }}/">
-			<div class="button">&#xe602;</div></a>
+			<li>&#xe602;</li></a>
 
 		{% else %}
 
 		<a href="/u/login/">
-			<div class="button">&#xe603;</div></a>
+			<li>&#xe603;</li></a>
 
 		{% endif %}
 		
-	</nav>
+	</ul></nav>
 
 	{% if messages %}
 		{% for message in messages %}

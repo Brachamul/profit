@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404, render, render_to_response
+from django.db.models import Count
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
-from django.views.generic.base import TemplateView
+from django.views.generic import TemplateView, ListView
 from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
@@ -28,3 +29,13 @@ class TownMapView(TemplateView):
 			context['player'] = 'not_in_game' # for new players or people who just finished a game
 
 		return context
+
+
+
+class JoinTownView(ListView):
+
+	model = Town
+
+	context_object_name = "open_towns"
+
+	queryset = Town.objects.all().annotate(population=Count('player'))

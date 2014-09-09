@@ -1,19 +1,18 @@
 /* Styles for the navigation buttons */
 
-nav .button {
+nav li {
 	font-family: "Symbols";
 	display: inline-block;
-	height: 2.5rem;
-	width: 2.5rem;
-	padding: .5rem;
+	font-size: 1.5rem;
+	height: 1em;
+	width: 1em;
+	padding: .5em;
 	color: black;
 	background-color: white;
 	text-align: center;
-	font-size: 1.3rem;
+	border-bottom: .250rem solid white;	
 }
 
-nav .button:hover {
-	color: black;
-	background-color: white;
+nav li:hover {
 	border-bottom: .250rem solid black;
 }

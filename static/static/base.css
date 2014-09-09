@@ -1,4 +1,4 @@
-@import url(nav.css); /* Import styles for the navigation buttons */
+@import url({% get_static_prefix %}css/nav.css); /* Import styles for the navigation buttons */
 
 
 /*
@@ -39,17 +39,19 @@ h1, h2, h3, h4 {
 h1 {font-size: 2.0rem; margin-top: 0;}
 h2 {font-size: 1.6rem;}
 h3 {font-size: 1.2rem;}
-h4 {font-size: 1.4rem;
-	font-family: inherit;
-	font-style: italic;
-}
+h4 {font-size: 0.8rem;
+	text-transform: uppercase;}
 
-p li:before {
+li:before {
 	content: "- ";
 }
 
 ul.links li:before {
 	content: "+ ";
+}
+
+li {
+	font-size: 1em;
 }
 
 .big {
@@ -92,16 +94,8 @@ a:link, a:hover, a:visited, a:active {
 	text-decoration: inherit;
 }
 
-
-/* Style all links with a black bottom line, except for buttons, and using a white line instead for the black footer area */
-	   a:not(.button):hover { border-bottom: .150em solid black; }
-footer a:not(.button):hover { border-bottom: .150em solid white; }
-
-
-.symbol {
-	font-family: "Symbols";
-	font-size: .8em;
-}
+a:hover        { border-bottom: .150em solid black; }
+footer a:hover { border-bottom: .150em solid white; }
 
 
 /*
@@ -132,7 +126,7 @@ header div:nth-child(2) {
 
 
 /*
- * Messages
+ * Message
  *
  */
 
@@ -143,36 +137,6 @@ div.message {
 	font-style: italic;
 }
 
-
-
-/*
- * Buttons
- *
- */
-
-.button {
-	display: inline-block;
-	background-color: lightgray;
-	font-family: "Berkshire Swash", serif;
-	padding: .5em 1em;
-	border-radius: .2em;
-	box-shadow: .2em .2em 0 0 darkgray;
-	margin-bottom: .2em;
-}
-
-.button:hover {
-	box-shadow: .2em .2em 0 0 gray;
-}
-
-.button:active {
-	box-shadow: 0 0 0 0 gray;
-	margin-top: .2em;
-	margin-left: .2em;
-	margin-bottom: 0;
-}
-
-.important.button { font-size: 1.25em; }
-.small.button { font-size: .7em; }
 
 
 /*
@@ -231,33 +195,6 @@ section + section.fake-column {
 	padding-top: 0;
 }
 
-
-
-/*
- * Tables
- *
- */
-
-table td {
-	padding: .5em;
-	vertical-align: middle;
-}
-
-table.horizontal tr td:first-child {
-	/* Styles the first cell of each row */
-	font-family: 'Berkshire Swash', serif;
-	font-size: 1.3em;
-}
-
-table.vertical tr:first-child {
-	/* Styles the first row */
-	font-family: 'Berkshire Swash', serif;
-	font-size: 1.3em;
-}
-
-table.big {
-	font-size: 1.2rem;
-}
 
 
 /*
@@ -399,6 +336,10 @@ div.anchor {
 	height: 1px;
 }
 
+/* TEMP */
+section.citylist {
+	display: none;
+}
 
 
 

@@ -45,14 +45,14 @@
 
 </div>
 
-{% if player == not_in_game %}
+{% if player == "not_in_game" %}
 
-<div class="important-button">Join a new town</div>
+<a class="important button" href="{% url 'join_a_new_town' %}">Join a new town</a>
 
 {% else %}
 
 <h3>
-    Current residence : <a href="{% url 'town_map' player.town.slug %}">{{ player.town.name }}</a> <!--residence-->
+Current residence : <a href="{% url 'town_map' player.town.slug %}">{{ player.town.name }}</a> <!--residence-->
 </h3>
 
 <!--
@@ -68,6 +68,14 @@ Current map unavailable.map
 -->
 
 {% endif %}
+
+
+{% comment %}
+<h3>
+    Test string : {{ player }}
+</h3>
+{% endcomment %}
+
 
 {% endblock content %}
 

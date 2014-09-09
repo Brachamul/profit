@@ -3,7 +3,8 @@
     "fields": {
         "name": "Townsville",
         "map_layout": 1,
-        "slug": "townsville"
+        "slug": "townsville",
+        "founded": "2014-09-01T16:19:19.176Z"
     },
     "model": "towns.town",
     "pk": 1
@@ -12,7 +13,8 @@
     "fields": {
         "name": "Citytown",
         "map_layout": 1,
-        "slug": "citytown"
+        "slug": "citytown",
+        "founded": "2014-09-03T16:19:19.176Z"
     },
     "model": "towns.town",
     "pk": 2
@@ -21,7 +23,8 @@
     "fields": {
         "name": "Hartlepool",
         "map_layout": 1,
-        "slug": "best-city-in-town"
+        "slug": "best-city-in-town",
+        "founded": "2014-09-05T16:19:19.176Z"
     },
     "model": "towns.town",
     "pk": 3
