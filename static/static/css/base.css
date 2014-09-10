@@ -153,11 +153,13 @@ div.message {
 .button {
 	display: inline-block;
 	background-color: lightgray;
-	font-family: "Berkshire Swash", serif;
 	padding: .5em 1em;
 	border-radius: .2em;
 	box-shadow: .2em .2em 0 0 darkgray;
 	margin-bottom: .2em;
+}
+.button:not(.symbol) {
+	font-family: "Berkshire Swash", serif;
 }
 
 .button:hover {
@@ -266,8 +268,9 @@ table.big {
  */
 
 .placeholder {
-	background-color: gray;
+	background-color: lightgray;
 	padding: .5rem;
+	border-radius: .2em;
 	text-align: center;
 }
 
@@ -314,9 +317,9 @@ input {
 	box-sizing: border-box;
 }
 
-input[type=text],
-input[type=email],
-input[type=password] {
+form.classic input[type=text],
+form.classic input[type=email],
+form.classic input[type=password] {
 	border: none;
 	border-bottom: 1px solid #ccc;
 	width: 100%;
@@ -325,8 +328,8 @@ input[type=password] {
 	text-align: right;
 }
 
-input[type=button],
-input[type=submit] {
+form.classic input[type=button],
+form.classic input[type=submit] {
 	float: right;
 	font-size: 1.5rem;
 	margin: 0 1rem 0 1rem;
@@ -336,7 +339,7 @@ input[type=submit] {
 	cursor: pointer;
 }
 
-form .helptext {
+form.classic form .helptext {
 	display: none;
 }
 

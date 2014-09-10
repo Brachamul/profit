@@ -156,30 +156,36 @@ map area {
 }
 
 .menu-submenu {
-	display: none;
+	visibility: hidden;
+	opacity:0;
+	transition: visibility 0s linear 0.1s, opacity 0.1s linear;
 	/* Displays only when menu is hovered. */
 	position: fixed;
 	color: black;
 	width: auto;
-	min-width: 10em;
-	right: 2vw;
 }
 
-@media (max-width: 1200px) 	{.menu-submenu 	{right: 1%;}}
-@media (max-width: 600px) 	{.menu-submenu 	{right: 2%;}}
+							.menu-submenu {	right: 3vw; } /* Fallback */
+							.menu-submenu {	right: calc(2vw + 17px); }
+@media (max-width: 980px) {	.menu-submenu {	right: 2vw } }
 
 .menu-submenu ul {
 	background-image: url('../images/parchment.jpg');
-	background-size: 100%;
-	padding: 0.500em;
-	padding-left: 1em;
-	margin-top: 1em;
+	background-size: cover;
+	margin-top: 2em;
 	line-height: 1.5;
+	text-align: left;
+}
+
+.menu-submenu ul li {
+	padding: 0.5em 1em;
 }
 
 .status-bar .menu:hover + .menu-submenu,
 .menu-submenu:hover {
-	display: block;
+	visibility: visible;
+	opacity:1;
+	transition-delay:0s;
 }
 
 

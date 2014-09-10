@@ -4,7 +4,7 @@
         "name": "Townsville",
         "map_layout": 1,
         "slug": "townsville",
-        "founded": "2014-09-01T16:19:19.176Z"
+        "founded": "2014-09-09T16:19:19.176Z"
     },
     "model": "towns.town",
     "pk": 1
@@ -14,7 +14,7 @@
         "name": "Citytown",
         "map_layout": 1,
         "slug": "citytown",
-        "founded": "2014-09-03T16:19:19.176Z"
+        "founded": "2014-09-10T02:19:19.176Z"
     },
     "model": "towns.town",
     "pk": 2
@@ -24,7 +24,7 @@
         "name": "Hartlepool",
         "map_layout": 1,
         "slug": "best-city-in-town",
-        "founded": "2014-09-05T16:19:19.176Z"
+        "founded": "2014-09-10T03:42:19.176Z"
     },
     "model": "towns.town",
     "pk": 3

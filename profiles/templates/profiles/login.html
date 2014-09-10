@@ -12,7 +12,7 @@
 
 {% block content %}
 
-		<form id="login_form" method="post" action="/u/login/">
+		<form id="login_form"  class="classic" method="POST" action="/u/login/">
 			{% csrf_token %}
 			<p><label>username:</label><input type="text" name="username" value="" size="50" /></p>
 			<p><label>password:</label><input type="password" name="password" value="" size="50" /></p>

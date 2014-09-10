@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render, render_to_response
 from django.db.models import Count
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, HttpRequest
 from django.template import RequestContext
 from django.views.generic import TemplateView, ListView
 from django.core.exceptions import ObjectDoesNotExist
@@ -33,9 +33,38 @@ class TownMapView(TemplateView):
 
 
 class JoinTownView(ListView):
-
 	model = Town
-
 	context_object_name = "open_towns"
-
 	queryset = Town.objects.all().annotate(population=Count('player'))
+
+
+
+### Make user join town by creating a 'player' within that town
+
+def create_player(request):
+
+	context = RequestContext(request)
+
+	if request.method == 'POST': # check if post data has been sent through the join town page
+		town_slug = request.POST.get('town_to_join')
+		town = Town.objects.get(slug=town_slug)
+		user = request.user
+		new_player = Player(town=town, user=user)
+		new_player.save()
+		return HttpResponseRedirect('/town/')
+
+def current_town(request):
+	try:
+		player = Player.objects.filter(user=request.user, left=None).latest('joined') # finds the current player
+		return HttpResponseRedirect('/town/%s' % player.town.slug)
+	except ObjectDoesNotExist:
+		return HttpResponseRedirect('/town/join')
+
+
+import datetime
+
+def leave_town(request):
+	player = Player.objects.filter(user=request.user, left=None).latest('joined')
+	player.left = datetime.datetime.now()
+	player.save()
+	return HttpResponseRedirect('/u/myprofile/')
