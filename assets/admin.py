@@ -2,8 +2,8 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Item, Feature, RequiredMaterial, DevelopmentProject
-from .forms import DevelopmentProjectInlineForm
+from .models import *
+from .forms import *
 
 
 
@@ -23,6 +23,7 @@ class DevelopmentProjectWas(admin.TabularInline):
 	form = DevelopmentProjectInlineForm
 	extra = 0
 
+
 class DevelopmentProjectBecomes(admin.TabularInline):
 	# For each feature, display development projects that can improve it
 	model = DevelopmentProject
@@ -30,22 +31,33 @@ class DevelopmentProjectBecomes(admin.TabularInline):
 	form = DevelopmentProjectInlineForm
 	extra = 0
 
+
 class FeatureAdmin(admin.ModelAdmin):
 	model = Feature
-	list_display = ("name", "description")
+	list_display = ("name", "id", "description")
 	inlines = [DevelopmentProjectBecomes, DevelopmentProjectWas, ]
 	prepopulated_fields = {"slug": ("name",)}
 
 admin.site.register(Feature, FeatureAdmin)
 
 
-
-class RequiredMaterialInline(admin.TabularInline):
-	model = RequiredMaterial
+class DevelopmentProjectRequiredMaterialInline(admin.TabularInline):
+	model = DevelopmentProjectRequiredMaterial
 	extra = 1
 
 class DevelopmentProjectAdmin(admin.ModelAdmin):
-	inlines = (RequiredMaterialInline,)
+	inlines = (DevelopmentProjectRequiredMaterialInline,)
 	list_display = ("development_project", "was", "becomes", "types_of_materials_needed")
 
 admin.site.register(DevelopmentProject, DevelopmentProjectAdmin)
+
+
+class UpgradeRequiredMaterialInline(admin.TabularInline):
+	model = UpgradeRequiredMaterial
+	extra = 1
+
+class UpgradeAdmin(admin.ModelAdmin):
+	inlines = (UpgradeRequiredMaterialInline,)
+	list_display = ("name", "types_of_materials_needed")
+
+admin.site.register(Upgrade, UpgradeAdmin)

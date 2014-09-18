@@ -26,10 +26,10 @@ class MapLayout(models.Model):
 
 class Slot(models.Model):
 	map_layout = models.ForeignKey(MapLayout)
-	number = models.PositiveSmallIntegerField()
+	number = models.PositiveSmallIntegerField(null=True, blank=True) # Let it be null to make input easier
 	longitude = models.PositiveSmallIntegerField()
 	latitude = models.PositiveSmallIntegerField()
-	starting_feature = models.ForeignKey(Feature)
+	starting_feature = models.ForeignKey(Feature, default=1)
 
 	def __str__(self):
 		return ("Map %s, slot %s : %s" % (str(self.map_layout), str(self.number), str(self.starting_feature)))
