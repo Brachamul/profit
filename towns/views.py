@@ -8,27 +8,56 @@ from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 
 from django.contrib.auth.models import User
-from .models import Town, Player
+from .models import *
 
 
-class TownMapView(TemplateView):
+def town_map(request, town_slug):
 
-	template_name = 'towns/town_map.html'
+	town = get_object_or_404(Town, slug=town_slug)
 
-	def get_context_data(self, **kwargs):
+	try:
+		player = Player.objects.filter(user=request.user, left=None).latest('joined') # finds the current player
+	except ObjectDoesNotExist:
+		player = 'not_in_game' # for new players or people who just finished a game
 
-		context = super(TownMapView, self).get_context_data()
+	list_of_town_slots = list(TownSlot.objects.filter(town=town))
+	slot_details = [{} for town_slot in range(len(list_of_town_slots))]
+	count = 0
+	for town_slot in list_of_town_slots:
+		slot_details[count] = {
+		# From Features
+			'name' : town_slot.feature.name,
+			'description' : town_slot.feature.description,
+		# From Slots
+			'number' : town_slot.slot.number,
+			'longitude' : town_slot.slot.longitude,
+			'latitude' : town_slot.slot.latitude,
+		# From TownSlots
+			'owner' : town_slot.owner,
+#			'stored_items' : 0,
+		# From Illustrations
+#			'file_name' : 'placeholder.png',
+#			'shape' : '30,0,61,15,31,31,0,16',
+#			'vertical-offset' : 0,
+#			'horizontal-offset' : 0,
+		# From Upgrades / Features
+#			'buttons' : '<a href="build"></a>',
+			}
+		count += 1
+		if count == len(list_of_town_slots):
+			break
 
-		town = get_object_or_404(Town, slug=self.kwargs['town_slug'])
-		context['town'] = town
+	return render_to_response('towns/town_map.html', {
+		'town': town,
+		'player': player,
+		'slot_details': slot_details
+		})
 
-		try:
-			player = Player.objects.filter(user=self.request.user, left=None).latest('joined') # finds the current player
-			context['player'] = player
-		except ObjectDoesNotExist:
-			context['player'] = 'not_in_game' # for new players or people who just finished a game
-
-		return context
+	town = models.ForeignKey(Town)
+	slot = models.ForeignKey(Slot) # Finds the coordinates and starting feature of this Slot
+	owner = models.ForeignKey(Player, null=True, default=None)
+	feature = models.ForeignKey(Feature)
+	stored_items = models.ManyToManyField(Item, through='StoredItems')
 
 
 

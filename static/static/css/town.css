@@ -233,8 +233,8 @@ map area {
  
 .mastermap {
 	font-size: 0px;
-	width: 2000px;
-	height: 1200px;
+	width: 3200px;
+	height: 1600px;
 	margin-left: auto;
 	margin-right: auto;
 	position: relative;
@@ -256,6 +256,17 @@ map area {
 	height: 32px;
 	width: 62px;
 	margin-left: -15px;
+	display: inline-block;
+	position: absolute;
+}
+
+.mastermap #town-center { /* anchor to position browser window on the middle of the page */
+	width: 50%;
+	width: 100vw; /* The anchor is the size of the screen */
+	margin-left: 25%;
+	margin-left: calc(50%-50vw); /* It is positionned in the middle (50% margin) and centered by moving it back 50vw */
+	margin-top: 10%;
+	margin-left: calc(50%-50vh);
 	display: inline-block;
 	position: absolute;
 }

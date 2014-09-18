@@ -38,6 +38,9 @@
             <ul>
                 <li><a href="{% url 'town_map' town.slug %}">{{ town.name }}</a></li>
                 <li>{{ player.cash }} &#9749;</li>
+                {% for town_slot in slot_details %}
+                <li>{{ town_slot.name }}</li>
+                {% endfor %}
             </ul>
             <img class="menu" src="{% get_static_prefix %}images/gear.svg">
             <div class="menu-submenu">
@@ -84,6 +87,7 @@
 
 
     <div id="base" class="mastermap dragger" style="background-image: url('{% get_media_prefix %}maps/{{ town.map_layout.slug }}.png');">
+        <div id="town-center"></div>
         <!-- Images for map slots -->
         <img class="single" style="margin-left: 1044; margin-top: 273;" src="{% get_static_prefix %}images/slot.png" usemap="#slot3"/>
         <img class="single" style="margin-left: 1000; margin-top: 300;" src="{% get_static_prefix %}images/slot.png" usemap="#slot4"/>
