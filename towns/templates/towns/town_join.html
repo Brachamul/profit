@@ -10,10 +10,10 @@
 
 {% block content %}
 
-{% if open_towns %}
+{% if joinable_towns %}
     <p>These towns are currently available for you to settle :</p><br><br>
 	<table class="big horizontal">
-	{% for town in open_towns %}
+	{% for town in joinable_towns %}
         <tr>
 			<td>{{ town.name }}</td>
 			<td>{{ town.population }} <span class="symbol">&#xe602;</span></td>
@@ -29,7 +29,7 @@
 	{% endfor %}
 	</table>
 {% else %}
-	<p>Unfortunately, no town is currently available. Please come back later.</p>
+	<p>Unfortunately, there are no currently available towns for settling. Please come back later.</p>
 {% endif %}
 	
 {% endblock content %}

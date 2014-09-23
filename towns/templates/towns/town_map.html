@@ -16,11 +16,11 @@
 <script type="text/javascript" src="{% get_static_prefix %}modules/drag-and-scroll/scrollsync.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}modules/drag-and-scroll/dragscrollable.js"></script>
 <script type="text/javascript">
-    $(function() {
-    // Set drag scroll on first descendant of class dragger on both selected elements
-    $('#viewport').
-        dragscrollable({dragSelector: '.dragger:first', acceptPropagatedEvent: false});
-    });
+	$(function() {
+	// Set drag scroll on first descendant of class dragger on both selected elements
+	$('#viewport').
+		dragscrollable({dragSelector: '.dragger:first', acceptPropagatedEvent: false});
+	});
 </script>
 
 {% endblock head %}
@@ -31,68 +31,68 @@
 <div id="viewport">
 
 
-    <div class="fixed-container">
+	<div class="fixed-container">
 
-        <!-- Top status bar -->
-        <div class="screen-wide status-bar">
-            <ul>
-                <li><a href="{% url 'town_map' town.slug %}">{{ town.name }}</a></li>
-                <li>{{ player.cash }} &#9749;</li>
-                {% for town_slot in slot_details %}
-                <li>{{ town_slot.name }}</li>
-                {% endfor %}
-            </ul>
-            <img class="menu" src="{% get_static_prefix %}images/gear.svg">
-            <div class="menu-submenu">
-                <ul class="menu-bar">
-                    <li><a href="/u/myprofile/">Back to my profile</a></li>
-                    <li><a href="/town/leave/">Leave town</a></li>
-                    <li><a href="/u/logout/">Sign Out</a></li>
-                </ul>
-            </div>
-        </div>
-    
-        <!-- Coordinates and shapes of map slot 3 -->
-        <map id="1044-273" name="slot3">
-            <area href="#1044-273" shape="poly" coords="30,0,61,15,31,31,0,16" alt="Slot Name">
-        </map>
+		<!-- Top status bar -->
+		<div class="screen-wide status-bar">
+			<ul>
+				<li><a href="{% url 'town_map' town.slug %}">{{ town.name }}</a></li>
+				<li>{{ player.cash }} &#9749;</li>
+			</ul>
+			<img class="menu" src="{% get_static_prefix %}images/gear.svg">
+			<div class="menu-submenu">
+				<ul class="menu-bar">
+					<li><a href="/u/myprofile/">Back to my profile</a></li>
+					<li><a href="/town/leave/">Leave town</a></li>
+					<li><a href="/u/logout/">Sign Out</a></li>
+				</ul>
+			</div>
+		</div>
 
-        <!-- Tooltip content for map slot 3 -->
-        <div class="screen-wide tooltip-bar">
-            <a href="#_"><img class="close-tooltip" src="{% get_static_prefix %}images/cross.svg"></a>
-            <table><tr><td>
-                <h1>Workshop</h1>
-                Owned by Brachamul | 
-                Workers : 5 &#9874;
-            </td></tr></table>
-        </div>
 
-        <!-- Coordinates and shapes of map slot 4 -->
-        <map id="1000-300" name="slot4">
-            <area href="#1000-300" shape="poly" coords="30,0,61,15,31,31,0,16" alt="Slot Name">
-        </map>
+		{% for town_slot in slot_details %}
+		
+		<!-- Coordinates and shape of slots -->
+		<map id="{{ town_slot.longitude }}-{{ town_slot.latitude }}" name="slot{{ town_slot.number }}">
+			<area
+				href="#{{ town_slot.longitude }}-{{ town_slot.latitude }}"
+				shape="poly"
+				coords="52,27,60,21,66,19,76,21,80,30,70,34,69,48,65,47,63,34,53,37"
+				alt="{{ town_slot.name }}">
+		</map>
 
-        <!-- Tooltip content for map slot 3 -->
-        <div class="screen-wide tooltip-bar">
-            <a href="#_"><img class="close-tooltip" src="{% get_static_prefix %}images/cross.svg"></a>
-            <table><tr><td>
-                <h1>Field</h1>
-                Owned by Brachamul | 
-                Workers : 3 &#9874;
-            </td></tr></table>
-        </div>
-    
-    </div> <!-- fixed-container -->
+		<!-- Tooltip content for map slot 3 -->
+		<div class="screen-wide tooltip-bar">
+			<a href="#_"><img class="close-tooltip" src="{% get_static_prefix %}images/cross.svg"></a>
+			
+			<h1>{{ town_slot.name }}</h1>
+			{% if town_slot.owner == None %}
+			<a class="action" href="slot/{{ town_slot.number }}/purchase">Purchase this slot</a>
+			{% else %}
+			Owned by {{ town_slot.owner }}
+			{% endif %}
+		</div>
+
+		{% endfor %}
+
+
+	</div> <!-- fixed-container -->
 
 
 
-    <div id="base" class="mastermap dragger" style="background-image: url('{% get_media_prefix %}maps/{{ town.map_layout.slug }}.png');">
-        <div id="town-center"></div>
-        <!-- Images for map slots -->
-        <img class="single" style="margin-left: 1044; margin-top: 273;" src="{% get_static_prefix %}images/slot.png" usemap="#slot3"/>
-        <img class="single" style="margin-left: 1000; margin-top: 300;" src="{% get_static_prefix %}images/slot.png" usemap="#slot4"/>
-    </div>
+	<div id="base" class="mastermap dragger" style="background-image: url('{% get_media_prefix %}maps/{{ town.map_layout.slug }}.png');">
+		<div id="town-center"></div>
+		<!-- Images for map slots -->
+		{% for town_slot in slot_details %}
+		<img
+			class="slot"
+			style="margin-left: {{ town_slot.longitude }}; margin-top: {{ town_slot.latitude }};"
+			src="{% get_static_prefix %}images/slot.png"
+			usemap="#slot{{ town_slot.number }}"
+			/>
+		{% endfor %}
+	</div>
 
 </div> <!-- viewport -->
-    
+	
 {% endblock content %}

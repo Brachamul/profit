@@ -23,7 +23,9 @@ class ProfileView(TemplateView):
 
 		context = super(ProfileView, self).get_context_data()
 
-		user = get_object_or_404(User, username=self.kwargs['username']) # find the User instance with this username
+		user = get_object_or_404(User, username=self.kwargs['username'])
+		# Finds the User instance with this username
+		# Uses lower() to find the user even if a letter was capitalized
 		context['user_object'] = user
 
 		try:

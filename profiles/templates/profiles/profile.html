@@ -14,23 +14,25 @@
 {% block content %}
 
 <h1>
-    {{ user_object.username | capfirst }}, the Brave <!--title-->
+    {{ user_object.username | capfirst }}
 </h1>
 
 <ul>
+{% if user != user_object %}
 <li>Last seen {{ user_object.last_login | timesince }} ago.</li>
+{% endif %}
 </ul>
 
 
 <br>
 {% if player == "not_in_game" %}
-<a class="important button" href="{% url 'join_a_new_town' %}">Join a new town</a>
+<a class="important button" href="{% url 'joinable_towns' %}">Join a new town</a>
 
 {% elif user.username == user_object.username %}
-<a class="important button" href="{% url 'town_map' player.town.slug %}">Return to {{ player.town.name }}</a>
+<a class="important button" href="{% url 'town_map' player.town.slug %}#town-center">Return to {{ player.town.name }}</a>
 
 {% else %}
-<a class="important button" href="{% url 'town_map' player.town.slug %}">Currently in : {{ player.town.name }}</a>
+<a class="important button" href="{% url 'town_map' player.town.slug %}#town-center">Currently in : {{ player.town.name }}</a>
 
 {% endif %}
 

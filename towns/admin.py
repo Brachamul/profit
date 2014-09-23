@@ -30,3 +30,11 @@ class PlayerAdmin(admin.ModelAdmin):
 	list_display = ("user", "pk", "cash", "joined", "left")
 
 admin.site.register(Player, PlayerAdmin)
+
+
+
+class TownSlotAdmin(admin.ModelAdmin):
+	model = TownSlot
+	list_display = ("town", "slot", "feature", "owner")
+
+admin.site.register(TownSlot, TownSlotAdmin)

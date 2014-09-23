@@ -55,8 +55,9 @@ a:link, a:hover, a:visited, a:active {
 	text-decoration: inherit;
 }
 
-a:hover        { border-bottom: .150em solid black; }
-footer a:hover { border-bottom: .150em solid white; }
+/* Style all links with a black bottom line, except for buttons, and using a white line instead for the black footer area */
+	   a:not(.button):hover { border-bottom: .150em solid black; }
+footer a:not(.button):hover { border-bottom: .150em solid white; }
 
 
 /*
@@ -99,6 +100,7 @@ map area {
 	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
 	box-sizing: border-box;         /* Opera/IE 8+ */
 }
+/*
 
 [class*="-bar"] table {
 	width: 100%;
@@ -111,6 +113,8 @@ map area {
 	text-align: center;
 	line-height: 1.5;
 }
+
+*/
 
 .screen-wide {
 	margin-left: 2vw;
@@ -213,7 +217,8 @@ map area {
 .tooltip-bar {
 	visibility: hidden;
 	opacity:0;
-	transition: visibility 0s linear 0.1s, opacity 0.1s linear;
+	padding: 1em;
+/*	transition: visibility 0s linear 0.1s, opacity 0.1s linear; */
 }
  
 .close-tooltip { 
@@ -223,6 +228,16 @@ map area {
 	position: absolute;
 	right: 0.450em;
 	top: 0.450em;
+}
+
+.action {
+	display: inline-block;
+	font-family: 'Average', serif;
+	opacity: .8;
+	color: black;
+	box-shadow: 0 0 0.150em black;
+	padding: .40em .60em;
+	margin: 1em;
 }
 
 
@@ -252,10 +267,9 @@ map area {
 	margin-left: 31px;
 }
 
-.mastermap .single {
-	height: 32px;
-	width: 62px;
-	margin-left: -15px;
+.mastermap .slot {
+	height: 64px;
+	width: 128px;
 	display: inline-block;
 	position: absolute;
 }

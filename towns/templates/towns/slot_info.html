@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block head %}{{ block.super }}
+
+<title>Slot Information - Profit</title>
+
+{% endblock head %}
+
+
+{% block content %}
+
+<h1>{{ town_slot.feature }}</h1>
+
+{% if town_slot.owner == None %}
+<p>This area of land belongs to the King.</p>
+{% else %}
+<p>This area of land is currently owned by {{ town_slot.owner }}</p>
+{% endif %}
+
+{% comment %}
+{% if town_slot.is_for_sale %}
+
+{% endif %}
+{% endcomment %}
+<a class="button" href="purchase">Purchase</a>
+
+{% endblock content %}

@@ -156,7 +156,7 @@ div.message {
 	padding: .5em 1em;
 	border-radius: .2em;
 	box-shadow: .2em .2em 0 0 darkgray;
-	margin-bottom: .2em;
+	margin: 1em 0 .2em 0;
 }
 .button:not(.symbol) {
 	font-family: "Berkshire Swash", serif;

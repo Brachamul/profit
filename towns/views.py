@@ -9,11 +9,12 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from django.contrib.auth.models import User
 from .models import *
-
+from maps.models import Slot
 
 def town_map(request, town_slug):
 
 	town = get_object_or_404(Town, slug=town_slug)
+	# Look for the town which corresponds to the town_slug that was passed through my URL
 
 	try:
 		player = Player.objects.filter(user=request.user, left=None).latest('joined') # finds the current player
@@ -42,9 +43,11 @@ def town_map(request, town_slug):
 #			'horizontal-offset' : 0,
 		# From Upgrades / Features
 #			'buttons' : '<a href="build"></a>',
+		# From Dunno
+#			'forsale' : False,
 			}
 		count += 1
-		if count == len(list_of_town_slots):
+		if count == len(list_of_town_slots): # if we've gone through all the slots, let's stop
 			break
 
 	return render_to_response('towns/town_map.html', {
@@ -61,19 +64,32 @@ def town_map(request, town_slug):
 
 
 
-class JoinTownView(ListView):
-	model = Town
-	context_object_name = "open_towns"
-	queryset = Town.objects.all().annotate(population=Count('player'))
+def joinable_towns (request):
+	joinable_towns = Town.objects.all().annotate(population=Count('player'))
+	return render_to_response('towns/town_join.html', {'joinable_towns': joinable_towns,}, context_instance=RequestContext(request))
 
+
+
+### Slot Views
+
+def get_town_slot (town_slug, slot_number):
+	# Reusable function for fetching a TownSlot
+	master_slot = Slot.objects.get(number=int(slot_number))
+	town = Town.objects.get(slug=town_slug)
+	town_slot = TownSlot.objects.get(slot=master_slot, town=town)
+	return town_slot
+
+def slot_info(request, town_slug, slot_number):
+	return render_to_response('towns/slot_info.html', {'town_slot': get_town_slot(town_slug, slot_number),})
+
+def slot_purchase(request, town_slug, slot_number):
+	return render_to_response('towns/slot_purchase.html', {'town_slot': get_town_slot(town_slug, slot_number),})
 
 
 ### Make user join town by creating a 'player' within that town
 
 def create_player(request):
-
 	context = RequestContext(request)
-
 	if request.method == 'POST': # check if post data has been sent through the join town page
 		town_slug = request.POST.get('town_to_join')
 		town = Town.objects.get(slug=town_slug)
