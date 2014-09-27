@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponse, HttpRequest
 from django.template import RequestContext
 from django.views.generic import TemplateView, ListView
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import messages
 
 # Create your views here.
 
@@ -80,10 +81,26 @@ def get_town_slot (town_slug, slot_number):
 	return town_slot
 
 def slot_info(request, town_slug, slot_number):
-	return render_to_response('towns/slot_info.html', {'town_slot': get_town_slot(town_slug, slot_number),})
+	purchase(request, town_slug, slot_number)
+#	if request.POST.get('bid') : messages.success(request, 'You placed a bid of %s !' % (request.POST.get('bid')))
+	return render_to_response(
+		'towns/slot_info.html',
+		{'town_slot': get_town_slot(town_slug, slot_number),},
+		context_instance=RequestContext(request)
+		)
 
 def slot_purchase(request, town_slug, slot_number):
-	return render_to_response('towns/slot_purchase.html', {'town_slot': get_town_slot(town_slug, slot_number),})
+	return render_to_response(
+		'towns/slot_purchase.html',
+		{'town_slot': get_town_slot(town_slug, slot_number),},
+		context_instance=RequestContext(request)
+		)
+
+def purchase(request, town_slug, slot_number):
+	bid = request.POST.get('bid') # Set 'bid' to whatever was posted in the form
+	try: bid.isdigit() # Is the bid made of digits, meaning, is it valid ?
+	except ValueError: messages.error(request, 'It looks like your "%s" bid was invalid ! A bid should contain only numbers.' % (bid))
+	messages.success(request, 'You placed a bid of %s !' % (bid))
 
 
 ### Make user join town by creating a 'player' within that town

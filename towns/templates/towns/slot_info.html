@@ -4,7 +4,7 @@
 
 {% block head %}{{ block.super }}
 
-<title>Slot Information - Profit</title>
+<title>Land Acquisition - Profit</title>
 
 {% endblock head %}
 
@@ -15,15 +15,23 @@
 
 {% if town_slot.owner == None %}
 <p>This area of land belongs to the King.</p>
+<p>His majesty's accountant has set a minimum selling price of <span class="cash">42</span>.</p>
 {% else %}
 <p>This area of land is currently owned by {{ town_slot.owner }}</p>
 {% endif %}
 
 {% comment %}
 {% if town_slot.is_for_sale %}
-
+<p>This slot is for sale.</p>
 {% endif %}
 {% endcomment %}
-<a class="button" href="purchase">Purchase</a>
+
+<p>You can purchase it by participating in the sale auction :</p>
+
+<form method="post" action="" enctype="multipart/form-data">
+	{% csrf_token %}
+	<input name="bid" value="10">
+	<input class="button" type="submit" name="submit" value="Bid" />
+</form>
 
 {% endblock content %}

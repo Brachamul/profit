@@ -5,7 +5,7 @@
 
 {% block head %}{{ block.super }}
 
-<title>{{ user_object.username | capfirst }}</title>
+<title>{{ user_object.username | capfirst }} - Profit</title>
 
 {% endblock head %}
 
@@ -14,7 +14,11 @@
 {% block content %}
 
 <h1>
-    {{ user_object.username | capfirst }}
+	{% if user = user_object %}
+		Welcome, {{ user.username }}. 
+    {% else %}
+    	{{ user_object.username | capfirst }}
+    {% endif %}
 </h1>
 
 <ul>
