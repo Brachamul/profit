@@ -22,27 +22,6 @@
 
 <div class="white-wrapper">
 
-	<nav class="content"><ul>
-
-		{% if user.is_authenticated %}
-
-			{% if user.is_staff %}
-			<a href="/admin/">
-				<li>&#xe606;</li></a>
-			{% endif %}
-
-		<a href="/u/{{ user.username }}/">
-			<li>&#xe602;</li></a>
-
-		{% else %}
-
-		<a href="/u/login/">
-			<li>&#xe603;</li></a>
-
-		{% endif %}
-		
-	</ul></nav>
-
 	{% if messages %}
 		{% for message in messages %}
 			<div {% if message.tags == "success" %} class="message" {% endif %} >{{ message }}</div>
@@ -64,9 +43,30 @@
 
 
 {% block lower_body %}
-
-		 <div class="anchor"></div>
 	</div>
+
+	<nav><ul>
+
+		{% if user.is_authenticated %}
+
+			{% if user.is_staff %}
+			<a href="/admin/">
+				<li>&#xe606;</li></a>
+			{% endif %}
+
+		<a href="/u/{{ user.username }}/">
+			<li>&#xe602;</li></a>
+
+		{% else %}
+
+		<a href="/u/login/">
+			<li>&#xe603;</li></a>
+
+		{% endif %}
+		
+	</ul></nav>
+
+<div class="anchor"></div>
 
 </div> <!-- white-wrapper -->
 

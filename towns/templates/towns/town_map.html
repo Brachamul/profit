@@ -65,7 +65,7 @@
 		<div class="screen-wide tooltip-bar">
 			<a href="#_"><img class="close-tooltip" src="{% get_static_prefix %}images/cross.svg"></a>
 			
-			<h1>{{ town_slot.name }}</h1>
+			<h2>{{ town_slot.name }}</h2>
 			{% if town_slot.owner == None %}
 			<a class="action" href="slot/{{ town_slot.number }}">Inspect this area</a>
 			{% else %}
