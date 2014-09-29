@@ -22,29 +22,6 @@
 
 <div class="white-wrapper">
 
-	{% if messages %}
-		{% for message in messages %}
-			<div {% if message.tags == "success" %} class="message" {% endif %} >{{ message }}</div>
-		{% endfor %}
-	{% endif %}
-	
-	<div class="content">
-
-{% endblock upper_body %}
-
-
-
-{% block content %}
-
-<!-- Main content displayed here -->
-
-{% endblock content %}
-
-
-
-{% block lower_body %}
-	</div>
-
 	<nav><ul>
 
 		{% if user.is_authenticated %}
@@ -64,7 +41,32 @@
 
 		{% endif %}
 		
-	</ul></nav>
+	</ul>
+	<div class="anchor"></div>
+	</nav>
+
+	<div class="content">
+
+	{% if messages %}
+		{% for message in messages %}
+			<div {% if message.tags == "success" %} class="message" {% endif %} >{{ message }}</div>
+		{% endfor %}
+	{% endif %}
+
+{% endblock upper_body %}
+
+
+
+{% block content %}
+
+<!-- Main content displayed here -->
+
+{% endblock content %}
+
+
+
+{% block lower_body %}
+	</div>
 
 <div class="anchor"></div>
 

@@ -81,7 +81,7 @@ def get_town_slot (town_slug, slot_number):
 	return town_slot
 
 def slot_info(request, town_slug, slot_number):
-	purchase(request, town_slug, slot_number)
+	if request.POST.get('bid'): purchase(request, town_slug, slot_number)
 #	if request.POST.get('bid') : messages.success(request, 'You placed a bid of %s !' % (request.POST.get('bid')))
 	return render_to_response(
 		'towns/slot_info.html',

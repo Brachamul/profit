@@ -12,12 +12,15 @@
 
 {% block content %}
 
-		<form id="login_form"  class="classic" method="POST" action="/u/login/">
-			{% csrf_token %}
-			<p><label>username:</label><input type="text" name="username" value="" size="50" /></p>
-			<p><label>password:</label><input type="password" name="password" value="" size="50" /></p>
-			<input type="submit" value="Log in !" />
-			<br><br>
-		</form>
+<p style="text-align:right; margin-top: 1em"><a href="{% url 'signup' %}" class="small button">Don't have an account yet ? Sign Up!</a></p>
+
+<form id="login_form"  class="classic" method="POST" action="">
+	{% csrf_token %}
+	<p><label>username:</label><input type="text" name="username" value="" size="50" /></p>
+	<p><label>password:</label><input type="password" name="password" value="" size="50" /></p>
+	<input type="submit" value="Log in !" />
+</form>
+
+
 
 {% endblock content %}

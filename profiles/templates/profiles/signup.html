@@ -14,10 +14,12 @@
 
 {% if registered %}
 <h2>Thank you for signing up !</h2>
-<a href="/u/login">Go to login</a><br><br><br>
+<a href="{% url 'login' %}">Go to login</a><br><br><br>
 
 {% else %}
-<form id="user_form" class="classic" method="post" action="/u/signup/"
+<p style="text-align:right; margin-top: 1em"><a href="{% url 'login' %}" class="small button">Already have an account ? Log in !</a></p>
+
+<form id="user_form" class="classic" method="post" action=""
         enctype="multipart/form-data">
 
     {% csrf_token %}
