@@ -303,32 +303,32 @@ map:target + .tooltip-bar {
 /* Zoom Levels */
 /***************/
 
-input[name=zoom] {
+input[name=zoom],
+input[name=zoom] + span {
 	z-index: 5;
 	position: fixed;
 }
 
-input[name=zoom]:nth-child(1) { top : 40%; left: 50%; }
-input[name=zoom]:nth-child(2) { top : 50%; left: 50%; }
-input[name=zoom]:nth-child(3) { top : 60%; left: 50%; }
+#zoomed-1x { top : 35%; left: 50%; }
+#zoomed-2x { top : 40%; left: 50%; }
+#zoomed-3x { top : 45%; left: 50%; }
+#zoomed-4x { top : 50%; left: 50%; }
 
-input[name=zoom]:nth-child(1):checked ~ #base {
-	width: 120vw;
-	height: 60vw;
+#zoomed-1x + span { top : 35%; left: 55%; }
+#zoomed-2x + span { top : 40%; left: 55%; }
+#zoomed-3x + span { top : 45%; left: 55%; }
+#zoomed-4x + span { top : 50%; left: 55%; }
+
+input[name=zoom] ~ #base {
+	min-width: 200vh;
+	min-height: 100vh;
+	max-width: 1600px;
+	max-height: 800px;
+	/* These are the fallback sizes. The map has to at least cover 100% of the height. */
+	/* And it can't either be bigger than the pixel size ! */
 }
 
-input[name=zoom]:nth-child(1):checked ~ #base {
-	width: 120vw;
-	height: 60vw;
-}
-
-input[name=zoom]:nth-child(2):checked ~ #base {
-	width: 3200px;
-	height: 1600px;
-}
-
-input[name=zoom]:nth-child(3):checked ~ #base {
-	width: 3200px;
-	height: 1600px;
-}
-
+#zoomed-1x:checked ~ #base { width: 100vw; height:  50vw; }
+#zoomed-2x:checked ~ #base { width: 200vw; height: 100vw; }
+#zoomed-3x:checked ~ #base { width: 300vw; height: 150vw; }
+#zoomed-4x:checked ~ #base { width: 400vw; height: 200vw; }
