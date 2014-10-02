@@ -26,6 +26,9 @@ def town_map(request, town_slug):
 	slot_details = [{} for town_slot in range(len(list_of_town_slots))]
 	count = 0
 	for town_slot in list_of_town_slots:
+		margin_left = town_slot.slot.longitude / 32
+		margin_top = town_slot.slot.latitude / 16
+		# Here, i used the longitude and latitude and divide them by the map size (3200*1600) to get percentage margins that will be responsive
 		slot_details[count] = {
 		# From Features
 			'name' : town_slot.feature.name,
@@ -34,6 +37,9 @@ def town_map(request, town_slug):
 			'number' : town_slot.slot.number,
 			'longitude' : town_slot.slot.longitude,
 			'latitude' : town_slot.slot.latitude,
+		# From my calculations
+			'margin_left' : margin_left,
+			'margin_top' : margin_top,
 		# From TownSlots
 			'owner' : town_slot.owner,
 #			'stored_items' : 0,

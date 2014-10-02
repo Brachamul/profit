@@ -78,22 +78,10 @@ $('img[usemap]').rwdImageMaps();
 			</div>
 		</div>
 
-
+		<!-- Tooltip contents for each -->
 		{% for town_slot in slot_details %}
-		
-		<!-- Coordinates and shape of slots -->
-		<map id="{{ town_slot.longitude }}-{{ town_slot.latitude }}" name="slot{{ town_slot.number }}">
-			<area
-				href="#{{ town_slot.longitude }}-{{ town_slot.latitude }}"
-				shape="poly"
-				coords="52,27,60,21,66,19,76,21,80,30,70,34,69,48,65,47,63,34,53,37"
-				alt="{{ town_slot.name }}">
-		</map>
-
-		<!-- Tooltip content for map slot 3 -->
-		<div class="screen-wide tooltip-bar">
-			<a href="#_"><img class="close-tooltip" src="{% get_static_prefix %}images/cross.svg"></a>
-			
+		<div class="screen-wide tooltip-bar" id="{{ town_slot.number }}">
+			<a href="#"><img class="close-tooltip" src="{% get_static_prefix %}images/cross.svg"></a>
 			<h2>{{ town_slot.name }}</h2>
 			{% if town_slot.owner == None %}
 			<a class="action" href="slot/{{ town_slot.number }}">Inspect this area</a>
@@ -101,7 +89,6 @@ $('img[usemap]').rwdImageMaps();
 			Owned by {{ town_slot.owner }}
 			{% endif %}
 		</div>
-
 		{% endfor %}
 
 
@@ -113,12 +100,15 @@ $('img[usemap]').rwdImageMaps();
 		<div id="town-center"></div>
 		<!-- Images for map slots -->
 		{% for town_slot in slot_details %}
-		<img
-			class="slot"
-			style="margin-left: {{ town_slot.longitude }}; margin-top: {{ town_slot.latitude }};"
-			src="{% get_static_prefix %}images/slot.png"
-			usemap="#slot{{ town_slot.number }}"
-			/>
+		<a href="#{{ town_slot.number }}">
+			<img
+				class="slot"
+				style="left: {{ town_slot.margin_left }}%; top: {{ town_slot.margin_top }}%;"
+				src="{% get_static_prefix %}images/slot.png"
+				alt="{{ town_slot.name }}"
+				/>
+			<div style="left: calc({{ town_slot.margin_left }}% + 2.5%); top: calc({{ town_slot.margin_top }}% + 4.5%);">{{ town_slot.name }}</div>
+		</a>
 		{% endfor %}
 	</div>
 

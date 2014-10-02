@@ -79,6 +79,10 @@ map area {
 	z-index: 3;
 }
 
+img.slot + div {
+	z-index: 4;
+}
+
 
 
 /*
@@ -97,8 +101,8 @@ map area {
 	border-radius: 0em; /* 0.400em */
 	box-shadow: 0 0 0.200em black;
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
-	box-sizing: border-box;         /* Opera/IE 8+ */
+	-moz-box-sizing: border-box;	/* Firefox, other Gecko */
+	box-sizing: border-box;		 /* Opera/IE 8+ */
 }
 /*
 
@@ -222,7 +226,7 @@ map area {
 	visibility: hidden;
 	opacity:0;
 	padding: 1em;
-/*	transition: visibility 0s linear 0.1s, opacity 0.1s linear; */
+	transition: visibility 0s linear 0.1s, opacity 0.1s linear; 
 }
  
 .close-tooltip { 
@@ -245,52 +249,70 @@ map area {
 }
 
 
-/*
- * Map
- *
- */
+
+/*|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|*/
+/*|        Map        |*/
+/*|___________________|*/
  
 .mastermap {
-	font-size: 0px;
-	margin-left: auto;
-	margin-right: auto;
 	position: relative;
 	background-size: contain;
 }
 
-.mastermap img {
-	position: relative;
-}
-
-.mastermap .line {
-	margin-bottom: -16px;
-}
-
-.mastermap .odd {
-	margin-left: 31px;
-}
-
-.mastermap .slot {
-	height: 64px;
-	width: 128px;
+img.slot {
 	display: inline-block;
 	position: absolute;
+	height: 4%; /* Should be 64px for 1600px */
+	width: 4%; /* Should be 128px for 3200px */
+	-webkit-transition: all .5s ease; /* Safari and Chrome */
+	   -moz-transition: all .5s ease; /* Firefox */
+	    -ms-transition: all .5s ease; /* IE 9 */
+	     -o-transition: all .5s ease; /* Opera */
+	        transition: all .5s ease;
+}
+
+img.slot:hover {
+	/* Little effect on hover */
+	-webkit-transform:scale(1.20); /* Safari and Chrome */
+	   -moz-transform:scale(1.20); /* Firefox */
+	    -ms-transform:scale(1.20); /* IE 9 */
+	     -o-transform:scale(1.20); /* Opera */
+	        transform:scale(1.20);
+}
+
+img.slot + div {
+	position: absolute;
+	text-align: center;
+	font-size: .8em;
+	background-image: url('../images/parchment.jpg');
+	background-size: cover;
+	border: 0.100em solid black;
+	border-radius: 0em; /* 0.400em */
+	box-shadow: 0 0 0.200em black;
+	padding: .25em .5em;
+	visibility: hidden;
+	opacity:0;
+	transition: visibility 0s linear 0.1s, opacity 0.1s linear;
+}
+
+img.slot:hover + div {
+	visibility: visible;
+	opacity:1;
+	transition-delay:0s;
 }
 
 .mastermap #town-center { /* anchor to position browser window on the middle of the page */
 	width: 50%;
 	width: 100vw; /* The anchor is the size of the screen */
-	margin-left: 25%;
-	margin-left: calc(50%-50vw); /* It is positionned in the middle (50% margin) and centered by moving it back 50vw */
-	margin-top: 10%;
-	margin-left: calc(50%-50vh);
+	left: 25%;
+	left: calc(50%-50vw); /* It is positionned in the middle (50% margin) and centered by moving it back 50vw */
+	top: 10%;
+	top: calc(50%-50vh);
 	display: inline-block;
 	position: absolute;
 }
 
-map:hover + .tooltip-bar,
-.tooltip-bar:hover, /* Don't flicker bar if it's displayed from hovering a feature underneath it. */
-map:target + .tooltip-bar {
+.tooltip-bar:target {
 	/* The tooltip is shown upon hover or click of the feature. */
 	visibility: visible;
 	opacity:1;
@@ -299,14 +321,14 @@ map:target + .tooltip-bar {
 
 
 
-/***************/
-/* Zoom Levels */
-/***************/
+/*|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|*/
+/*|    Zoom levels    |*/
+/*|___________________|*/
 
 input[name=zoom],
 input[name=zoom] + span {
-    z-index: 5;
-    position: fixed;
+	z-index: 5;
+	position: fixed;
 }
 
 #zoomed-1x { top : 35%; left: 50%; }
@@ -320,23 +342,20 @@ input[name=zoom] + span {
 #zoomed-4x + span { top : 50%; left: 55%; }
 
 input[name=zoom] ~ #base {
-    min-width: 200vh;
-    min-height: 100vh;
-    /* These are the fallback sizes. The map has to at least cover 100% of the height. */
-    /* And it can't either be bigger than the pixel size ! */
+	min-width: 200vh;
+	min-height: 100vh;
+	/* Fallback minimum sizes. */
 }
 
-/* Hide zoom if device is 2400px or better */
 #zoomed-1x:checked ~ #base { width: 100vw; height:  50vw; }
 #zoomed-2x:checked ~ #base { width: 200vw; height: 100vw; }
-
-/* Hide third level if 1600px or more */
 #zoomed-3x:checked ~ #base { width: 300vw; height: 150vw; }
-
-/* Hide fourth level if 800px or more */
 #zoomed-4x:checked ~ #base { width: 400vw; height: 200vw; }
 
+/* Hide zoom if device is 2400px or better */
 @media (min-width: 2350px) { #zoomed-1x, #zoomed-1x + span { display: none; } }
 @media (min-width: 2350px) { #zoomed-2x, #zoomed-2x + span { display: none; } }
+/* Hide third level if 1600px or more */
 @media (min-width: 1550px) { #zoomed-3x, #zoomed-3x + span { display: none; } }
+/* Hide fourth level if 800px or more */
 @media (min-width:  750px) { #zoomed-4x, #zoomed-4x + span { display: none; } }
