@@ -305,8 +305,8 @@ map:target + .tooltip-bar {
 
 input[name=zoom],
 input[name=zoom] + span {
-	z-index: 5;
-	position: fixed;
+    z-index: 5;
+    position: fixed;
 }
 
 #zoomed-1x { top : 35%; left: 50%; }
@@ -320,15 +320,23 @@ input[name=zoom] + span {
 #zoomed-4x + span { top : 50%; left: 55%; }
 
 input[name=zoom] ~ #base {
-	min-width: 200vh;
-	min-height: 100vh;
-	max-width: 1600px;
-	max-height: 800px;
-	/* These are the fallback sizes. The map has to at least cover 100% of the height. */
-	/* And it can't either be bigger than the pixel size ! */
+    min-width: 200vh;
+    min-height: 100vh;
+    /* These are the fallback sizes. The map has to at least cover 100% of the height. */
+    /* And it can't either be bigger than the pixel size ! */
 }
 
+/* Hide zoom if device is 2400px or better */
 #zoomed-1x:checked ~ #base { width: 100vw; height:  50vw; }
 #zoomed-2x:checked ~ #base { width: 200vw; height: 100vw; }
+
+/* Hide third level if 1600px or more */
 #zoomed-3x:checked ~ #base { width: 300vw; height: 150vw; }
+
+/* Hide fourth level if 800px or more */
 #zoomed-4x:checked ~ #base { width: 400vw; height: 200vw; }
+
+@media (min-width: 2350px) { #zoomed-1x, #zoomed-1x + span { display: none; } }
+@media (min-width: 2350px) { #zoomed-2x, #zoomed-2x + span { display: none; } }
+@media (min-width: 1550px) { #zoomed-3x, #zoomed-3x + span { display: none; } }
+@media (min-width:  750px) { #zoomed-4x, #zoomed-4x + span { display: none; } }

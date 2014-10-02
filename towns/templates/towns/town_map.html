@@ -23,6 +23,17 @@
 	});
 </script>
 
+<!-- Script to add the #town-center id to URL -->
+<script type="text/javascript">
+location.hash = 'town-center';
+</script>
+
+<!-- Script to make my image maps responsive, even when in and out -->
+<script type="text/javascript" src="{% get_static_prefix %}modules/responsive-image-maps/jquery.rwdImageMaps.min.js">
+$('img[usemap]').rwdImageMaps();
+</script>
+
+
 {% endblock head %}
 
 
@@ -30,16 +41,23 @@
 
 <div id="viewport">
 
-	<input name="zoom" id="zoomed-1x" type="radio"/>
+	<!-- Zoom buttons ! -->
+	<!-- Include a reset to town-center -->
+
+	<input name="zoom" id="zoomed-1x" type="radio"
+	onclick='window.location.assign("#town-center")'/>
 	<span>1x</span>
 
-	<input name="zoom" id="zoomed-2x" type="radio"/>
+	<input name="zoom" id="zoomed-2x" type="radio"
+	onclick='window.location.assign("#town-center")'/>
 	<span>2x</span>
 
-	<input name="zoom" id="zoomed-3x" type="radio"/>
+	<input name="zoom" id="zoomed-3x" type="radio"
+	onclick='window.location.assign("#town-center")'/>
 	<span>3x</span>
 
-	<input name="zoom" id="zoomed-4x" type="radio"/>
+	<input name="zoom" id="zoomed-4x" type="radio"
+	onclick='window.location.assign("#town-center")'/>
 	<span>4x</span>
 
 	<div class="fixed-container">
