@@ -28,3 +28,20 @@
     url('../fonts/icomoon.ttf') format('truetype'),
     url('../fonts/icomoon.svg#averageregular') format('svg');
 }
+
+@font-face {
+  font-family: 'Foundation';
+  src: url('../fonts/foundation-icons/foundation-icons.eot');
+  src: url('../fonts/foundation-icons/foundation-icons.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/foundation-icons/foundation-icons.woff') format('woff'),
+       url('../fonts/foundation-icons/foundation-icons.ttf') format('truetype'),
+       url('../fonts/foundation-icons/foundation-icons.svg#fontcustom') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import url('../fonts/foundation-icons/foundation-icons.css'); /* Import foundation symbols font */
+
+.foundation-symbol {
+    font-family: "Foundation";
+}

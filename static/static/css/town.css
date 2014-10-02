@@ -56,8 +56,8 @@ a:link, a:hover, a:visited, a:active {
 }
 
 /* Style all links with a black bottom line, except for buttons, and using a white line instead for the black footer area */
-	   a:not(.button):hover { border-bottom: .150em solid black; }
-footer a:not(.button):hover { border-bottom: .150em solid white; }
+	   a:not(.button):not(.foundation-symbol):hover { border-bottom: .150em solid black; }
+footer a:not(.button):not(.foundation-symbol):hover { border-bottom: .150em solid white; }
 
 
 /*
@@ -90,7 +90,9 @@ img.slot + div {
  *
  */
 
-[class*="-bar"] {
+[class*="-bar"],
+input[name=zoom] + label, .dummy-zoom,
+input[name=touch-mouse-toggle] + label {
 	/* Used to format most bars. */
 	background-image: url('../images/parchment.jpg');
 	background-size: cover;
@@ -120,13 +122,6 @@ img.slot + div {
 
 */
 
-.screen-wide {
-	margin-left: 2vw;
-}
-							.screen-wide {	width: 95vw; } /* Fallback */
-							.screen-wide {	width: calc(96vw - 17px); }
-@media (max-width: 980px) {	.screen-wide {	width: 96vw } }
-/* Compensate for the scrollbar on larger screens. */ 
 
 
 .fixed-container {
@@ -136,10 +131,14 @@ img.slot + div {
 	height: 100%;
 }
 
-
 .status-bar {
 	top: 2vw;
-	min-height: 2.200em;
+	right: 2vw;
+	min-height: 3em;
+	max-width: calc(100vw - 4vw - 8em);
+	padding-top: .7em;
+	padding-right: 1em;
+	padding-left: 1em;
 	display: inline-block;
 	vertical-align: middle;
 	position: absolute;
@@ -151,16 +150,14 @@ img.slot + div {
 	line-height: 1;
 }
 
-.status-bar > ul li { display: inline-block; }
+.status-bar > ul li { display: inline-block; font-size: 1.5em; }
 .status-bar > ul li:before { content: "\2022 \0020"; }
 .status-bar > ul li:first-child:before { content: none; }
 
 .status-bar .menu {
-	height: 1.200em;
-	vertical-align: bottom;
-	position: absolute;
-	right: 0.800em;
-	top: 0.450em;
+	margin-left: .5em;
+	font-size: 1.5em;
+	vertical-align: -.125em;
 }
 
 .menu-submenu {
@@ -171,30 +168,36 @@ img.slot + div {
 	position: fixed;
 	color: black;
 	width: auto;
+	right: 2vw;
+	top: calc(2vw + 4em);
+	max-width: calc(100vw - 4vw - 8em);
 }
-
-							.menu-submenu {	right: 3vw; } /* Fallback */
-							.menu-submenu {	right: calc(2vw + 17px); }
-@media (max-width: 980px) {	.menu-submenu {	right: 2vw } }
 
 .menu-submenu ul {
 	background-image: url('../images/parchment.jpg');
 	background-size: cover;
-	margin-top: 2em;
 	line-height: 1.5;
 	text-align: left;
 }
 
 .menu-submenu ul li {
 	padding: 0.5em 1em;
+	font-family: "Average", sans-serif;
 }
 
-.status-bar .menu:hover + .menu-submenu,
+.menu-submenu ul li:before { content: "\2022 \0020"; }
+
+.status-bar #menu:target ~ .menu-submenu,
+/* .status-bar .open-menu:hover ~ .menu-submenu, */
 .menu-submenu:hover {
 	visibility: visible;
 	opacity:1;
 	transition-delay:0s;
 }
+
+.close-menu { display: none; }
+.status-bar #menu:target, .status-bar #menu:target + .open-menu { display: none; }
+.status-bar #menu:target ~ .close-menu { display: inline-block; }
 
 
 /****************/
@@ -204,6 +207,14 @@ img.slot + div {
 .tooltip-bar {
 	vertical-align: middle;
 	position: absolute;
+	bottom: 2vw;
+	right: 2vw;
+	max-height: calc(100vh - 4vw - 9em); /* Doesn't overlap the zoom and touch/mouse buttons */
+	max-width: 96vw;
+	visibility: hidden;
+	opacity:0;
+	padding: 1em;
+	transition: visibility 0s linear 0.1s, opacity 0.1s linear; 
 }
 
 .tooltip-bar h2 {
@@ -211,24 +222,7 @@ img.slot + div {
 	text-align: center;
 }
 
-							.tooltip-bar {	height: 16vh; }
-@media (max-width: 980px) {	.tooltip-bar {	height: 24vh; } }
-@media (max-width: 480px) {	.tooltip-bar {	height: 40vh; } }
-/* Resizes the tooltip bar depending on screen width */
 
-							.tooltip-bar {	bottom: 3vw; } /* Fallback */
-							.tooltip-bar {	bottom: calc(2vw + 17px); }
-@media (max-width: 980px) {	.tooltip-bar {	bottom: 2vw; } }
-/* Scrollbar offset */
-
-
-.tooltip-bar {
-	visibility: hidden;
-	opacity:0;
-	padding: 1em;
-	transition: visibility 0s linear 0.1s, opacity 0.1s linear; 
-}
- 
 .close-tooltip { 
 	/* Styles the icon which closes a tooltip. */
 	height: 1em;
@@ -244,7 +238,8 @@ img.slot + div {
 	opacity: .8;
 	color: black;
 	box-shadow: 0 0 0.150em black;
-	padding: .40em .60em;
+	border-bottom: .150em solid transparent;
+	padding: .40em .60em .25em .60em;
 	margin: 1em;
 }
 
@@ -284,6 +279,7 @@ img.slot + div {
 	position: absolute;
 	text-align: center;
 	font-size: .8em;
+	font-family: 'Average', serif;
 	background-image: url('../images/parchment.jpg');
 	background-size: cover;
 	border: 0.100em solid black;
@@ -321,41 +317,87 @@ img.slot:hover + div {
 
 
 
+/* Radio Buttons as option markers */
+
+input[type=radio] + label { font-family: 'Average', serif; text-align: center; }
+input[type=radio] + label:before { font-family: "Foundation"; cursor: pointer; font-size: 1.5em; display: block;}
+
+
+
 /*|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|*/
 /*|    Zoom levels    |*/
 /*|___________________|*/
 
 input[name=zoom],
-input[name=zoom] + span {
+input[name=zoom] + label,
+.dummy-zoom  {
 	z-index: 5;
 	position: fixed;
+	top: 2vw;
+	height: 3em;
+	width: 3em;
+	padding-top: .72em
 }
 
-#zoomed-1x { top : 35%; left: 50%; }
-#zoomed-2x { top : 40%; left: 50%; }
-#zoomed-3x { top : 45%; left: 50%; }
-#zoomed-4x { top : 50%; left: 50%; }
-
-#zoomed-1x + span { top : 35%; left: 55%; }
-#zoomed-2x + span { top : 40%; left: 55%; }
-#zoomed-3x + span { top : 45%; left: 55%; }
-#zoomed-4x + span { top : 50%; left: 55%; }
-
-input[name=zoom] ~ #base {
-	min-width: 200vh;
-	min-height: 100vh;
-	/* Fallback minimum sizes. */
-}
+input[name=zoom] ~ #base { min-width: 200vh; min-height: 100vh; } /* Fallback minimum sizes. */
 
 #zoomed-1x:checked ~ #base { width: 100vw; height:  50vw; }
 #zoomed-2x:checked ~ #base { width: 200vw; height: 100vw; }
 #zoomed-3x:checked ~ #base { width: 300vw; height: 150vw; }
 #zoomed-4x:checked ~ #base { width: 400vw; height: 200vw; }
 
+@media (orientation:portrait) {
+	#zoomed-1x:checked ~ #base { width: 200vh; height: 100vh; }
+	#zoomed-2x:checked ~ #base { width: 300vh; height: 150vh; }
+	#zoomed-3x:checked ~ #base { width: 400vh; height: 200vh; }
+	#zoomed-4x:checked ~ #base { width: 500vh; height: 250vh; }
+}
+
 /* Hide zoom if device is 2400px or better */
-@media (min-width: 2350px) { #zoomed-1x, #zoomed-1x + span { display: none; } }
-@media (min-width: 2350px) { #zoomed-2x, #zoomed-2x + span { display: none; } }
+@media (min-width: 2350px) { #zoomed-1x, #zoomed-1x + label { display: none; } }
+@media (min-width: 2350px) { #zoomed-2x, #zoomed-2x + label { display: none; } }
 /* Hide third level if 1600px or more */
-@media (min-width: 1550px) { #zoomed-3x, #zoomed-3x + span { display: none; } }
+@media (min-width: 1550px) { #zoomed-3x, #zoomed-3x + label { display: none; } }
 /* Hide fourth level if 800px or more */
-@media (min-width:  750px) { #zoomed-4x, #zoomed-4x + span { display: none; } }
+@media (min-width:  750px) { #zoomed-4x, #zoomed-4x + label { display: none; } }
+
+input[name=zoom] { display: none; }
+/* Hide the default checkboxes, replace them with their labels */
+input[name=zoom] + label { left: calc(2vw + 4em); }
+input[name=zoom]:not(:first-child) + label { box-shadow: none; }
+input[name=zoom] + label:before { content: "\f21a"; }
+/* Display the zooming out icon for the topmost zoom button */
+input[name=zoom]:checked + label { display: none; }
+/* If a zoom level is activated, its button is useless ! */
+input[name=zoom]:checked ~ [id*="zoomed"] + label { display: none; }
+/* Hide all the higher zoom levels */
+input[name=zoom]:checked + label + [id*="zoomed"] + label { display: inline-block; left: 2vw; box-shadow: 0 0 0.200em black; }
+/* Except for the one right after/above the current checked one */
+input[name=zoom]:checked + label + [id*="zoomed"] + label:before { content: "\f219"; }
+/* Display it as a zoom-in button */
+
+/* input[name=zoom]:first-child:checked ~ input[name=zoom] + label { left: 2vw; }
+/* If the lowest zoom is checked, there is no minus button, so we move the + button to the right. */
+
+input[name=zoom] + label:active { text-decoration: underline; }
+
+.dummy-zoom { z-index: 4; text-align: center; opacity: 0.3; box-shadow: none; border: none; box-shadow: 0 0 0.200em black; }
+.dummy-zoom span { font-size: 1.5em; }
+
+
+/*|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|*/
+/*|    Touch Toggle    |*/
+/*|____________________|*/
+
+input[name=touch-mouse-toggle] { display: none; }
+input[name=touch-mouse-toggle] + label { position: fixed; z-index: 5; top: calc(2vw + 4em); left: 2vw; width: 5em; height: 4em; padding-top: .70em}
+input[name=touch-mouse-toggle]:checked + label { display: none; }
+input[name=touch-mouse-toggle]#touch + label:before { content: "\f178"; }
+input[name=touch-mouse-toggle]#mouse + label:before { content: "\f179"; }
+
+input[name=touch-mouse-toggle]#touch:checked ~ #viewport { overflow: auto; }
+input[name=touch-mouse-toggle]#mouse:checked ~ #viewport { overflow: hidden; }
+
+@media (min-width: 1550px) { input[name=touch-mouse-toggle]#touch + label { z-index: 6;} }
+#touch:not(:checked) ~ #mouse:not(:checked) + label{ box-shadow: none; }
+/* If neither is selected, they are both showing up, so we increase the z-index on the relevant one and remove the box-shadow */

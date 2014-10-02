@@ -67,21 +67,21 @@ cite p:first-child:first-letter {
 
 cite p:first-child:before {
 	content: open-quote;
-	font-family: "Berkshire Swash", serif;
+	font-family: "Berkshire Swash", "Average", serif;
 	position: relative;
 	font-size: 3em;
-	left: .4em;
+	left: .6em;
 	top: .4em;
 	line-height: 0;
 }
 
 cite p:last-child:after {
 	content: close-quote;
-	font-family: "Berkshire Swash", serif;
+	font-family: "Berkshire Swash", "Average", serif;
 	font-size: 3em;
 	position: relative;
 	top: .6em;
-	left: .2em;
+	left: 0em;
 	line-height: 0;
 }
 
