@@ -33,10 +33,10 @@
 <a class="important button" href="{% url 'joinable_towns' %}">Join a new town</a>
 
 {% elif user.username == user_object.username %}
-<a class="important button" href="{% url 'town_map' player.town.slug %}#town-center">Return to {{ player.town.name }}</a>
+<a class="important button" href="{% url 'town_map' player.town.slug %}">Return to {{ player.town.name }}</a>
 
 {% else %}
-<a class="important button" href="{% url 'town_map' player.town.slug %}#town-center">Currently in : {{ player.town.name }}</a>
+<a class="important button" href="{% url 'town_map' player.town.slug %}">Currently in : {{ player.town.name }}</a>
 
 {% endif %}
 

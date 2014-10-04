@@ -22,7 +22,6 @@ urlpatterns = patterns('',
 			# the \d says to accept only digits
 			# the + sign says there can be several of them
 			url(r'^$', views.slot_info, name='slot_info'),
-			url(r'^purchase/', views.slot_purchase, name='slot_purchase'),
 			))),
 		))),
 	)

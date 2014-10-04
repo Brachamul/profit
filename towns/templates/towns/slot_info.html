@@ -4,12 +4,14 @@
 
 {% block head %}{{ block.super }}
 
-<title>Land Acquisition - Profit</title>
+<title>{{ town_slot.feature }} - Profit</title>
 
 {% endblock head %}
 
 
 {% block content %}
+
+<img style="float:right;" src="{% get_static_prefix %}images/slot.png" alt="{{ town_slot.name }}" />
 
 <h1>{{ town_slot.feature }}</h1>
 
@@ -26,12 +28,22 @@
 {% endif %}
 {% endcomment %}
 
-<p>You can purchase it by participating in the sale auction :</p>
+<section class="for-sale">
+
+<p>You can <strong>purchase</strong> this land by participating in the auction :</p>
 
 <form method="post" action="" enctype="multipart/form-data">
 	{% csrf_token %}
-	<input name="bid" value="10">
-	<input class="button" type="submit" name="submit" value="Bid" />
+	<input type="number" name="bid" step="1" value="10"/>
+	<input class="inline button" type="submit" name="submit" value="Bid" />
 </form>
+
+</section>
+
+<section style="text-align: right;">
+
+<a class="important button" href="{% url 'town_map' town_slot.town.slug %}">Return to {{ town_slot.town.name }}</a>
+
+</section>
 
 {% endblock content %}

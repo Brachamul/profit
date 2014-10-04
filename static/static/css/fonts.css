@@ -45,3 +45,8 @@
 .foundation-symbol {
     font-family: "Foundation";
 }
+
+.symbol {
+    font-family: "Symbols";
+    font-size: .8em;
+}

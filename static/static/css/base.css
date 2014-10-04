@@ -61,28 +61,22 @@ strong {
 	font-weight: bold;
 }
 
-cite p:first-child:first-letter {
-	margin-left: -1em;
-}
-
 cite p:first-child:before {
-	content: open-quote;
-	font-family: "Berkshire Swash", "Average", serif;
-	position: relative;
-	font-size: 3em;
-	left: .6em;
-	top: .4em;
+	content: "\201c";
+	font-size: 4em;
 	line-height: 0;
+	position: relative;
+	top: .40em;
+	margin-right: .1em;
 }
 
 cite p:last-child:after {
-	content: close-quote;
-	font-family: "Berkshire Swash", "Average", serif;
-	font-size: 3em;
-	position: relative;
-	top: .6em;
-	left: 0em;
+	content: "\201d";
+	font-size: 4em;
 	line-height: 0;
+	position: relative;
+	top: .55em;
+	margin-left: .1em;
 }
 
 p {
@@ -118,10 +112,10 @@ a:link, a:hover, a:visited, a:active {
 footer a:not(.button):hover { border-bottom: .150em solid white; }
 
 
-.symbol {
-	font-family: "Symbols";
-	font-size: .8em;
+hr {
+	margin-top: 1rem;
 }
+
 
 
 /*
@@ -187,7 +181,13 @@ input[type=submit] {
 	position: relative;
 	bottom: .2em;
 	right: .2em;
+	margin: 0;
 }
+
+.button + .button {
+	margin-left: 1em;
+}
+
 
 .button:not(.symbol) {
 	font-family: "Berkshire Swash", serif;
@@ -211,13 +211,20 @@ input[type=button]:active,
 input[type=submit]:active {
 	box-shadow: 0 0 0 0 white;
 	position: relative;
-	bottom: 0;
-	right: 0;
+	bottom: 0em;
+	right: 0em;
 }
 
 .button { font-size: 1em; }
 .important.button { font-size: 1.25em; }
-.small.button { font-size: .7em; }
+.small.button { font-size: .8em; }
+
+.button.inline {
+	display: inline-block;
+	margin: 0 1em;
+	height: 2.5rem;
+	vertical-align: bottom;
+}
 
 
 
@@ -264,6 +271,7 @@ nav {
 	background-color: white;
 	width: 100%;
 	position: relative;
+	padding-bottom: 1rem;
 }
 
 
@@ -286,32 +294,6 @@ nav li {
 
 nav li:hover {
 	border-bottom: .250rem solid black;
-}
-
-/*
- * Sections
- *
- */
-
-hr {
-	margin-top: 1rem;
-}
-
-section {
-	float: left;
-	text-align: left;
-	padding: 0 1.5rem;
-	width: 24rem;
-	vertical-align: top;
-}
-
-section + section {
-	padding-top: 2rem;
-}
-
-/* Used when I want two columns of text that merge seamlessly on low resolution */
-section + section.fake-column {
-	padding-top: 0;
 }
 
 
@@ -343,6 +325,7 @@ table.big {
 }
 
 
+
 /*
  * Placeholders
  *
@@ -354,6 +337,20 @@ table.big {
 	border-radius: .2em;
 	text-align: center;
 }
+
+
+/*
+ * Sections
+ *
+ */
+
+section {
+	margin-top: 2em;
+	border-top: .125em solid gray;
+	padding-top: 1em;
+}
+
+
 
 /*
  * Form Styling
@@ -389,6 +386,7 @@ input {
 	line-height: 1.5;
 	background-color: lightgray;
 	padding: .5em 1em;
+	height: 2.5rem;
 	border-radius: .2em;
 	font-size: 1em;
 	text-align: bottom;
@@ -432,6 +430,15 @@ input[type=submit] {
 	/* Also see buttons */
 }
 
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
 
 /*
  * User Page

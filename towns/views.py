@@ -42,6 +42,7 @@ def town_map(request, town_slug):
 			'margin_top' : margin_top,
 		# From TownSlots
 			'owner' : town_slot.owner,
+			'town' : town_slot.town,
 #			'stored_items' : 0,
 		# From Illustrations
 #			'file_name' : 'placeholder.png',
@@ -88,16 +89,8 @@ def get_town_slot (town_slug, slot_number):
 
 def slot_info(request, town_slug, slot_number):
 	if request.POST.get('bid'): purchase(request, town_slug, slot_number)
-#	if request.POST.get('bid') : messages.success(request, 'You placed a bid of %s !' % (request.POST.get('bid')))
 	return render_to_response(
 		'towns/slot_info.html',
-		{'town_slot': get_town_slot(town_slug, slot_number),},
-		context_instance=RequestContext(request)
-		)
-
-def slot_purchase(request, town_slug, slot_number):
-	return render_to_response(
-		'towns/slot_purchase.html',
 		{'town_slot': get_town_slot(town_slug, slot_number),},
 		context_instance=RequestContext(request)
 		)
