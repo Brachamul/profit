@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block head %}{{ block.super }}
+
+<title>God - Profit</title>
+
+{% endblock head %}
+
+
+{% block content %}
+
+<h1>Oh how time goes by !</h1>
+
+<section style="text-align: center;">
+
+{% for town in list_of_active_towns %}
+<form method="POST" action="">{% csrf_token %}
+	<input type="hidden" class="small button" name="time-goes-by-in" value="{{ town.slug }}">
+	<input type="submit" class="inline small button" value="Time goes by for {{ town.name }} ! (phase {{ town.phase }})">
+</form>
+{% endfor %}
+
+</section>
+
+<section>
+
+<form method="POST" action="">{% csrf_token %}
+	<input type="hidden" class="small button" name="time-goes-by-in" value="all">
+	<input style="margin: 0 auto;" type="submit" class="button" value="Time goes by for all !">
+</form>
+
+</section>
+
+{{ debug }}
+
+{% endblock content %}

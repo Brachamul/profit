@@ -18,7 +18,7 @@ class TownSlotInline(admin.TabularInline):
 class TownAdmin(admin.ModelAdmin):
 	model = Town
 	inlines = (PlayerInline, TownSlotInline, )
-	list_display = ("name", "pk", "map_layout")
+	list_display = ("name", "phase", "pk", "map_layout")
 	prepopulated_fields = {"slug": ("name",)}
 
 admin.site.register(Town, TownAdmin)

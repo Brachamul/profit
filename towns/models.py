@@ -14,6 +14,8 @@ class Town(models.Model):
 	slug = models.SlugField(max_length=255, unique=True)
 	map_layout = models.ForeignKey(MapLayout)
 	founded = models.DateTimeField(auto_now_add=True)
+	ended = models.DateTimeField(default=None, blank=True, null=True)
+	phase = models.PositiveSmallIntegerField(default=0, null=True)
 
 	def __str__(self):
 		return self.name

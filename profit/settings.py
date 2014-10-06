@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'maps',
     'welcome',
     'towns',
+    'god',
 )
 
 MIDDLEWARE_CLASSES = (

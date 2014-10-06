@@ -140,7 +140,7 @@ def get_current_player(request):
 
 def current_town(request):
 	try:
-		player = Player.objects.filter(user=request.user, left=None).latest('joined') # finds the current player
+		player = get_current_player(request)
 		return HttpResponseRedirect('/town/%s' % player.town.slug)
 	except ObjectDoesNotExist:
 		return HttpResponseRedirect('/town/join')
@@ -148,7 +148,7 @@ def current_town(request):
 import datetime
 
 def leave_town(request):
-	player = Player.objects.filter(user=request.user, left=None).latest('joined')
+	player = get_current_player(request)
 	player.left = datetime.datetime.now()
 	player.save()
 	return HttpResponseRedirect('/u/myprofile/')
