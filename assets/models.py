@@ -22,6 +22,7 @@ class Feature(models.Model):
 	description = models.TextField(max_length=255, blank=True)
 	shape = models.CharField(max_length=255, blank=True, default='30,0,61,15,31,31,0,16') # Coordinates of the HTML map polygon
 	slug = models.SlugField(max_length=255, unique=True) # Used to name image folder and as a css class for rendering
+	min_price = models.PositiveSmallIntegerField(blank=True, null=True)
 
 	def upload_details(instance, filename):
 		path = "features/" # Upload location

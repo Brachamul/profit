@@ -1,487 +1,93 @@
 [
-{
-    "fields": {
-        "content_type": 1,
-        "codename": "add_logentry",
-        "name": "Can add log entry"
-    },
-    "model": "auth.permission",
-    "pk": 1
-},
-{
-    "fields": {
-        "content_type": 1,
-        "codename": "change_logentry",
-        "name": "Can change log entry"
-    },
-    "model": "auth.permission",
-    "pk": 2
-},
-{
-    "fields": {
-        "content_type": 1,
-        "codename": "delete_logentry",
-        "name": "Can delete log entry"
-    },
-    "model": "auth.permission",
-    "pk": 3
-},
-{
-    "fields": {
-        "content_type": 2,
-        "codename": "add_permission",
-        "name": "Can add permission"
-    },
-    "model": "auth.permission",
-    "pk": 4
-},
-{
-    "fields": {
-        "content_type": 2,
-        "codename": "change_permission",
-        "name": "Can change permission"
-    },
-    "model": "auth.permission",
-    "pk": 5
-},
-{
-    "fields": {
-        "content_type": 2,
-        "codename": "delete_permission",
-        "name": "Can delete permission"
-    },
-    "model": "auth.permission",
-    "pk": 6
-},
-{
-    "fields": {
-        "content_type": 3,
-        "codename": "add_group",
-        "name": "Can add group"
-    },
-    "model": "auth.permission",
-    "pk": 7
-},
-{
-    "fields": {
-        "content_type": 3,
-        "codename": "change_group",
-        "name": "Can change group"
-    },
-    "model": "auth.permission",
-    "pk": 8
-},
-{
-    "fields": {
-        "content_type": 3,
-        "codename": "delete_group",
-        "name": "Can delete group"
-    },
-    "model": "auth.permission",
-    "pk": 9
-},
-{
-    "fields": {
-        "content_type": 4,
-        "codename": "add_user",
-        "name": "Can add user"
-    },
-    "model": "auth.permission",
-    "pk": 10
-},
-{
-    "fields": {
-        "content_type": 4,
-        "codename": "change_user",
-        "name": "Can change user"
-    },
-    "model": "auth.permission",
-    "pk": 11
-},
-{
-    "fields": {
-        "content_type": 4,
-        "codename": "delete_user",
-        "name": "Can delete user"
-    },
-    "model": "auth.permission",
-    "pk": 12
-},
-{
-    "fields": {
-        "content_type": 5,
-        "codename": "add_contenttype",
-        "name": "Can add content type"
-    },
-    "model": "auth.permission",
-    "pk": 13
-},
-{
-    "fields": {
-        "content_type": 5,
-        "codename": "change_contenttype",
-        "name": "Can change content type"
-    },
-    "model": "auth.permission",
-    "pk": 14
-},
-{
-    "fields": {
-        "content_type": 5,
-        "codename": "delete_contenttype",
-        "name": "Can delete content type"
-    },
-    "model": "auth.permission",
-    "pk": 15
-},
-{
-    "fields": {
-        "content_type": 6,
-        "codename": "add_session",
-        "name": "Can add session"
-    },
-    "model": "auth.permission",
-    "pk": 16
-},
-{
-    "fields": {
-        "content_type": 6,
-        "codename": "change_session",
-        "name": "Can change session"
-    },
-    "model": "auth.permission",
-    "pk": 17
-},
-{
-    "fields": {
-        "content_type": 6,
-        "codename": "delete_session",
-        "name": "Can delete session"
-    },
-    "model": "auth.permission",
-    "pk": 18
-},
-{
-    "fields": {
-        "content_type": 7,
-        "codename": "add_signup",
-        "name": "Can add sign up"
-    },
-    "model": "auth.permission",
-    "pk": 19
-},
-{
-    "fields": {
-        "content_type": 7,
-        "codename": "change_signup",
-        "name": "Can change sign up"
-    },
-    "model": "auth.permission",
-    "pk": 20
-},
-{
-    "fields": {
-        "content_type": 7,
-        "codename": "delete_signup",
-        "name": "Can delete sign up"
-    },
-    "model": "auth.permission",
-    "pk": 21
-},
-{
-    "fields": {
-        "content_type": 8,
-        "codename": "add_item",
-        "name": "Can add item"
-    },
-    "model": "auth.permission",
-    "pk": 22
-},
-{
-    "fields": {
-        "content_type": 8,
-        "codename": "change_item",
-        "name": "Can change item"
-    },
-    "model": "auth.permission",
-    "pk": 23
-},
-{
-    "fields": {
-        "content_type": 8,
-        "codename": "delete_item",
-        "name": "Can delete item"
-    },
-    "model": "auth.permission",
-    "pk": 24
-},
-{
-    "fields": {
-        "content_type": 9,
-        "codename": "add_feature",
-        "name": "Can add feature"
-    },
-    "model": "auth.permission",
-    "pk": 25
-},
-{
-    "fields": {
-        "content_type": 9,
-        "codename": "change_feature",
-        "name": "Can change feature"
-    },
-    "model": "auth.permission",
-    "pk": 26
-},
-{
-    "fields": {
-        "content_type": 9,
-        "codename": "delete_feature",
-        "name": "Can delete feature"
-    },
-    "model": "auth.permission",
-    "pk": 27
-},
-{
-    "fields": {
-        "content_type": 10,
-        "codename": "add_developmentproject",
-        "name": "Can add development project"
-    },
-    "model": "auth.permission",
-    "pk": 28
-},
-{
-    "fields": {
-        "content_type": 10,
-        "codename": "change_developmentproject",
-        "name": "Can change development project"
-    },
-    "model": "auth.permission",
-    "pk": 29
-},
-{
-    "fields": {
-        "content_type": 10,
-        "codename": "delete_developmentproject",
-        "name": "Can delete development project"
-    },
-    "model": "auth.permission",
-    "pk": 30
-},
-{
-    "fields": {
-        "content_type": 11,
-        "codename": "add_requiredmaterial",
-        "name": "Can add required material"
-    },
-    "model": "auth.permission",
-    "pk": 31
-},
-{
-    "fields": {
-        "content_type": 11,
-        "codename": "change_requiredmaterial",
-        "name": "Can change required material"
-    },
-    "model": "auth.permission",
-    "pk": 32
-},
-{
-    "fields": {
-        "content_type": 11,
-        "codename": "delete_requiredmaterial",
-        "name": "Can delete required material"
-    },
-    "model": "auth.permission",
-    "pk": 33
-},
-{
-    "fields": {
-        "content_type": 12,
-        "codename": "add_maplayout",
-        "name": "Can add map layout"
-    },
-    "model": "auth.permission",
-    "pk": 34
-},
-{
-    "fields": {
-        "content_type": 12,
-        "codename": "change_maplayout",
-        "name": "Can change map layout"
-    },
-    "model": "auth.permission",
-    "pk": 35
-},
-{
-    "fields": {
-        "content_type": 12,
-        "codename": "delete_maplayout",
-        "name": "Can delete map layout"
-    },
-    "model": "auth.permission",
-    "pk": 36
-},
-{
-    "fields": {
-        "content_type": 13,
-        "codename": "add_slot",
-        "name": "Can add slot"
-    },
-    "model": "auth.permission",
-    "pk": 37
-},
-{
-    "fields": {
-        "content_type": 13,
-        "codename": "change_slot",
-        "name": "Can change slot"
-    },
-    "model": "auth.permission",
-    "pk": 38
-},
-{
-    "fields": {
-        "content_type": 13,
-        "codename": "delete_slot",
-        "name": "Can delete slot"
-    },
-    "model": "auth.permission",
-    "pk": 39
-},
-{
-    "fields": {
-        "content_type": 14,
-        "codename": "add_town",
-        "name": "Can add town"
-    },
-    "model": "auth.permission",
-    "pk": 40
-},
-{
-    "fields": {
-        "content_type": 14,
-        "codename": "change_town",
-        "name": "Can change town"
-    },
-    "model": "auth.permission",
-    "pk": 41
-},
-{
-    "fields": {
-        "content_type": 14,
-        "codename": "delete_town",
-        "name": "Can delete town"
-    },
-    "model": "auth.permission",
-    "pk": 42
-},
-{
-    "fields": {
-        "content_type": 15,
-        "codename": "add_player",
-        "name": "Can add player"
-    },
-    "model": "auth.permission",
-    "pk": 43
-},
-{
-    "fields": {
-        "content_type": 15,
-        "codename": "change_player",
-        "name": "Can change player"
-    },
-    "model": "auth.permission",
-    "pk": 44
-},
-{
-    "fields": {
-        "content_type": 15,
-        "codename": "delete_player",
-        "name": "Can delete player"
-    },
-    "model": "auth.permission",
-    "pk": 45
-},
-{
-    "fields": {
-        "content_type": 16,
-        "codename": "add_townslot",
-        "name": "Can add town slot"
-    },
-    "model": "auth.permission",
-    "pk": 46
-},
-{
-    "fields": {
-        "content_type": 16,
-        "codename": "change_townslot",
-        "name": "Can change town slot"
-    },
-    "model": "auth.permission",
-    "pk": 47
-},
-{
-    "fields": {
-        "content_type": 16,
-        "codename": "delete_townslot",
-        "name": "Can delete town slot"
-    },
-    "model": "auth.permission",
-    "pk": 48
-},
-{
-    "fields": {
-        "content_type": 17,
-        "codename": "add_storeditems",
-        "name": "Can add stored items"
-    },
-    "model": "auth.permission",
-    "pk": 49
-},
-{
-    "fields": {
-        "content_type": 17,
-        "codename": "change_storeditems",
-        "name": "Can change stored items"
-    },
-    "model": "auth.permission",
-    "pk": 50
-},
-{
-    "fields": {
-        "content_type": 17,
-        "codename": "delete_storeditems",
-        "name": "Can delete stored items"
-    },
-    "model": "auth.permission",
-    "pk": 51
-},
-{
-    "fields": {
-        "is_superuser": true,
-        "is_staff": true,
-        "is_active": true,
-        "first_name": "",
-        "username": "Brachamul",
-        "password": "pbkdf2_sha256$12000$J2i29bDFesL3$Swvagxz0hdQRjVFB4Dyzx+lt4QaauTdQd5KbMRNd2DM=",
-        "groups": [],
-        "user_permissions": [],
-        "last_login": "2014-09-07T00:27:31.711Z",
-        "date_joined": "2014-09-07T00:27:31.711Z",
-        "email": "",
-        "last_name": ""
-    },
-    "model": "auth.user",
-    "pk": 1
-},
-{
-    "pk": "2e47hsjsfj6vn653p2xh5s0do2pkwuzt",
-    "model": "sessions.session",
-    "fields": {
-        "session_data": "ZmQwMWVmMWEzMzkyMTlhMDFiZWE2MjBjYWUzZjJkNDA2OTNkNmY2Njp7Il9hdXRoX3VzZXJfaWQiOjEsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
-        "expire_date": "2100-09-21T00:29:17.103Z"
-    }
-}
+
+{"model": "assets.item","pk": 1,"fields": {"name": "Wood","description": "Obtained by chopping down trees, wood is a versatile material used to make buildings, furniture, tools and toothpicks."}},
+{"model": "assets.item","pk": 2,"fields": {"name": "Berries","description": "Berries come in all sorts of shapes and sizes. They are highly nutritious, and are gathered from bushes or trees."}},
+{"model": "assets.item","pk": 3,"fields": {"name": "Clay","description": "A type of mud that is particularily suitable for building homes and treating oily skin problems."}},
+{"model": "assets.item","pk": 4,"fields": {"name": "Game","description": "A strong type of meat which is gathered from wild animals."}},
+{"model": "assets.item","pk": 5,"fields": {"name": "Fish","description": ""}},
+{"model": "assets.item","pk": 6,"fields": {"name": "Leather","description": ""}},
+{"model": "assets.item","pk": 7,"fields": {"name": "Wooden Tools","description": "Basic wooden tools, used in various tasks."}},
+{"model": "assets.item","pk": 8,"fields": {"name": "Instruments","description": "It gets noisier before it gets better."}},
+{"model": "assets.item","pk": 9,"fields": {"name": "Bone","description": ""}},
+{"model": "assets.item","pk": 10,"fields": {"name": "Meat","description": ""}},
+{"model": "assets.item","pk": 11,"fields": {"name": "Skins","description": ""}},
+{"model": "assets.item","pk": 12,"fields": {"name": "Clothing","description": ""}},
+
+{"model": "assets.feature","pk": 1,"fields": {"name": "Meadow","slug": "meadow","description": "Mostly grass."}},
+{"model": "assets.feature","pk": 2,"fields": {"name": "Storage","slug": "storage","description": "Yes, it's on the ground. You got a problem with that ?"}},
+{"model": "assets.feature","pk": 3,"fields": {"name": "Humble Abode","slug": "humble-abode","description": "A handful of people live here. They don't seem to have much, but they look like a cheerful bunch. Perhaps they can't yet fathom all the wonderful things they <em>could</em> have ?"}},
+{"model": "assets.feature","pk": 4,"fields": {"name": "River","slug": "river","description": "Plenty of fish here."}},
+{"model": "assets.feature","pk": 5,"fields": {"name": "Bonfire","slug": "bonfire","description": "Not much else to do here than stare at the burning embers. The people sitting around here probably agree. They say they have the best ghost stories in town."}},
+
+{"model": "maps.maplayout", "fields": {"slug": "sausset-les-pins", "name": "Sausset-les-Pins", "image": "maps/map.png", "description": "A beach on the blue coast !" }, "pk": 1},
+{"model": "maps.maplayout", "fields": {"slug": "carry-le-rouet", "name": "Carry-le-rouet", "image": "maps/map_1.png", "description": "Pas loin de la mer, il fait beau." }, "pk": 2},
+{"model": "maps.maplayout", "fields": {"slug": "hartlepool-map", "name": "Hartlepool Map", "image": "maps/hartlepool-map.png", "description": "Two forest slots, two river slots, 60 normal slots." }, "pk": 3},
+
+{"model": "maps.slot", "fields": {"number": 1, "latitude": 245, "longitude": 302, "starting_feature": 1, "map_layout": 2 }, "pk": 1},
+{"model": "maps.slot", "fields": {"number": 1, "latitude": 273, "longitude": 1044, "starting_feature": 1, "map_layout": 1 }, "pk": 2},
+{"model": "maps.slot", "fields": {"number": 2, "latitude": 300, "longitude": 1000, "starting_feature": 2, "map_layout": 1 }, "pk": 3},
+{"model": "maps.slot", "fields": {"number": 1, "latitude": 240, "longitude": 2171, "starting_feature": 1, "map_layout": 3 }, "pk": 4},
+{"model": "maps.slot", "fields": {"number": 2, "latitude": 279, "longitude": 1778, "starting_feature": 1, "map_layout": 3 }, "pk": 5},
+{"model": "maps.slot", "fields": {"number": 3, "latitude": 300, "longitude": 1926, "starting_feature": 1, "map_layout": 3 }, "pk": 6},
+{"model": "maps.slot", "fields": {"number": 4, "latitude": 344, "longitude": 1637, "starting_feature": 1, "map_layout": 3 }, "pk": 7},
+{"model": "maps.slot", "fields": {"number": 5, "latitude": 356, "longitude": 2247, "starting_feature": 1, "map_layout": 3 }, "pk": 8},
+{"model": "maps.slot", "fields": {"number": 6, "latitude": 358, "longitude": 1787, "starting_feature": 1, "map_layout": 3 }, "pk": 9},
+{"model": "maps.slot", "fields": {"number": 7, "latitude": 412, "longitude": 1405, "starting_feature": 1, "map_layout": 3 }, "pk": 10},
+{"model": "maps.slot", "fields": {"number": 8, "latitude": 413, "longitude": 2031, "starting_feature": 1, "map_layout": 3 }, "pk": 11},
+{"model": "maps.slot", "fields": {"number": 9, "latitude": 417, "longitude": 1549, "starting_feature": 1, "map_layout": 3 }, "pk": 12},
+{"model": "maps.slot", "fields": {"number": 10, "latitude": 429, "longitude": 1691, "starting_feature": 1, "map_layout": 3 }, "pk": 13},
+{"model": "maps.slot", "fields": {"number": 11, "latitude": 480, "longitude": 1895, "starting_feature": 1, "map_layout": 3 }, "pk": 14},
+{"model": "maps.slot", "fields": {"number": 12, "latitude": 485, "longitude": 2044, "starting_feature": 1, "map_layout": 3 }, "pk": 15},
+{"model": "maps.slot", "fields": {"number": 13, "latitude": 487, "longitude": 1297, "starting_feature": 1, "map_layout": 3 }, "pk": 16},
+{"model": "maps.slot", "fields": {"number": 14, "latitude": 493, "longitude": 1457, "starting_feature": 1, "map_layout": 3 }, "pk": 17},
+{"model": "maps.slot", "fields": {"number": 15, "latitude": 500, "longitude": 1596, "starting_feature": 1, "map_layout": 3 }, "pk": 18},
+{"model": "maps.slot", "fields": {"number": 16, "latitude": 554, "longitude": 1805, "starting_feature": 1, "map_layout": 3 }, "pk": 19},
+{"model": "maps.slot", "fields": {"number": 17, "latitude": 555, "longitude": 1961, "starting_feature": 1, "map_layout": 3 }, "pk": 20},
+{"model": "maps.slot", "fields": {"number": 18, "latitude": 555, "longitude": 2107, "starting_feature": 1, "map_layout": 3 }, "pk": 21},
+{"model": "maps.slot", "fields": {"number": 19, "latitude": 561, "longitude": 1326, "starting_feature": 1, "map_layout": 3 }, "pk": 22},
+{"model": "maps.slot", "fields": {"number": 20, "latitude": 569, "longitude": 1505, "starting_feature": 1, "map_layout": 3 }, "pk": 23},
+{"model": "maps.slot", "fields": {"number": 21, "latitude": 598, "longitude": 1011, "starting_feature": 1, "map_layout": 3 }, "pk": 24},
+{"model": "maps.slot", "fields": {"number": 22, "latitude": 624, "longitude": 1717, "starting_feature": 1, "map_layout": 3 }, "pk": 25},
+{"model": "maps.slot", "fields": {"number": 23, "latitude": 624, "longitude": 2044, "starting_feature": 1, "map_layout": 3 }, "pk": 26},
+{"model": "maps.slot", "fields": {"number": 24, "latitude": 627, "longitude": 1881, "starting_feature": 1, "map_layout": 3 }, "pk": 27},
+{"model": "maps.slot", "fields": {"number": 25, "latitude": 636, "longitude": 1398, "starting_feature": 1, "map_layout": 3 }, "pk": 28},
+{"model": "maps.slot", "fields": {"number": 26, "latitude": 643, "longitude": 871, "starting_feature": 1, "map_layout": 3 }, "pk": 29},
+{"model": "maps.slot", "fields": {"number": 27, "latitude": 666, "longitude": 1123, "starting_feature": 1, "map_layout": 3 }, "pk": 30},
+{"model": "maps.slot", "fields": {"number": 28, "latitude": 694, "longitude": 1617, "starting_feature": 1, "map_layout": 3 }, "pk": 31},
+{"model": "maps.slot", "fields": {"number": 29, "latitude": 694, "longitude": 1978, "starting_feature": 1, "map_layout": 3 }, "pk": 32},
+{"model": "maps.slot", "fields": {"number": 30, "latitude": 696, "longitude": 1777, "starting_feature": 1, "map_layout": 3 }, "pk": 33},
+{"model": "maps.slot", "fields": {"number": 31, "latitude": 696, "longitude": 2133, "starting_feature": 1, "map_layout": 3 }, "pk": 34},
+{"model": "maps.slot", "fields": {"number": 32, "latitude": 716, "longitude": 819, "starting_feature": 1, "map_layout": 3 }, "pk": 35},
+{"model": "maps.slot", "fields": {"number": 33, "latitude": 718, "longitude": 978, "starting_feature": 1, "map_layout": 3 }, "pk": 36},
+{"model": "maps.slot", "fields": {"number": 34, "latitude": 740, "longitude": 1198, "starting_feature": 1, "map_layout": 3 }, "pk": 37},
+{"model": "maps.slot", "fields": {"number": 35, "latitude": 761, "longitude": 1912, "starting_feature": 1, "map_layout": 3 }, "pk": 38},
+{"model": "maps.slot", "fields": {"number": 36, "latitude": 769, "longitude": 1719, "starting_feature": 1, "map_layout": 3 }, "pk": 39},
+{"model": "maps.slot", "fields": {"number": 37, "latitude": 770, "longitude": 2066, "starting_feature": 1, "map_layout": 3 }, "pk": 40},
+{"model": "maps.slot", "fields": {"number": 38, "latitude": 786, "longitude": 877, "starting_feature": 1, "map_layout": 3 }, "pk": 41},
+{"model": "maps.slot", "fields": {"number": 39, "latitude": 802, "longitude": 1066, "starting_feature": 1, "map_layout": 3 }, "pk": 42},
+{"model": "maps.slot", "fields": {"number": 40, "latitude": 811, "longitude": 731, "starting_feature": 1, "map_layout": 3 }, "pk": 43},
+{"model": "maps.slot", "fields": {"number": 41, "latitude": 811, "longitude": 1449, "starting_feature": 4, "map_layout": 3 }, "pk": 44},
+{"model": "maps.slot", "fields": {"number": 42, "latitude": 832, "longitude": 1853, "starting_feature": 1, "map_layout": 3 }, "pk": 45},
+{"model": "maps.slot", "fields": {"number": 43, "latitude": 839, "longitude": 2155, "starting_feature": 1, "map_layout": 3 }, "pk": 46},
+{"model": "maps.slot", "fields": {"number": 44, "latitude": 854, "longitude": 1302, "starting_feature": 1, "map_layout": 3 }, "pk": 47},
+{"model": "maps.slot", "fields": {"number": 45, "latitude": 864, "longitude": 1989, "starting_feature": 1, "map_layout": 3 }, "pk": 48},
+{"model": "maps.slot", "fields": {"number": 46, "latitude": 861, "longitude": 826, "starting_feature": 1, "map_layout": 3 }, "pk": 49},
+{"model": "maps.slot", "fields": {"number": 47, "latitude": 880, "longitude": 1588, "starting_feature": 1, "map_layout": 3 }, "pk": 50},
+{"model": "maps.slot", "fields": {"number": 48, "latitude": 891, "longitude": 680, "starting_feature": 1, "map_layout": 3 }, "pk": 51},
+{"model": "maps.slot", "fields": {"number": 49, "latitude": 909, "longitude": 2125, "starting_feature": 1, "map_layout": 3 }, "pk": 52},
+{"model": "maps.slot", "fields": {"number": 50, "latitude": 919, "longitude": 1173, "starting_feature": 1, "map_layout": 3 }, "pk": 53},
+{"model": "maps.slot", "fields": {"number": 51, "latitude": 926, "longitude": 816, "starting_feature": 1, "map_layout": 3 }, "pk": 54},
+{"model": "maps.slot", "fields": {"number": 52, "latitude": 929, "longitude": 1362, "starting_feature": 1, "map_layout": 3 }, "pk": 55},
+{"model": "maps.slot", "fields": {"number": 53, "latitude": 950, "longitude": 1755, "starting_feature": 1, "map_layout": 3 }, "pk": 56},
+{"model": "maps.slot", "fields": {"number": 54, "latitude": 961, "longitude": 1581, "starting_feature": 4, "map_layout": 3 }, "pk": 57},
+{"model": "maps.slot", "fields": {"number": 55, "latitude": 976, "longitude": 1894, "starting_feature": 1, "map_layout": 3 }, "pk": 58},
+{"model": "maps.slot", "fields": {"number": 56, "latitude": 982, "longitude": 1043, "starting_feature": 1, "map_layout": 3 }, "pk": 59},
+{"model": "maps.slot", "fields": {"number": 57, "latitude": 987, "longitude": 680, "starting_feature": 1, "map_layout": 3 }, "pk": 60},
+{"model": "maps.slot", "fields": {"number": 58, "latitude": 1004, "longitude": 1329, "starting_feature": 1, "map_layout": 3 }, "pk": 61},
+{"model": "maps.slot", "fields": {"number": 59, "latitude": 1009, "longitude": 1184, "starting_feature": 1, "map_layout": 3 }, "pk": 62},
+{"model": "maps.slot", "fields": {"number": 60, "latitude": 1025, "longitude": 1726, "starting_feature": 1, "map_layout": 3 }, "pk": 63},
+{"model": "maps.slot", "fields": {"number": 61, "latitude": 1034, "longitude": 2030, "starting_feature": 1, "map_layout": 3 }, "pk": 64},
+{"model": "maps.slot", "fields": {"number": 62, "latitude": 1052, "longitude": 1872, "starting_feature": 1, "map_layout": 3 }, "pk": 65},
+{"model": "maps.slot", "fields": {"number": 63, "latitude": 1053, "longitude": 919, "starting_feature": 1, "map_layout": 3 }, "pk": 66},
+{"model": "maps.slot", "fields": {"number": 64, "latitude": 1093, "longitude": 782, "starting_feature": 1, "map_layout": 3 }, "pk": 67}
 ]

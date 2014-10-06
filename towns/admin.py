@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Town, Player, TownSlot, StoredItems
+from .models import *
 
 
 class PlayerInline(admin.TabularInline):
@@ -38,3 +38,11 @@ class TownSlotAdmin(admin.ModelAdmin):
 	list_display = ("town", "slot", "feature", "owner")
 
 admin.site.register(TownSlot, TownSlotAdmin)
+
+
+
+class BidAdmin(admin.ModelAdmin):
+	model = Bid
+	list_display = ("amount", "player", "town_slot")
+
+admin.site.register(Bid, BidAdmin)

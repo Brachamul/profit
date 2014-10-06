@@ -82,24 +82,42 @@ def joinable_towns (request):
 
 def get_town_slot (town_slug, slot_number):
 	# Reusable function for fetching a TownSlot
-	master_slot = Slot.objects.get(number=int(slot_number))
 	town = Town.objects.get(slug=town_slug)
+	master_slot = Slot.objects.get(map_layout=town.map_layout, number=int(slot_number))
 	town_slot = TownSlot.objects.get(slot=master_slot, town=town)
 	return town_slot
 
 def slot_info(request, town_slug, slot_number):
-	if request.POST.get('bid'): purchase(request, town_slug, slot_number)
+	if request.POST.get('bid'): purchase(request, town_slug, slot_number) # if a bid is placed, roll the purchasing code
+	town_slot = get_town_slot(town_slug, slot_number)
+	player = get_current_player(request)
+	bid = get_bid(town_slot, player)
 	return render_to_response(
-		'towns/slot_info.html',
-		{'town_slot': get_town_slot(town_slug, slot_number),},
+		'towns/slot_info.html',	{'town_slot': town_slot, 'player': player, 'bid': bid },
 		context_instance=RequestContext(request)
 		)
 
 def purchase(request, town_slug, slot_number):
+	town_slot = get_town_slot(town_slug, slot_number)
 	bid = request.POST.get('bid') # Set 'bid' to whatever was posted in the form
 	try: bid.isdigit() # Is the bid made of digits, meaning, is it valid ?
-	except ValueError: messages.error(request, 'It looks like your "%s" bid was invalid ! A bid should contain only numbers.' % (bid))
-	messages.success(request, 'You placed a bid of %s !' % (bid))
+	except ValueError: messages.error(request, "It looks like your '%s' bid was invalid ! A bid should contain only numbers." % (bid))
+	bid = int(bid)
+	player = get_current_player(request)
+	if bid >= player.cash : # does the player have enough cash for this bid ?
+		messages.error(request, "You don't have the necessary funds to place a bid of <span class='cash'>%d</span> !" % (bid))
+	else :
+		messages.success(request, "You placed a bid of %d !" % (bid))
+		create_bid(bid, player, town_slot)
+
+def create_bid(amount, player, town_slot):
+	new_bid = Bid(amount=amount, player=player, town_slot=town_slot)
+	new_bid.save()
+
+def get_bid(town_slot, player):
+	try: bid = Bid.objects.get(town_slot=town_slot, player=player) # finds the current player
+	except ObjectDoesNotExist: bid = None # for new players or people who just finished a game
+	return bid
 
 
 ### Make user join town by creating a 'player' within that town
@@ -114,13 +132,18 @@ def create_player(request):
 		new_player.save()
 		return HttpResponseRedirect('/town/')
 
+def get_current_player(request):
+	# Get the current "player" instance based on the current logged-in user
+	try: player = Player.objects.filter(user=request.user, left=None).latest('joined') # finds the current player
+	except ObjectDoesNotExist: player = 'not_in_game' # for new players or people who just finished a game
+	return player
+
 def current_town(request):
 	try:
 		player = Player.objects.filter(user=request.user, left=None).latest('joined') # finds the current player
 		return HttpResponseRedirect('/town/%s' % player.town.slug)
 	except ObjectDoesNotExist:
 		return HttpResponseRedirect('/town/join')
-
 
 import datetime
 

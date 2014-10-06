@@ -17,28 +17,40 @@
 
 {% if town_slot.owner == None %}
 <p>This area of land belongs to the King.</p>
-<p>His majesty's accountant has set a minimum selling price of <span class="cash">42</span>.</p>
 {% else %}
 <p>This area of land is currently owned by {{ town_slot.owner }}</p>
 {% endif %}
 
-{% comment %}
-{% if town_slot.is_for_sale %}
-<p>This slot is for sale.</p>
+{% if town_slot.on_sale == None %}
+<p>It is not currently for sale</p>
 {% endif %}
-{% endcomment %}
 
+
+
+{% if town_slot.on_sale != None %}
 <section class="for-sale">
 
-<p>You can <strong>purchase</strong> this land by participating in the auction :</p>
+<h2>This slot is for sale !</h2>
+
+{% if town_slot.owner == None %}<p>His majesty's accountant has set a minimum selling price of <span class="cash">42</span>.</p>{% endif %}
+	<p>The auction will end in {{ town_slot.on_sale|timeuntil }}</p>
+
+{% if bid != None %}
+	<p>You have already placed a bid of <span class="cash">{{ bid.amount }}</span>. If you wish, you may change your bid :</p>
+	{% else %}
+	<p>You can purchase this land by participating in the auction :</p>
+	{% endif %}
 
 <form method="post" action="" enctype="multipart/form-data">
 	{% csrf_token %}
-	<input type="number" name="bid" step="1" value="10"/>
+	<input type="number" name="bid" step="1" value="0"/>
 	<input class="inline button" type="submit" name="submit" value="Bid" />
 </form>
 
 </section>
+{% endif %}<!-- for sale -->
+
+
 
 <section style="text-align: right;">
 

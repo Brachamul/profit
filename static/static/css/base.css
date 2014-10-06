@@ -33,7 +33,7 @@ h1, h2, h3, h4 {
 }
 
 h1 {font-size: 2.0rem; margin-top: 0;}
-h2 {font-size: 1.6rem;}
+h2 {font-size: 1.4rem;}
 h3 {font-size: 1.2rem;}
 h4 {font-size: 1.4rem;
 	font-family: inherit;
@@ -249,6 +249,14 @@ nav {
 	text-align: center;
 }
 
+.white-wrapper {
+	background-color: white;
+	width: 100%;
+	position: relative;
+	padding-bottom: 1rem;
+	min-height: 20rem; /* In case the side menu bar is longer than the content ! */
+}
+
 @media (max-width: 800px) {
 
 	.content {
@@ -265,14 +273,13 @@ nav {
 	}
 
 	nav li { max-width: 2rem; float: right; }
+
+	.white-wrapper {
+		min-height: 0; /* No need to compensate for sidebar size since there is no sidebar in small screen modes */
+	}
 }
 
-.white-wrapper {
-	background-color: white;
-	width: 100%;
-	position: relative;
-	padding-bottom: 1rem;
-}
+
 
 
 

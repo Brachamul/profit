@@ -15,7 +15,7 @@
 
 <h1>
 	{% if user = user_object %}
-		Welcome, {{ user.username }}. 
+		Welcome, {{ user.username | capfirst }}. 
     {% else %}
     	{{ user_object.username | capfirst }}
     {% endif %}

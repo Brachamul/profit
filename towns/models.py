@@ -7,8 +7,6 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 
-# Create your models here.
-
 
 
 class Town(models.Model):
@@ -19,7 +17,6 @@ class Town(models.Model):
 
 	def __str__(self):
 		return self.name
-
 
 @receiver(post_save, sender=Town)
 def slotify_town(sender, **kwargs):
@@ -33,6 +30,7 @@ def slotify_town(sender, **kwargs):
 			feature = master_slot.starting_feature
 			)
 		new_slot.save()
+
 
 
 class Player(models.Model):
@@ -50,12 +48,17 @@ class Player(models.Model):
 class TownSlot(models.Model):
 	town = models.ForeignKey(Town)
 	slot = models.ForeignKey(Slot) # Finds the coordinates and starting feature of this Slot
-	owner = models.ForeignKey(Player, null=True, default=None)
+	owner = models.ForeignKey(Player, blank=True, null=True, default=None)
+	# if null, belongs to the king !
+	# certain starting features, when null, belong to peasants
 	feature = models.ForeignKey(Feature)
+	on_sale = models.DateTimeField(blank=True, null=True, default=None)
+	# if not date, slot is not on sale
+	# if there is a one, sale auction ends at that date
 	stored_items = models.ManyToManyField(Item, through='StoredItems')
 
 	def __str__(self):
-		return 'Slot #%d | %d - %d' % (self.slot.number, self.slot.latitude, self.slot.longitude)
+		return '%s \t \t \t Slot #%d, \t %d \t %d' % (self.feature.name, self.slot.number, self.slot.latitude, self.slot.longitude)
 
 class StoredItems(models.Model):
 	town_slot = models.ForeignKey(TownSlot)
@@ -65,3 +68,12 @@ class StoredItems(models.Model):
 	def __str__(self):
 		quantity_of_items = str(self.item) + ', ' + str(self.quantity)
 		return quantity_of_items
+
+
+
+class Bid(models.Model):
+	# Bids are placed by players when an auction for land is in progress
+	town_slot = models.ForeignKey(TownSlot)
+	player = models.ForeignKey(Player)
+	amount = models.PositiveSmallIntegerField()
+	datetime_placed = models.DateTimeField(auto_now_add=True)
