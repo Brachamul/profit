@@ -20,18 +20,19 @@ class Town(models.Model):
 	def __str__(self):
 		return self.name
 
-@receiver(post_save, sender=Town)
-def slotify_town(sender, **kwargs):
-	town = kwargs.get('instance')
-	map_layout = town.map_layout
-	slot_map = Slot.objects.filter(map_layout=map_layout)
-	for master_slot in slot_map :
-		new_slot = TownSlot(
-			town = town,
-			slot = master_slot,
-			feature = master_slot.starting_feature
-			)
-		new_slot.save()
+@receiver(post_save, sender=Town) # When a Town is created, populate it with slots from the map layout.
+def slotify_town(sender, created, **kwargs):
+	if created :
+		town = kwargs.get('instance')
+		map_layout = town.map_layout
+		slot_map = Slot.objects.filter(map_layout=map_layout)
+		for master_slot in slot_map :
+			new_slot = TownSlot(
+				town = town,
+				slot = master_slot,
+				feature = master_slot.starting_feature
+				)
+			new_slot.save()
 
 
 

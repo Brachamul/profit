@@ -22,13 +22,20 @@
 </form>
 {% endfor %}
 
+<br>
+
+<form method="POST" action="">{% csrf_token %}
+	<input type="hidden" class="small button" name="time-goes-by-in" value="all">
+	<input style="margin: 0 auto;" type="submit" class="button" value="Time goes by for all !">
+</form>
+
 </section>
 
 <section>
 
 <form method="POST" action="">{% csrf_token %}
-	<input type="hidden" class="small button" name="time-goes-by-in" value="all">
-	<input style="margin: 0 auto;" type="submit" class="button" value="Time goes by for all !">
+	<input type="hidden" class="small button" name="complete-auctions" value="all">
+	<input style="margin: 0 auto;" type="submit" class="button" value="Complete auctions for all !">
 </form>
 
 </section>
