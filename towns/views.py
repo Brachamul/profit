@@ -89,6 +89,7 @@ def get_town_slot (town_slug, slot_number):
 
 def slot_info(request, town_slug, slot_number):
 	if request.POST.get('bid'): purchase(request, town_slug, slot_number) # if a bid is placed, roll the purchasing code
+	if request.POST.get('sell-slot') == "sell" : sell_slot(request, town_slug, slot_number)
 	town_slot = get_town_slot(town_slug, slot_number)
 	player = get_current_player(request)
 	bid = get_bid(town_slot, player)
@@ -96,6 +97,26 @@ def slot_info(request, town_slug, slot_number):
 		'towns/slot_info.html',	{'town_slot': town_slot, 'player': player, 'bid': bid },
 		context_instance=RequestContext(request)
 		)
+
+from django.utils import timezone
+from datetime import timedelta
+def sell_slot(request, town_slug, slot_number):
+	town_slot = get_town_slot(town_slug, slot_number)
+	town_slot.on_sale = timezone.now() + timedelta(days=1)
+	town_slot.save()
+	messages.success(request, "Sale of this land has begun.")
+
+def advance_phase(request, list_of_active_towns) :
+	if request.POST.get('time-goes-by-in') == "all" :
+		logger.debug('Advancing all towns by one phase.')
+		for town in list_of_active_towns :
+			town.phase += 1
+			town.save()
+	elif request.POST.get('time-goes-by-in') :
+		town_slug = request.POST.get('time-goes-by-in')
+		town = Town.objects.get(slug=town_slug)
+		town.phase += 1
+		town.save()
 
 def purchase(request, town_slug, slot_number):
 	town_slot = get_town_slot(town_slug, slot_number)
@@ -108,6 +129,8 @@ def purchase(request, town_slug, slot_number):
 		messages.error(request, "You don't have the necessary funds to place a bid of <span class='cash'>%d</span> !" % (bid))
 	else :
 		messages.success(request, "You placed a bid of %d !" % (bid))
+		player.cash -= bid
+		player.save()
 		create_bid(bid, player, town_slot)
 
 def create_bid(amount, player, town_slot):
@@ -146,7 +169,6 @@ def current_town(request):
 		return HttpResponseRedirect('/town/join')
 
 import datetime
-
 def leave_town(request):
 	player = get_current_player(request)
 	player.left = datetime.datetime.now()

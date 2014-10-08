@@ -31,28 +31,28 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'profiles',
-    'signups',
-    'assets',
-    'maps',
-    'welcome',
-    'towns',
-    'god',
+	'django.contrib.admin',
+	'django.contrib.auth',
+	'django.contrib.contenttypes',
+	'django.contrib.sessions',
+	'django.contrib.messages',
+	'django.contrib.staticfiles',
+	'profiles',
+	'signups',
+	'assets',
+	'maps',
+	'welcome',
+	'towns',
+	'god',
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'django.contrib.sessions.middleware.SessionMiddleware',
+	'django.middleware.common.CommonMiddleware',
+	'django.middleware.csrf.CsrfViewMiddleware',
+	'django.contrib.auth.middleware.AuthenticationMiddleware',
+	'django.contrib.messages.middleware.MessageMiddleware',
+	'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'profit.urls'
@@ -64,10 +64,10 @@ WSGI_APPLICATION = 'profit.wsgi.application'
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+	'default': {
+		'ENGINE': 'django.db.backends.sqlite3',
+		'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+	}
 }
 
 # Internationalization
@@ -92,14 +92,52 @@ STATIC_URL = '/static/'
 # Template location
 
 TEMPLATE_DIRS = (
-    os.path.join((BASE_DIR), "static", "templates"),
-    # 'C:/skillshare/profit/static/templates/',
+	os.path.join((BASE_DIR), "static", "templates"),
+	# 'C:/skillshare/profit/static/templates/',
 )
 
 if DEBUG:
-    MEDIA_URL = '/media/'
-    STATIC_ROOT = os.path.join((BASE_DIR), "static", "static-only")
-    MEDIA_ROOT = os.path.join((BASE_DIR), "static", "media")
-    STATICFILES_DIRS = (
-        os.path.join((BASE_DIR), "static", "static"),
-    )
+	MEDIA_URL = '/media/'
+	STATIC_ROOT = os.path.join((BASE_DIR), "static", "static-only")
+	MEDIA_ROOT = os.path.join((BASE_DIR), "static", "media")
+	STATICFILES_DIRS = (
+		os.path.join((BASE_DIR), "static", "static"),
+	)
+
+
+#   LOGGING = {
+#	   'version': 1,
+#	   'disable_existing_loggers': False,
+#	   'formatters': {
+#		   'verbose': {
+#			   'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+#			   'datefmt' : "%d/%b/%Y %H:%M:%S"
+#		   },
+#		   'simple': {
+#			   'format': '%(levelname)s %(message)s'
+#		   },
+#	   },
+#	   'handlers': {
+#		   'file': {
+#			   'level': 'DEBUG',
+#			   'class': 'logging.FileHandler',
+#			   'filename': 'mysite.log',
+#			   'formatter': 'verbose'
+#		   },
+#	   },
+#	   'loggers': {
+#		   'django': {
+#			   'handlers':['file'],
+#			   'propagate': True,
+#			   'level':'DEBUG',
+#		   },
+#		   'profit': {
+#			   'handlers': ['file'],
+#			   'level': 'DEBUG',
+#		   },
+#	   }
+#   }# 
+
+from django.contrib import messages
+from django.contrib.messages import constants as message_constants
+MESSAGE_LEVEL = messages.DEBUG

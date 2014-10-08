@@ -49,9 +49,12 @@
 	<div class="content">
 
 	{% if messages %}
+		<div class="messages">
 		{% for message in messages %}
-			<div {% if message.tags == "success" %} class="message" {% endif %} >{{ message }}</div>
+			<input id="message-{{forloop.counter}}" class="message" type="radio"/>
+			<label for="message-{{forloop.counter}}" {% if message.tags %} class="{{message.tags}} message"{% endif %}>{{ message }}</label>
 		{% endfor %}
+		</div>
 	{% endif %}
 
 {% endblock upper_body %}

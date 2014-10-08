@@ -81,14 +81,14 @@ $('img[usemap]').rwdImageMaps();
 
 		<!-- Top status bar -->
 		<div class="status-bar">
-			<a href="#menu" id="menu" class="open-menu">{{ town.name }}</a>
+			<a href="#menu" id="menu" class="open-menu">${{ player.cash }}</a>
 			<a href="#menu" class="menu open-menu foundation-symbol">&#xf169;</a>
-			<a href="#close-menu" id="close-menu" class="close-menu">{{ town.name }}</a>
+			<a href="#close-menu" id="close-menu" class="close-menu">${{ player.cash }}</a>
 			<a href="#close-menu" class="menu close-menu foundation-symbol">&#xf169;</a>
 			<div class="menu-submenu">
 				<ul class="menu-bar">
 					<li><a href="/u/myprofile/">Back to my profile</a></li>
-					<li><a href="/town/leave/">Leave town</a></li>
+					<li><a href="/town/leave/">Leave {{ town.name }}</a></li>
 					<li><a href="/u/logout/">Sign Out</a></li>
 				</ul>
 			</div>
@@ -99,11 +99,11 @@ $('img[usemap]').rwdImageMaps();
 		<div class="screen-wide tooltip-bar" id="{{ town_slot.number }}">
 			<a href="#"><img class="close-tooltip" src="{% get_static_prefix %}images/cross.svg"></a>
 			<h2>{{ town_slot.name }}</h2>
-			{% if town_slot.owner == None %}
-			<a class="action" href="slot/{{ town_slot.number }}">Inspect this area</a>
-			{% else %}
-			Owned by {{ town_slot.owner }}
-			{% endif %}
+			{% if town_slot.owner != None %}<p>Owned by {{ town_slot.owner }}</p>{% endif %}
+
+			
+			<a class="action inspect" href="slot/{{ town_slot.number }}">Inspect this area</a>
+
 		</div>
 		{% endfor %}
 

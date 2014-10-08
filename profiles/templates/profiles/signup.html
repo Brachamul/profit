@@ -13,8 +13,7 @@
 {% block content %}
 
 {% if registered %}
-<h2>Thank you for signing up !</h2>
-<a href="{% url 'login' %}">Go to login</a><br><br><br>
+<a class="important button" style="margin: 1em auto;" href="{% url 'login' %}">Go to login</a>
 
 {% else %}
 <p style="text-align:right; margin-top: 1em"><a href="{% url 'login' %}" class="small button">Already have an account ? Log in !</a></p>

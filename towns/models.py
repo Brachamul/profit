@@ -61,7 +61,7 @@ class TownSlot(models.Model):
 	stored_items = models.ManyToManyField(Item, through='StoredItems')
 
 	def __str__(self):
-		return '%s \t \t \t Slot #%d, \t %d \t %d' % (self.feature.name, self.slot.number, self.slot.latitude, self.slot.longitude)
+		return str(self.slot.number)
 
 class StoredItems(models.Model):
 	town_slot = models.ForeignKey(TownSlot)

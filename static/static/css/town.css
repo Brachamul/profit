@@ -9,7 +9,7 @@
 body {
 	/* background-image: url('map_section.png'); */
 	background-color: white;
-	font-family: "Berkshire Swash";
+	font-family: "Average";
 	font-weight: 100;
 	font-size: 16px;
 	-webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
@@ -39,15 +39,20 @@ strong {
 
 p {
 	line-height: 1.5;
+	font
 }
 
-p img {
-	height: 1em;
-	vertical-align: bottom;
+h1, h2, h3, h4 {
+	font-family: "Berkshire Swash", serif;
+	line-height: 1.2;
 }
 
-h1 {
-	font-size: 1.600em;
+h1 {font-size: 2.0rem; margin-top: 0;}
+h2 {font-size: 1.4rem;}
+h3 {font-size: 1.2rem;}
+h4 {font-size: 1.4rem;
+	font-family: inherit;
+	font-style: italic;
 }
 
 a:link, a:hover, a:visited, a:active {
@@ -211,16 +216,14 @@ input[name=touch-mouse-toggle] + label {
 	right: 2vw;
 	max-height: calc(100vh - 4vw - 9em); /* Doesn't overlap the zoom and touch/mouse buttons */
 	max-width: 96vw;
+	min-width: 20rem;
 	visibility: hidden;
 	opacity:0;
 	padding: 1em;
 	transition: visibility 0s linear 0.1s, opacity 0.1s linear; 
 }
 
-.tooltip-bar h2 {
-	font-size: 1.5rem;
-	text-align: center;
-}
+
 
 
 .close-tooltip { 
@@ -239,10 +242,12 @@ input[name=touch-mouse-toggle] + label {
 	color: black;
 	box-shadow: 0 0 0.150em black;
 	border-bottom: .150em solid transparent;
-	padding: .40em .60em .25em .60em;
-	margin: 1em;
+	padding: .30em .60em .20em .40em;
+	margin: .5em 0;
 }
 
+.action:before { font-family: 'Foundation'; vertical-align: top;}
+.action.inspect:before { content: '\f16c \0020';}
 
 
 /*|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|*/

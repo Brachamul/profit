@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse, HttpRequest
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist
 from django.views import generic
+from django.contrib import messages
 
 from django.contrib.auth.models import User
 
@@ -11,6 +12,7 @@ from django.http import Http404
 from django.views.generic.base import TemplateView
 
 from towns.models import Player
+
 
 
 ### Profile
@@ -68,6 +70,7 @@ def signup(request):
 
 			# Update our variable to tell the template registration was successful.
 			registered = True
+			messages.success(request, "You have successfully signed up!")
 
 		# Invalid form or forms - mistakes or something else?
 		# Print problems to the terminal.
