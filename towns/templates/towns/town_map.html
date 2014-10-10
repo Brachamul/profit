@@ -79,12 +79,10 @@ $('img[usemap]').rwdImageMaps();
 
 	<div class="fixed-container">
 
-		<!-- Top status bar -->
-		<div class="status-bar">
-			<a href="#menu" id="menu" class="open-menu">${{ player.cash }}</a>
-			<a href="#menu" class="menu open-menu foundation-symbol">&#xf169;</a>
-			<a href="#close-menu" id="close-menu" class="close-menu">${{ player.cash }}</a>
-			<a href="#close-menu" class="menu close-menu foundation-symbol">&#xf169;</a>
+		<!-- Menu button -->
+		<input class="hidden" name="menu" id="menu" type="checkbox"/>
+		<label class="module" for="menu">
+			<span class="foundation-symbol">&#xf169;</span>
 			<div class="menu-submenu">
 				<ul class="menu-bar">
 					<li><a href="/u/myprofile/">Back to my profile</a></li>
@@ -92,23 +90,26 @@ $('img[usemap]').rwdImageMaps();
 					<li><a href="/u/logout/">Sign Out</a></li>
 				</ul>
 			</div>
+		</label>
+
+		<div class="module">
+			<span class="cash">{{ player.cash }}</span>
 		</div>
-
-		<!-- Tooltip contents for each -->
-		{% for town_slot in slot_details %}
-		<div class="screen-wide tooltip-bar" id="{{ town_slot.number }}">
-			<a href="#"><img class="close-tooltip" src="{% get_static_prefix %}images/cross.svg"></a>
-			<h2>{{ town_slot.name }}</h2>
-			{% if town_slot.owner != None %}<p>Owned by {{ town_slot.owner }}</p>{% endif %}
-
-			
-			<a class="action inspect" href="slot/{{ town_slot.number }}">Inspect this area</a>
-
-		</div>
-		{% endfor %}
-
 
 	</div> <!-- fixed-container -->
+
+	<!-- Tooltip contents for each slot -->
+	{% for town_slot in slot_details %}
+	<div class="screen-wide tooltip-bar" id="{{ town_slot.number }}">
+		<a href="#"><img class="close-tooltip" src="{% get_static_prefix %}images/cross.svg"></a>
+		<h2>{{ town_slot.name }}</h2>
+		{% if town_slot.owner != None %}<p>Owned by {{ town_slot.owner }}</p>{% endif %}
+
+		
+		<a class="action inspect" href="slot/{{ town_slot.number }}">Inspect this area</a>
+
+	</div>
+	{% endfor %}
 
 
 

@@ -5,42 +5,20 @@
  * General Formatting
  *
  */
+							html { font-size: 16px; }
+@media (max-width: 980px) { html { font-size: 14px;	} }
+@media (max-width: 480px) {	html { font-size: 12px; } }
 
 body {
-	/* background-image: url('map_section.png'); */
 	background-color: white;
 	font-family: "Average";
 	font-weight: 100;
-	font-size: 16px;
 	-webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
 }
 
-.tooltip-bar{
-	font-size: 16px;
-}
+strong { font-weight: bold; }
 
-@media (max-width: 980px) {
-	body,
-	.tooltip-bar{
-		font-size: 14px;
-	}
-}
-
-@media (max-width: 480px) {
-	body,
-	.tooltip-bar{
-		font-size: 12px;
-	}
-}
-
-strong {
-	font-weight: bold;
-}
-
-p {
-	line-height: 1.5;
-	font
-}
+p { line-height: 1.5; }
 
 h1, h2, h3, h4 {
 	font-family: "Berkshire Swash", serif;
@@ -64,6 +42,11 @@ a:link, a:hover, a:visited, a:active {
 	   a:not(.button):not(.foundation-symbol):hover { border-bottom: .150em solid black; }
 footer a:not(.button):not(.foundation-symbol):hover { border-bottom: .150em solid white; }
 
+span.cash:after {
+	content: "P";
+	text-decoration: line-through;
+	margin-left: .25em;
+}
 
 /*
  * Vertical Positioning (z-index)
@@ -79,7 +62,6 @@ map area {
 	z-index: 2;
 }
 
-.status-bar,
 .tooltip-bar {
 	z-index: 3;
 }
@@ -96,6 +78,7 @@ img.slot + div {
  */
 
 [class*="-bar"],
+.module,
 input[name=zoom] + label, .dummy-zoom,
 input[name=touch-mouse-toggle] + label {
 	/* Used to format most bars. */
@@ -111,59 +94,68 @@ input[name=touch-mouse-toggle] + label {
 	-moz-box-sizing: border-box;	/* Firefox, other Gecko */
 	box-sizing: border-box;		 /* Opera/IE 8+ */
 }
-/*
-
-[class*="-bar"] table {
-	width: 100%;
-	height: 100%;
-	margin-top: -0.100em;
-}
-
-[class*="-bar"] td {
-	vertical-align: middle;
-	text-align: center;
-	line-height: 1.5;
-}
-
-*/
-
 
 
 .fixed-container {
 	position: fixed;
-	pointer-events: none; /* Makes the container click-through */
-	width: 100%;
-	height: 100%;
-}
-
-.status-bar {
+	text-align: right;
 	top: 2vw;
 	right: 2vw;
+	max-width: calc(100vw - 4vw - 8rem);
+	font-size: 0; /* inline block space fix */
+	direction: rtl;
+	pointer-events: none;
+}
+
+.module {
+	cursor: pointer;
 	min-height: 3em;
-	max-width: calc(100vw - 4vw - 8em);
 	padding-top: .7em;
 	padding-right: 1em;
 	padding-left: 1em;
+	margin-left: 1vw;
+	margin-bottom: 1vw;
 	display: inline-block;
 	vertical-align: middle;
-	position: absolute;
+	font-size: 1rem;
+	margin-left: 1vw;
+	margin-bottom: 1vw;
 }
 
-.status-bar ul {
+
+
+@media (max-width: 480px) {	
+	.module {
+		margin-left: 2vw;
+		margin-bottom: 2vw;
+	}
+}
+
+.module span.foundation-symbol {
+	font-size: 1.5em;
+	vertical-align: -.125em;
+	line-height: 1;
+}
+
+.module span {
+	line-height: 1.45;
+	direction: ltr;
+
+}
+
+input[type=checkbox].hidden  {
+	display: none;
+} 
+
+.module ul {
 	margin-top: auto;
 	margin-bottom: auto;
 	line-height: 1;
 }
 
-.status-bar > ul li { display: inline-block; font-size: 1.5em; }
-.status-bar > ul li:before { content: "\2022 \0020"; }
-.status-bar > ul li:first-child:before { content: none; }
-
-.status-bar .menu {
-	margin-left: .5em;
-	font-size: 1.5em;
-	vertical-align: -.125em;
-}
+.module > ul li { display: inline-block; font-size: 1.5em; }
+.module > ul li:before { content: "\2022 \0020"; }
+.module > ul li:first-child:before { content: none; }
 
 .menu-submenu {
 	visibility: hidden;
@@ -192,8 +184,7 @@ input[name=touch-mouse-toggle] + label {
 
 .menu-submenu ul li:before { content: "\2022 \0020"; }
 
-.status-bar #menu:target ~ .menu-submenu,
-/* .status-bar .open-menu:hover ~ .menu-submenu, */
+input:checked + label.module .menu-submenu,
 .menu-submenu:hover {
 	visibility: visible;
 	opacity:1;
@@ -201,8 +192,9 @@ input[name=touch-mouse-toggle] + label {
 }
 
 .close-menu { display: none; }
-.status-bar #menu:target, .status-bar #menu:target + .open-menu { display: none; }
-.status-bar #menu:target ~ .close-menu { display: inline-block; }
+input:checked + label.module .open-menu { display: none; }
+input:checked + label.module .close-menu { display: inline-block; }
+
 
 
 /****************/
@@ -211,20 +203,18 @@ input[name=touch-mouse-toggle] + label {
 
 .tooltip-bar {
 	vertical-align: middle;
-	position: absolute;
+	font-size: 1rem;
+	position: fixed;
 	bottom: 2vw;
 	right: 2vw;
 	max-height: calc(100vh - 4vw - 9em); /* Doesn't overlap the zoom and touch/mouse buttons */
 	max-width: 96vw;
-	min-width: 20rem;
+	width: 20rem;
 	visibility: hidden;
 	opacity:0;
 	padding: 1em;
 	transition: visibility 0s linear 0.1s, opacity 0.1s linear; 
 }
-
-
-
 
 .close-tooltip { 
 	/* Styles the icon which closes a tooltip. */
