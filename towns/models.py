@@ -1,12 +1,11 @@
 from django.db import models
 
 from maps.models import Slot, MapLayout
-from assets.models import Feature, Item
+from assets.models import Feature, Item, Illustration
 from django.contrib.auth.models import User
 
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-
 
 
 class Town(models.Model):
@@ -30,7 +29,8 @@ def slotify_town(sender, created, **kwargs):
 			new_slot = TownSlot(
 				town = town,
 				slot = master_slot,
-				feature = master_slot.starting_feature
+				feature = master_slot.starting_feature,
+				illustration = master_slot.starting_feature.base_illustration
 				)
 			new_slot.save()
 
@@ -59,6 +59,7 @@ class TownSlot(models.Model):
 	# if not date, slot is not on sale
 	# if there is a one, sale auction ends at that date
 	stored_items = models.ManyToManyField(Item, through='StoredItems')
+	illustration = models.ForeignKey(Illustration, null=True)
 
 	def __str__(self):
 		return str(self.slot.number)

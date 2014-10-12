@@ -26,12 +26,22 @@ def advance_phase(request, list_of_active_towns) :
 		logger.debug('Advancing all towns by one phase.')
 		for town in list_of_active_towns :
 			town.phase += 1
+			reillustrate(town)
 			town.save()
 	elif request.POST.get('time-goes-by-in') :
 		town_slug = request.POST.get('time-goes-by-in')
 		town = Town.objects.get(slug=town_slug)
 		town.phase += 1
+		reillustrate(town)
 		town.save()
+
+def reillustrate(town):
+	# Goes through every town_slot and calculates which illustration should be employed based on multiple factors
+	for town_slot in TownSlot.objects.filter(town=town) :
+		town_slot.illustration = town_slot.feature.base_illustration
+		# for now, just illustrate town slots with the base illustrations for their active feature
+		town_slot.save()
+
 
 from django.utils import timezone
 def complete_auctions(request) :
@@ -64,8 +74,9 @@ def complete_auctions(request) :
 							winner = bid.player
 					for bid in list_of_bids :
 						if bid.player == winner :
-							town_slot.owner.cash += bid.amount
-							town_slot.owner.save() # Transfer the bid money to the former owner
+							if town_slot.owner != None : # If the owner was not the king
+								town_slot.owner.cash += bid.amount
+								town_slot.owner.save() # Transfer the bid money to the former owner
 							town_slot.owner = bid.player
 							town_slot.save() # Grant ownership to the purchaser
 							# [todo] notify successful purchase

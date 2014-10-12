@@ -11,7 +11,7 @@ class PlayerInline(admin.TabularInline):
 
 class TownSlotInline(admin.TabularInline):
 	model = TownSlot
-	fields = ("feature", "owner")
+	fields = ("feature", "illustration", "owner", "on_sale")
 	readonly_fields = fields
 	extra = 0
 

@@ -7,12 +7,18 @@ from .forms import *
 
 
 
+class IllustrationAdmin(admin.ModelAdmin):
+	model = Illustration
+
+admin.site.register(Illustration, IllustrationAdmin)
+
+
+
 class ItemAdmin(admin.ModelAdmin):
 	model = Item
 	list_display = ("name", "pk", "description")
 
 admin.site.register(Item, ItemAdmin)
-
 
 
 

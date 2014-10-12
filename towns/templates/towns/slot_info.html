@@ -24,9 +24,10 @@
 {% endif %}
 
 
-{% if town_slot.on_sale == None %}
+{% if town_slot.on_sale == None and town_slot.owner != None %}
 	<p>It is not currently for sale</p>
-	{% endif %}
+
+{% endif %}
 
 
 {% if town_slot.owner.user == user and town_slot.on_sale == None %}
@@ -37,16 +38,23 @@
 	{% endif %}
 
 
-{% if town_slot.on_sale != None %}
+
+{% if town_slot.on_sale != None or town_slot.owner == None %}
 <section class="for-sale">
 
-<h2>This slot is for sale !</h2>
+<h2>This land is for sale !</h2>
 
-{% if town_slot.owner == None %}
-	<p>His majesty's accountant has set a minimum selling price of <span class="cash">42</span>.</p>
+{% if town_slot.owner == None and town_slot.on_sale == None %}
+	<p>You may request an auction to purchase it by placing the first bid.</p>
 	{% endif %}
 
+{% if town_slot.owner == None %}
+	<p>His majesty's accountant has set a minimum selling price of <span class="cash">{{ town_slot.feature.min_price }}</span>.</p>
+	{% endif %}
+
+{% if town_slot.on_sale != None %}
 <p>The auction will end in {{ town_slot.on_sale|timeuntil }}</p>
+	{% endif %}
 
 	{% if bid != None %}
 		<p>You have already placed a bid of <span class="cash">{{ bid.amount }}</span>
@@ -65,6 +73,47 @@
 </section>
 {% endif %}<!-- for sale -->
 
+
+{% if town_slot.owner.user == user %}
+{% if runs.production_runs != None or runs.service_runs != None or runs.boost_runs != None and town_slot.owner.user == user %}
+<section class="tasks">
+
+<h2>Available Tasks</h2>
+
+{% for production_run in runs.production_runs %}
+<p>{{ production_run.name }}</p>
+{% endfor %}
+
+{% for service_run in runs.service_runs %}
+<p>{{ service_run.name }}</p>
+{% endfor %}
+
+{% for boost_run in runs.boost_runs %}
+<p>{{ boost_run.name }}</p>
+{% endfor %}
+
+</section>
+{% endif %}<!-- tasks -->
+{% endif %}<!-- user = owner -->
+
+
+{% if town_slot.owner.user == user %}
+{% if runs.development_runs != None or runs.upgrade_runs != None %}
+<section class="upgrades">
+
+<h2>Upgrades & Developments</h2>
+
+{% for development_run in runs.development_runs %}
+<p>{{ development_run.becomes.name }}</p>
+{% endfor %}
+
+{% for upgrade_run in runs.upgrade_runs %}
+<p>{{ upgrade_run.name }}</p>
+{% endfor %}
+
+</section>
+{% endif %}<!-- upgrades -->
+{% endif %}<!-- user = owner -->
 
 
 <section style="text-align: right;">
