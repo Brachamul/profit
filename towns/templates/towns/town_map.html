@@ -119,9 +119,9 @@ $('img[usemap]').rwdImageMaps();
 		{% for town_slot in slot_details %}
 		<a href="#{{ town_slot.number }}">
 			<img
-				class="slot"
+				class="slot owned-by-{{ town_slot.owner }}"
 				style="left: {{ town_slot.margin_left }}%; top: {{ town_slot.margin_top }}%;"
-				src="{% get_static_prefix %}images/slot.png"
+				src="{{ town_slot.illustration.image.url }}"
 				alt="{{ town_slot.name }}"
 				/>
 			<div style="left: calc({{ town_slot.margin_left }}% + 2.5%); top: calc({{ town_slot.margin_top }}% + 4.5%);">{{ town_slot.name }}</div>

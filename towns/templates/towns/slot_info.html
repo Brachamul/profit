@@ -11,24 +11,22 @@
 
 {% block content %}
 
-<img style="float:right;" src="{% get_static_prefix %}images/slot.png" alt="{{ town_slot.name }}" />
+<img style="float:right;" src="{{ town_slot.illustration.image.url }}" alt="{{ town_slot.name }}" />
 
 <h1>{{ town_slot.feature }}</h1>
 
 {% if town_slot.owner == None %}
 	<p>This area of land belongs to the King.</p>
-
+{% elif town_slot.owner.user == user %}
+	<p>This area of land belongs to you.</p>
 {% else %}
 	<p>This area of land is currently owned by {{ town_slot.owner }}</p>
-
 {% endif %}
 
 
-{% if town_slot.on_sale == None and town_slot.owner != None %}
+{% if town_slot.on_sale == None and town_slot.owner != None and town_slot.owner.user != user %}
 	<p>It is not currently for sale</p>
-
-{% endif %}
-
+	{% endif %}
 
 {% if town_slot.owner.user == user and town_slot.on_sale == None %}
 	<form method="POST" action="">{% csrf_token %}
@@ -48,16 +46,16 @@
 	<p>You may request an auction to purchase it by placing the first bid.</p>
 	{% endif %}
 
-{% if town_slot.owner == None %}
+{% if town_slot.owner == None and town_slot.feature.min_price %}
 	<p>His majesty's accountant has set a minimum selling price of <span class="cash">{{ town_slot.feature.min_price }}</span>.</p>
 	{% endif %}
 
 {% if town_slot.on_sale != None %}
-<p>The auction will end in {{ town_slot.on_sale|timeuntil }}</p>
+<p>The auction will end in {{ town_slot.on_sale|timeuntil }}.</p>
 	{% endif %}
 
 	{% if bid != None %}
-		<p>You have already placed a bid of <span class="cash">{{ bid.amount }}</span>
+		<p>You have already placed a bid of <span class="cash">{{ bid.amount }}</span>.
 
 	{% elif town_slot.owner.user == user %}
 		<p>You can't bid on your own slot.</p>
@@ -74,41 +72,59 @@
 {% endif %}<!-- for sale -->
 
 
-{% if town_slot.owner.user == user %}
+{% if town_slot.owner.user == user and town_slot.on_sale == None %}
 {% if runs.production_runs != None or runs.service_runs != None or runs.boost_runs != None and town_slot.owner.user == user %}
 <section class="tasks">
 
 <h2>Available Tasks</h2>
 
 {% for production_run in runs.production_runs %}
-<p>{{ production_run.name }}</p>
+<input class="hidden" name="" type="checkbox"/>
+<label class="run" for=""><img src="{{ production_run.illustration.image.url }}"/></label>
+<div></div>
 {% endfor %}
 
 {% for service_run in runs.service_runs %}
-<p>{{ service_run.name }}</p>
+<input class="hidden" name="" type="checkbox"/>
+<label class="run" for=""><img src="{{ service_run.illustration.image.url }}"/></label>
 {% endfor %}
 
 {% for boost_run in runs.boost_runs %}
-<p>{{ boost_run.name }}</p>
+<input class="hidden" name="" type="checkbox"/>
+<label class="run" for=""><img src="{{ boost_run.illustration.image.url }}"/></label>
 {% endfor %}
 
 </section>
 {% endif %}<!-- tasks -->
-{% endif %}<!-- user = owner -->
 
-
-{% if town_slot.owner.user == user %}
 {% if runs.development_runs != None or runs.upgrade_runs != None %}
 <section class="upgrades">
 
 <h2>Upgrades & Developments</h2>
 
 {% for development_run in runs.development_runs %}
-<p>{{ development_run.becomes.name }}</p>
+<input class="hidden" id="dev-{{forloop.counter}}" type="checkbox"/>
+<label class="run" for="dev-{{forloop.counter}}">{{ development_run.becomes.name }}
+	<div>
+		<img src="{{ development_run.becomes.base_illustration.image.url }}" style="float: right;"/>
+		<p>{{ development_run.becomes.description }}</p>
+		<p class="requirements">Requires : 
+			{% for required_material in development_run.developmentprojectrequiredmaterial_set.all %}
+			<span>{{ required_material.quantity }} {{ required_material.item|lower }}</span>
+			{% endfor %}
+		</p>
+		<div class="anchor"></div>
+		<form method="POST" action="">{% csrf_token %}
+			<input type="hidden" class="small button" name="time-goes-by-in" value="{{ town.slug }}">
+			<input type="submit" class="action build" value="&#xe606; Build {{ development_run.becomes.name }}">
+		</form>
+	</div>
+</label>
 {% endfor %}
 
 {% for upgrade_run in runs.upgrade_runs %}
-<p>{{ upgrade_run.name }}</p>
+<input class="hidden" name="" type="checkbox"/>
+<label class="run" for=""><img src="{{ upgrade_run.illustration.image.url }}"/></label>
 {% endfor %}
 
 </section>
@@ -118,7 +134,7 @@
 
 <section style="text-align: right;">
 
-<a class="important button" href="{% url 'town_map' town_slot.town.slug %}">Return to {{ town_slot.town.name }}</a>
+<a class="important button" style="margin-top: 1.5em;" href="{% url 'town_map' town_slot.town.slug %}">&#xf171;&nbsp;&nbsp; Return to {{ town_slot.town.name }}</a>
 
 </section>
 

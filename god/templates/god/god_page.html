@@ -18,7 +18,7 @@
 {% for town in list_of_active_towns %}
 <form method="POST" action="">{% csrf_token %}
 	<input type="hidden" class="small button" name="time-goes-by-in" value="{{ town.slug }}">
-	<input type="submit" class="inline small button" value="Time goes by for {{ town.name }} ! (phase {{ town.phase }})">
+	<input type="submit" class="inline small button" style="width: 100%; margin-bottom: .5em;" value="Time goes by for {{ town.name }} ! (phase {{ town.phase }})">
 </form>
 {% endfor %}
 

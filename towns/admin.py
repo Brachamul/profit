@@ -35,7 +35,7 @@ admin.site.register(Player, PlayerAdmin)
 
 class TownSlotAdmin(admin.ModelAdmin):
 	model = TownSlot
-	list_display = ("town", "slot", "feature", "owner")
+	list_display = ("slot", "feature", "owner", "town", "illustration")
 
 admin.site.register(TownSlot, TownSlotAdmin)
 

@@ -1,10 +1,11 @@
-from django.shortcuts import get_object_or_404, render, render_to_response
-from django.db.models import Count
-from django.http import HttpResponseRedirect, HttpResponse, HttpRequest
-from django.template import RequestContext
-from django.views.generic import TemplateView, ListView
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.db.models import Count
+from django.http import HttpResponseRedirect, HttpResponse, HttpRequest
+from django.shortcuts import get_object_or_404, render, render_to_response
+from django.template import RequestContext
+from django.views.generic import TemplateView, ListView
 
 # Create your views here.
 
@@ -13,6 +14,7 @@ from .models import *
 from maps.models import *
 from assets.models import *
 
+@login_required
 def town_map(request, town_slug):
 
 	town = get_object_or_404(Town, slug=town_slug) # Look for the town which corresponds with the town_slug that was passed through my URL
@@ -41,7 +43,7 @@ def town_map(request, town_slug):
 			'town' : town_slot.town,
 #			'stored_items' : 0,
 		# From Illustrations
-#			'file_name' : 'placeholder.png',
+			'illustration' : town_slot.illustration,
 #			'shape' : '30,0,61,15,31,31,0,16',
 #			'vertical-offset' : 0,
 #			'horizontal-offset' : 0,
@@ -68,7 +70,7 @@ def town_map(request, town_slug):
 
 
 
-### Slot Views
+### Slots !
 
 
 def get_town_slot (town_slug, slot_number):
@@ -79,6 +81,8 @@ def get_town_slot (town_slug, slot_number):
 	return town_slot
 
 
+# main slot view
+@login_required
 def slot_info(request, town_slug, slot_number):
 	
 	town_slot = get_town_slot(town_slug, slot_number)
@@ -86,7 +90,7 @@ def slot_info(request, town_slug, slot_number):
 
 	# Purchasing and selling slots
 	if request.POST.get('bid'): purchase(request, town_slot) # if a bid is placed, roll the purchasing code
-	if request.POST.get('sell-slot') == "sell" : sell_slot(request, town_slug, slot_number)
+	if request.POST.get('sell-slot') == "sell" : sell_slot(request, town_slot)
 	bid = get_bid(town_slot, player)
 
 	# Runs
