@@ -197,7 +197,6 @@ input[type=submit]:not(.action) {
 	position: relative;
 	bottom: .2em;
 	right: .2em;
-	margin: 0;
 }
 
 .button + .button {
@@ -235,11 +234,10 @@ input[type=submit]:not(.action):active {
 .important.button { font-size: 1.25em; }
 .small.button { font-size: .8em; }
 
-.button.inline {
-	display: inline-block;
+p .button:not(.action) {
 	margin: 0 1em;
-	height: 2.5rem;
 	vertical-align: bottom;
+	height: 2.5rem;
 }
 
 
@@ -444,8 +442,6 @@ input[type=password] {
 
 input[type=button]:not(.action),
 input[type=submit]:not(.action) {
-	display: block;
-	margin: .5em 0;
 	font-size: 1em;
 	font-family: 'Berkshire Swash', 'Foundation', serif;
 	cursor: pointer;

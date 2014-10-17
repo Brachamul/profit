@@ -141,3 +141,6 @@ if DEBUG:
 from django.contrib import messages
 from django.contrib.messages import constants as message_constants
 MESSAGE_LEVEL = messages.DEBUG
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'

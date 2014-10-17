@@ -62,9 +62,10 @@
 		
 	{% else %}
 		<form method="post" action="" enctype="multipart/form-data">
-			{% csrf_token %}
-			<input type="number" name="bid" step="1" value="0"/>
-			<input class="inline button" type="submit" name="submit" value="Bid" />
+			<p>{% csrf_token %}
+				<input type="number" name="bid" step="1" value="0"/>
+				<input class="button" type="submit" name="submit" value="Bid" />
+			</p>
 		</form>
 	{% endif %}
 
