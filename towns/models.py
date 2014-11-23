@@ -16,6 +16,12 @@ class Town(models.Model):
 	ended = models.DateTimeField(default=None, blank=True, null=True)
 	phase = models.PositiveSmallIntegerField(default=0, null=True)
 
+	# Rules
+	minimum_wage = models.PositiveSmallIntegerField(default=100)
+
+	# Status
+	floating_wealth = models.PositiveIntegerField(default=0)
+
 	def __str__(self):
 		return self.name
 

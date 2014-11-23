@@ -110,13 +110,14 @@
 		<img src="{{ development_run.becomes.base_illustration.image.url }}" style="float: right;"/>
 		<p>{{ development_run.becomes.description }}</p>
 		<p class="requirements">Requires : 
+			<span>{{ development_run.required_amount_of_workers }} workers</span>
 			{% for required_material in development_run.developmentprojectrequiredmaterial_set.all %}
 			<span>{{ required_material.quantity }} {{ required_material.item|lower }}</span>
 			{% endfor %}
 		</p>
 		<div class="anchor"></div>
 		<form method="POST" action="">{% csrf_token %}
-			<input type="hidden" class="small button" name="time-goes-by-in" value="{{ town.slug }}">
+			<input type="hidden" name="development_run" value="{{ development_run.pk }}">
 			<input type="submit" class="action build" value="&#xe606; Build {{ development_run.becomes.name }}">
 		</form>
 	</div>

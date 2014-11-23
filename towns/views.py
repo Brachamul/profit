@@ -122,19 +122,25 @@ def sell_slot(request, town_slot):
 def purchase(request, town_slot):
 	bid = request.POST.get('bid') # Set 'bid' to whatever was posted in the form
 	try: bid.isdigit() # Is the bid made of digits, meaning, is it valid ?
-	except ValueError: messages.error(request, "It looks like your '%s' bid was invalid ! A bid should contain only numbers." % (bid))
+	except ValueError:
+		messages.error(request, "It looks like your '%s' bid was invalid ! A bid should contain only numbers." % (bid))
+		return False
 	bid = int(bid)
 	player = get_current_player(request)
-	if player.cash >= bid : pass # does the player have enough cash for this bid ?
-	else : messages.error(request, "You don't have the necessary funds to place a bid of <span class='cash'>%d</span> !" % (bid))
-	if bid >= town_slot.feature.min_price  : pass # does the bid match the minimum purchase price ?
-	else : messages.error(request, "The bid you placed was lower than the price set by the King." % (bid))
-	if town_slot.on_sale != None : pass
-	else : sell_slot(request, town_slot) 
+	if player.cash <= bid :
+		messages.error(request, "You don't have the necessary funds to place a bid of <span class='cash'>%d</span> !" % (bid))
+		return False
+	if town_slot.feature.min_price != None : # is there a minimum price for this feature ?
+		if bid <= town_slot.feature.min_price  : # is the bid enough to cover that minimum ?
+			messages.error(request, "The bid you placed was lower than the price set by the King.")
+			return False
+	if town_slot.on_sale == None :
+		sell_slot(request, town_slot) 
 	messages.success(request, "You placed a bid of %d !" % (bid))
 	player.cash -= bid
 	player.save()
 	create_bid(bid, player, town_slot)
+	return True
 
 
 def create_bid(amount, player, town_slot):

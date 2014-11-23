@@ -31,7 +31,7 @@ class Feature(models.Model):
 #	shape = models.CharField(max_length=255, blank=True, default='30,0,61,15,31,31,0,16') # Coordinates of the HTML map polygon
 	slug = models.SlugField(max_length=255, unique=True) # Used to name image folder and as a css class for rendering
 	min_price = models.PositiveSmallIntegerField(blank=True, null=True)
-	base_illustration = models.ForeignKey(Illustration, blank=True, null=True)
+	base_illustration = models.ForeignKey(Illustration, default=1)
 	def __str__(self):
 		return self.name
 
@@ -69,6 +69,7 @@ class DevelopmentProject(models.Model):
 	becomes = models.ForeignKey(Feature, related_name='Project Result')
 	required_materials = models.ManyToManyField(Item, through='DevelopmentProjectRequiredMaterial')
 	illustration = models.ForeignKey(Illustration, null=True)
+	required_amount_of_workers = models.PositiveSmallIntegerField(default=4)
 
 	def development_project(self):
 		return ("[%s] ⇒ [%s]" % (str(self.was), str(self.becomes)))

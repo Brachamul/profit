@@ -237,7 +237,7 @@ input[type=submit]:not(.action):active {
 p .button:not(.action) {
 	margin: 0 1em;
 	vertical-align: bottom;
-	height: 2.5rem;
+	height: 2.5em;
 }
 
 
@@ -517,6 +517,8 @@ input[type=number] {
 	padding: 0em .6em;
 	margin: .5em 1em .5em 0;
 	width: 100%;
+	background-image: url('../images/parchment.jpg');
+	background-size: cover;
 }
 
 .run div p { margin-top: 0; font-size: .8em;}
@@ -564,13 +566,14 @@ input[type=number] {
 .action {
 	display: inline-block;
 	font-family: "Symbols", "Average", serif;
-	background-color: lightgray;
 	color: black;
 	box-shadow: 0 0 0.150em black;
 	border: none;
 	border-left: .150em solid transparent;
 	padding: .30em .60em .35em .25em;
 	margin: .5em 0;
+	background-image: url('../images/parchment.jpg');
+	background-size: cover;
 }
 
 .action:hover {

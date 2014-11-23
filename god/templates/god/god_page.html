@@ -14,32 +14,40 @@
 <h1>Oh how time goes by !</h1>
 
 <section style="text-align: center;">
-
+<p>
 {% for town in list_of_active_towns %}
 <form method="POST" action="">{% csrf_token %}
-	<input type="hidden" class="small button" name="time-goes-by-in" value="{{ town.slug }}">
+	<input type="hidden" name="time-goes-by-in" value="{{ town.slug }}">
 	<input type="submit" class="inline small button" style="width: 100%; margin-bottom: .5em;" value="Time goes by for {{ town.name }} ! (phase {{ town.phase }})">
 </form>
 {% endfor %}
+</p>
 
-<br>
-
+<p>
 <form method="POST" action="">{% csrf_token %}
-	<input type="hidden" class="small button" name="time-goes-by-in" value="all">
+	<input type="hidden" name="time-goes-by-in" value="all">
 	<input style="margin: 0 auto;" type="submit" class="button" value="Time goes by for all !">
 </form>
+</p>
 
 </section>
 
 <section>
 
-<form method="POST" action="">{% csrf_token %}
-	<input type="hidden" class="small button" name="complete-auctions" value="all">
-	<input style="margin: 0 auto;" type="submit" class="button" value="Complete auctions for all !">
+<p>
+<form method="POST" action="" style="text-align: center;">{% csrf_token %}
+	<input type="hidden" name="process-auctions" value="only-completed">
+	<input type="submit" class="button" value="Process completed auctions !">
 </form>
+</p>
+
+<p>
+<form method="POST" action="" style="text-align: center;">{% csrf_token %}
+    <input type="hidden" name="process-auctions" value="all">
+    <input type="submit" class="button" value="Process all auctions regardless !">
+</form>
+</p>
 
 </section>
-
-{{ debug }}
 
 {% endblock content %}
