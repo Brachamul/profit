@@ -88,28 +88,40 @@ def slot_info(request, town_slug, slot_number):
 	town_slot = get_town_slot(town_slug, slot_number)
 	player = get_current_player(request)
 
+	current_runs = None # by default, nothing is going on and there are no runs
+
 	# Purchasing and selling slots
+	if request.POST.get('run'): current_runs = activate_runmill(request, town_slot)
 	if request.POST.get('bid'): purchase(request, town_slot) # if a bid is placed, roll the purchasing code
 	if request.POST.get('sell-slot') == "sell" : sell_slot(request, town_slot)
 	bid = get_bid(town_slot, player)
 
 	# Runs
-	runs = get_runs(town_slot, player)
+	available_runs = get_available_runs(town_slot, player)
 	
 	return render_to_response(
 		'towns/slot_info.html',	{
 			'town_slot': town_slot,
 			'player': player,
 			'bid': bid,
-			'runs': runs
+			'available_runs': available_runs,
+			'current_runs': current_runs
 			},
 		context_instance=RequestContext(request)
 		)
 
 
 
-### Purchasing and selling slots
+### Doing stuff with slots : purchasing, selling, upgrading, ...
 
+
+def activate_runmill(request, town_slot):
+	if request.POST.get('development_run'):
+		target_pk = request.POST.get('development_run')
+		town_slot.feature = Feature.objects.get(pk=target_pk)
+		town_slot.illustration = town_slot.feature.base_illustration
+		town_slot.save()
+		return target_pk
 
 from django.utils import timezone
 from datetime import timedelta
@@ -201,7 +213,7 @@ def leave_town(request):
 ### Joining and leaving a Town
 
 
-def get_runs(town_slot, player):
+def get_available_runs(town_slot, player):
 
 	# Collect development runs
 	development_runs = list()

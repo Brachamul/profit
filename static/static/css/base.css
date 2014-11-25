@@ -508,8 +508,9 @@ input[type=number] {
 
 .run {
 	display: inline-block;
-	font-family: 'Berkshire Swash', serif;
+	font-weight: bold;
 	line-height: 1.5;
+	font-size: 1.2rem;
 	color: black;
 	box-shadow: 0 0 0.150em black;
 	border-radius: .150em;
@@ -521,7 +522,7 @@ input[type=number] {
 	background-size: cover;
 }
 
-.run div p { margin-top: 0; font-size: .8em;}
+.run div p { margin-top: 0; font-weight: normal; font-size: 1rem;}
 
 .run:hover,
 .run:active { border-bottom: .150em solid black; }
@@ -550,11 +551,11 @@ input[type=number] {
 }
 
 
-.requirements {  }
+.run .requirements { font-weight: bold; }
 /* Adds a comma after each required element */
-.requirements span:not(:last-child):after { content: ","; }
+.run .requirements span:not(:last-child):after { content: ","; }
 /* Adds a stop after the last element */
-.requirements span:last-child:after { content: "."; }
+.run .requirements span:last-child:after { content: "."; }
 
 
 

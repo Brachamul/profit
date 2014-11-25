@@ -53,7 +53,7 @@ class DevelopmentProjectRequiredMaterialInline(admin.TabularInline):
 
 class DevelopmentProjectAdmin(admin.ModelAdmin):
 	inlines = (DevelopmentProjectRequiredMaterialInline,)
-	list_display = ("development_project", "was", "becomes", "types_of_materials_needed")
+	list_display = ("id", "development_project", "was", "becomes", "types_of_materials_needed")
 
 admin.site.register(DevelopmentProject, DevelopmentProjectAdmin)
 

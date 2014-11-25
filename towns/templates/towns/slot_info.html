@@ -15,6 +15,25 @@
 
 <h1>{{ town_slot.feature }}</h1>
 
+{% if user.is_active and user.is_staff %}
+<p>We are running something here !</p>
+<p>{{ current_runs }}</p>
+<!-- Return to meadow code start -->
+	<div>
+		<div class="anchor"></div>
+		<form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+			<input type="hidden" name="run" value="run"> <!-- activates the runmill -->
+			<input type="hidden" name="development_run" value="1"> <!-- pk of meadow -->
+			<input type="submit" class="action build" value="&#xe606; Downgrade to Meadow">
+		</form>
+	</div>
+<!-- Return to meadow code end -->
+{% endif %}
+
+<!-- Runmill Starts -->
+
+<!-- Runmill Ends -->
+
 {% if town_slot.owner == None %}
 	<p>This area of land belongs to the King.</p>
 {% elif town_slot.owner.user == user %}
@@ -74,23 +93,23 @@
 
 
 {% if town_slot.owner.user == user and town_slot.on_sale == None %}
-{% if runs.production_runs != None or runs.service_runs != None or runs.boost_runs != None and town_slot.owner.user == user %}
+{% if available_runs.production_runs != None or available_runs.service_runs != None or available_runs.boost_runs != None and town_slot.owner.user == user %}
 <section class="tasks">
 
 <h2>Available Tasks</h2>
 
-{% for production_run in runs.production_runs %}
+{% for production_run in available_runs.production_runs %}
 <input class="hidden" name="" type="checkbox"/>
 <label class="run" for=""><img src="{{ production_run.illustration.image.url }}"/></label>
 <div></div>
 {% endfor %}
 
-{% for service_run in runs.service_runs %}
+{% for service_run in available_runs.service_runs %}
 <input class="hidden" name="" type="checkbox"/>
 <label class="run" for=""><img src="{{ service_run.illustration.image.url }}"/></label>
 {% endfor %}
 
-{% for boost_run in runs.boost_runs %}
+{% for boost_run in available_runs.boost_runs %}
 <input class="hidden" name="" type="checkbox"/>
 <label class="run" for=""><img src="{{ boost_run.illustration.image.url }}"/></label>
 {% endfor %}
@@ -98,12 +117,12 @@
 </section>
 {% endif %}<!-- tasks -->
 
-{% if runs.development_runs != None or runs.upgrade_runs != None %}
+{% if available_runs.development_runs != None or available_runs.upgrade_runs != None %}
 <section class="upgrades">
 
 <h2>Upgrades & Developments</h2>
 
-{% for development_run in runs.development_runs %}
+{% for development_run in available_runs.development_runs %}
 <input class="hidden" id="dev-{{forloop.counter}}" type="checkbox"/>
 <label class="run" for="dev-{{forloop.counter}}">{{ development_run.becomes.name }}
 	<div>
@@ -116,15 +135,16 @@
 			{% endfor %}
 		</p>
 		<div class="anchor"></div>
-		<form method="POST" action="">{% csrf_token %}
-			<input type="hidden" name="development_run" value="{{ development_run.pk }}">
+		<form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+			<input type="hidden" name="run" value="run"> <!-- activates the runmill -->
+			<input type="hidden" name="development_run" value="{{ development_run.becomes.pk }}"> <!-- what kind of run, what target ? -->
 			<input type="submit" class="action build" value="&#xe606; Build {{ development_run.becomes.name }}">
 		</form>
 	</div>
 </label>
 {% endfor %}
 
-{% for upgrade_run in runs.upgrade_runs %}
+{% for upgrade_run in available_runs.upgrade_runs %}
 <input class="hidden" name="" type="checkbox"/>
 <label class="run" for=""><img src="{{ upgrade_run.illustration.image.url }}"/></label>
 {% endfor %}
