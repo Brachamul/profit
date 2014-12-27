@@ -11,21 +11,21 @@
 {% block content %}
 
 {% if joinable_towns %}
-    <p>These towns are currently available for you to settle :</p><br><br>
+	<p>These towns are currently available for you to settle :</p><br><br>
 	<table class="horizontal">
 	{% for town in joinable_towns %}
-        <tr>
+		<tr>
 			<td>{{ town.name }}</td>
 			<td>{{ town.population }} <span class="symbol">&#xe602;</span></td>
-            <td>Founded {{ town.founded | timesince }} ago</td>
-            <td>
-                <form method="POST" action="/town/create_player/">{% csrf_token %}
-                <input type="hidden" class="small button" name="town_to_join" value="{{ town.slug }}">
-                <input type="submit" class="small button" value="→">
-                </form>
-            </td>
+			<td>Founded {{ town.founded | timesince }} ago</td>
+			<td>
+				<form method="POST" action="/town/create_player/">{% csrf_token %}
+				<input type="hidden" class="small button" name="town_to_join" value="{{ town.slug }}">
+				<input type="submit" class="small button" value="→">
+				</form>
+			</td>
 		</tr>
-        <tr><td></td></tr>
+		<tr><td></td></tr>
 	{% endfor %}
 	</table>
 {% else %}
