@@ -40,4 +40,5 @@ Icon
 *.pot
 *.pyc
 __pycache__/
+static/static-only/
 local_settings.py
