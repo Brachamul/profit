@@ -9,6 +9,7 @@ from django.utils import timezone
 # Create your views here.
 
 from towns.models import *
+from population.models import *
 
 from django.contrib.admin.views.decorators import staff_member_required
 @staff_member_required
@@ -17,9 +18,10 @@ def god_home(request):
 	advance_phase(request, list_of_active_towns) # If one of the time-goes-by buttons were pressed.
 	process_auctions(request) # Check if any auction has run its course. If so, process bids and assign new owner.
 	return render_to_response(
-		'god/god_page.html', {'list_of_active_towns': list_of_active_towns},
-		context_instance=RequestContext(request)
-		)
+		'god/god_page.html', {
+			'list_of_active_towns': list_of_active_towns,
+			},
+		context_instance=RequestContext(request))
 
 
 def god_town_info(request, town_slug):
@@ -53,6 +55,8 @@ def reillustrate(town):
 		town_slot.save()
 
 def process_auctions(request) :
+	# this is triggered when the process auctions button is pressed.
+	# the button can carry several commands
 	command = request.POST.get('process-auctions')
 	if command == "only-completed" or command == "all"  :
 		list_of_onsale_townslots = TownSlot.objects.exclude(on_sale=None)

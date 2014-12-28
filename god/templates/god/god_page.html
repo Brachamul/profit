@@ -15,11 +15,11 @@
 
 <section>
 <table class="backend vertical">
-<thead><td>Town</td><td>Pop.</td><td colspan="2">Phase</td></thead>
+<thead><td>Town</td><td>Players</td><td colspan="2">Phase</td><td>Pop.</td></thead>
 {% for town in list_of_active_towns %}
 <tr>
 	<td>{{ town.name }}</td>
-	<td style="text-align: center;">{{ town.population }}</td>
+	<td style="text-align: center;">{{ town.player_set.count }}</td>
 	<td style="text-align: center;">{{ town.phase }}</td>
 	<td>
 		<form method="POST" action="">{% csrf_token %}
@@ -27,6 +27,7 @@
 			<input type="submit" class="minibutton" value="+">
 		</form>
 	</td>
+	<td style="text-align: center;">{{ town.resident_set.count }}</td>
 </tr>
 {% endfor %}
 </table>

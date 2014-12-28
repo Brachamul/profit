@@ -95,6 +95,9 @@ def slot_info(request, town_slug, slot_number):
 	if request.POST.get('sell-slot') == "sell" : sell_slot(request, town_slot)
 	bid = get_bid(town_slot, player)
 
+	# Resources
+	resources = get_resources(player)
+
 	# Runs
 	available_runs = get_available_runs(town_slot, player)
 	
@@ -103,6 +106,7 @@ def slot_info(request, town_slug, slot_number):
 			'town_slot': town_slot,
 			'player': player,
 			'bid': bid,
+			'resources': resources,
 			'available_runs': available_runs,
 			'current_runs': current_runs
 			},
@@ -196,6 +200,18 @@ def activate_runmill(request, town_slot):
 		town_slot.illustration = town_slot.feature.base_illustration
 		town_slot.save()
 		return target_pk
+
+
+
+### Resources
+
+
+def get_resources(player):
+	resources = []
+	for resource in PlayerStuff.objects.filter(player=player):
+		resource = [resource.item, resource.quantity]
+		resources.append(resource)
+	return resources
 
 
 
