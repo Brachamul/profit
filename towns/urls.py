@@ -15,8 +15,6 @@ urlpatterns = patterns('',
 		# the dash means i accept dashes in the name, ie for slugs
 		# the \w is here to say i accept words
 		# the + sign says that i can accept several of these items
-		# the (?i) should say that i'll ignore upper/lower case, but doesn't work
-		# tried something like ([-\w]+)/i but didn't work either
 		url(r'^$', views.town_map, name='town_map'),
 		url(r'^slot/(?P<slot_number>[\d]+)/', include(patterns('',
 			# the \d says to accept only digits

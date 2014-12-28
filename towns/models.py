@@ -46,11 +46,21 @@ class Player(models.Model):
 	town = models.ForeignKey(Town)
 	user = models.ForeignKey(User)
 	cash = models.PositiveIntegerField(default=10000)
+	stuff= models.ManyToManyField(Item, through='PlayerStuff')
 	joined = models.DateTimeField(auto_now_add=True) # States when the user joined a town
 	left = models.DateTimeField(blank=True, null=True)
 
 	def __str__(self):
 		return self.user.username
+
+class PlayerStuff(models.Model):
+	player = models.ForeignKey(Player)
+	item = models.ForeignKey(Item)
+	quantity = models.PositiveSmallIntegerField(default=0, blank=True)
+
+	def __str__(self):
+		quantity_of_items = str(self.item) + ', ' + str(self.quantity)
+		return quantity_of_items
 
 
 

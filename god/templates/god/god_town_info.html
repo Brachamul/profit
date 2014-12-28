@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block head %}{{ block.super }}
+
+<title>God - {{ town }}</title>
+
+{% endblock head %}
+
+
+{% block content %}
+
+<h1>{{ town }}</h1>
+<p>- God Page</p>
+
+<br><br>
+
+<style>
+    td { border: 1px solid black; }
+</style>
+
+<table>
+<tr><td>Population</td><td>{{ town.population }}</td></tr>
+<tr><td>Founded</td><td>{{ town.founded }}</td></tr>
+<tr><td>Phase n°</td><td>{{ town.phase }}</td></tr>
+<tr><td>Ended</td><td>{{ town.ended }}</td></tr>
+</table>
+
+{% endblock content %}

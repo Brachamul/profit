@@ -15,20 +15,24 @@
 
 <h1>{{ town_slot.feature }}</h1>
 
-{% if user.is_active and user.is_staff %}
-<p>We are running something here !</p>
-<p>{{ current_runs }}</p>
-<!-- Return to meadow code start -->
-	<div>
-		<div class="anchor"></div>
-		<form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
-			<input type="hidden" name="run" value="run"> <!-- activates the runmill -->
-			<input type="hidden" name="development_run" value="1"> <!-- pk of meadow -->
-			<input type="submit" class="action build" value="&#xe606; Downgrade to Meadow">
-		</form>
-	</div>
-<!-- Return to meadow code end -->
-{% endif %}
+{% comment "Debugging stuff to check production" %}
+
+	{% if user.is_active and user.is_staff %}
+	<p>We are running something here !</p>
+	<p>{{ current_runs }}</p>
+	<!-- Return to meadow code start -->
+		<div>
+			<div class="anchor"></div>
+			<form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+				<input type="hidden" name="run" value="run"> <!-- activates the runmill -->
+				<input type="hidden" name="development_run" value="1"> <!-- pk of meadow -->
+				<input type="submit" class="action build" value="&#xe606; Downgrade to Meadow">
+			</form>
+		</div>
+	<!-- Return to meadow code end -->
+	{% endif %}
+
+{% endcomment %}
 
 <!-- Runmill Starts -->
 
@@ -118,6 +122,7 @@
 {% endif %}<!-- tasks -->
 
 {% if available_runs.development_runs != None or available_runs.upgrade_runs != None %}
+
 <section class="upgrades">
 
 <h2>Upgrades & Developments</h2>
@@ -134,6 +139,9 @@
 			<span>{{ required_material.quantity }} {{ required_material.item|lower }}</span>
 			{% endfor %}
 		</p>
+		{% for available_resource in development_run.available_resources %}
+		<p class="small">{{ available_resource }}</p>
+		{% endfor %}
 		<div class="anchor"></div>
 		<form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
 			<input type="hidden" name="run" value="run"> <!-- activates the runmill -->

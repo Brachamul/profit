@@ -13,15 +13,23 @@
 
 <h1>Oh how time goes by !</h1>
 
-<section style="text-align: center;">
-<p>
+<section>
+<table class="backend vertical">
+<thead><td>Town</td><td>Pop.</td><td colspan="2">Phase</td></thead>
 {% for town in list_of_active_towns %}
-<form method="POST" action="">{% csrf_token %}
-	<input type="hidden" name="time-goes-by-in" value="{{ town.slug }}">
-	<input type="submit" class="inline small button" style="width: 100%; margin-bottom: .5em;" value="Time goes by for {{ town.name }} ! (phase {{ town.phase }})">
-</form>
+<tr>
+	<td>{{ town.name }}</td>
+	<td style="text-align: center;">{{ town.population }}</td>
+	<td style="text-align: center;">{{ town.phase }}</td>
+	<td>
+		<form method="POST" action="">{% csrf_token %}
+			<input type="hidden" name="time-goes-by-in" value="{{ town.slug }}">
+			<input type="submit" class="minibutton" value="+">
+		</form>
+	</td>
+</tr>
 {% endfor %}
-</p>
+</table>
 
 <p>
 <form method="POST" action="">{% csrf_token %}
@@ -43,8 +51,8 @@
 
 <p>
 <form method="POST" action="" style="text-align: center;">{% csrf_token %}
-    <input type="hidden" name="process-auctions" value="all">
-    <input type="submit" class="button" value="Process all auctions regardless !">
+	<input type="hidden" name="process-auctions" value="all">
+	<input type="submit" class="button" value="Process all auctions regardless !">
 </form>
 </p>
 

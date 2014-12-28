@@ -69,16 +69,15 @@ def town_map(request, town_slug):
 	stored_items = models.ManyToManyField(Item, through='StoredItems')
 
 
-
-### Slots !
-
-
 def get_town_slot (town_slug, slot_number):
 	# Reusable function for fetching a TownSlot
 	town = Town.objects.get(slug=town_slug)
 	master_slot = Slot.objects.get(map_layout=town.map_layout, number=int(slot_number))
 	town_slot = TownSlot.objects.get(slot=master_slot, town=town)
 	return town_slot
+
+
+### Slots !
 
 
 # main slot view
@@ -112,16 +111,8 @@ def slot_info(request, town_slug, slot_number):
 
 
 
-### Doing stuff with slots : purchasing, selling, upgrading, ...
+### Buying & Selling
 
-
-def activate_runmill(request, town_slot):
-	if request.POST.get('development_run'):
-		target_pk = request.POST.get('development_run')
-		town_slot.feature = Feature.objects.get(pk=target_pk)
-		town_slot.illustration = town_slot.feature.base_illustration
-		town_slot.save()
-		return target_pk
 
 from django.utils import timezone
 from datetime import timedelta
@@ -167,7 +158,48 @@ def get_bid(town_slot, player):
 
 
 
-### Joining and leaving a Town
+### Running Tasks
+
+
+def get_available_runs(town_slot, player):
+
+	# Collect development runs
+	development_runs = list()
+	for development_project in DevelopmentProject.objects.filter(was=town_slot.feature) :
+		# insert techtree check here
+		development_project.available_resources = list()
+		for required_materials in DevelopmentProjectRequiredMaterial.objects.filter(development_project=development_project) :
+			item = required_materials.item
+			quantity = required_materials.quantity
+			try : currently_owned = PlayerStuff.objects.get(player=player, item=item)
+			except ObjectDoesNotExist :
+				currently_owned = None
+				string = "You don't have any {item}.".format(item=item)
+			else :
+				string = "You currently have {quantity} units of {item}.".format(quantity=PlayerStuff.quantity, item=item)
+			development_project.available_resources.append(string)
+		development_runs.append(development_project)
+
+	# Collect upgrade runs
+	upgrade_runs = list()
+	for upgrade in Upgrade.objects.filter(feature=town_slot.feature) :
+		# insert techtree check here
+		upgrade_runs.append(upgrade)
+
+	return {'development_runs': development_runs, 'upgrade_runs': upgrade_runs}
+
+
+def activate_runmill(request, town_slot):
+	if request.POST.get('development_run'):
+		target_pk = request.POST.get('development_run')
+		town_slot.feature = Feature.objects.get(pk=target_pk)
+		town_slot.illustration = town_slot.feature.base_illustration
+		town_slot.save()
+		return target_pk
+
+
+
+### Town Meta
 
 
 def joinable_towns(request): # A page that lists towns available for joining
@@ -207,25 +239,3 @@ def leave_town(request):
 	player.left = datetime.datetime.now()
 	player.save()
 	return HttpResponseRedirect('/u/myprofile/')
-
-
-
-### Joining and leaving a Town
-
-
-def get_available_runs(town_slot, player):
-
-	# Collect development runs
-	development_runs = list()
-	for development_project in DevelopmentProject.objects.filter(was=town_slot.feature) :
-		# insert techtree check here
-		development_runs.append(development_project)
-
-	# Collect upgrade runs
-	upgrade_runs = list()
-	for upgrade in Upgrade.objects.filter(feature=town_slot.feature) :
-		# insert techtree check here
-		upgrade_runs.append(upgrade)
-
-	return {'development_runs': development_runs, 'upgrade_runs': upgrade_runs}
-

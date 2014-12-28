@@ -199,6 +199,9 @@ input[type=submit]:not(.action) {
 	right: .2em;
 }
 
+input[type=submit].minibutton:not(.action),
+input[type=button].minibutton:not(.action) { padding : 0 .3em .5em .3em; height : 1.5em; }
+
 .button + .button {
 	margin-left: 1em;
 }
@@ -335,7 +338,7 @@ table.horizontal tr td:first-child {
 	font-size: 1.3em;
 }
 
-table.vertical tr:first-child {
+table.vertical thead {
 	/* Styles the first row */
 	font-family: 'Berkshire Swash', serif;
 	font-size: 1.3em;
@@ -344,7 +347,6 @@ table.vertical tr:first-child {
 table.big {
 	font-size: 1.2rem;
 }
-
 
 
 /*
@@ -462,6 +464,10 @@ input[type=number] {
     -moz-appearance:textfield;
 }
 
+.mini-button {
+
+}
+
 /*
  * User Page
  *
@@ -523,6 +529,7 @@ input[type=number] {
 }
 
 .run div p { margin-top: 0; font-weight: normal; font-size: 1rem;}
+.run div p.small { font-size: .8rem; }
 
 .run:hover,
 .run:active { border-bottom: .150em solid black; }
