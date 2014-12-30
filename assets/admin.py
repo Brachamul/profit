@@ -38,6 +38,7 @@ class DevelopmentProjectBecomes(admin.TabularInline):
 	extra = 0
 
 
+
 class FeatureAdmin(admin.ModelAdmin):
 	model = Feature
 	list_display = ("name", "id", "description")
@@ -45,6 +46,7 @@ class FeatureAdmin(admin.ModelAdmin):
 	prepopulated_fields = {"slug": ("name",)}
 
 admin.site.register(Feature, FeatureAdmin)
+
 
 
 class DevelopmentProjectRequiredMaterialInline(admin.TabularInline):
@@ -58,6 +60,7 @@ class DevelopmentProjectAdmin(admin.ModelAdmin):
 admin.site.register(DevelopmentProject, DevelopmentProjectAdmin)
 
 
+
 class UpgradeRequiredMaterialInline(admin.TabularInline):
 	model = UpgradeRequiredMaterial
 	extra = 1
@@ -67,3 +70,15 @@ class UpgradeAdmin(admin.ModelAdmin):
 	list_display = ("name", "types_of_materials_needed")
 
 admin.site.register(Upgrade, UpgradeAdmin)
+
+
+
+class ProductionOutputInline(admin.TabularInline):
+	model = ProductionOutput
+	extra = 1
+
+class ProductionAdmin(admin.ModelAdmin):
+	inlines = (ProductionOutputInline,)
+	list_display = ("name", "production_output")
+
+admin.site.register(Production, ProductionAdmin)

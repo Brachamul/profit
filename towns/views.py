@@ -168,7 +168,7 @@ def get_bid(town_slot, player):
 def get_available_runs(town_slot, player):
 
 	# Collect development runs
-	development_runs = list()
+	development_runs = []
 	for development_project in DevelopmentProject.objects.filter(was=town_slot.feature) :
 		# insert techtree check here
 		development_project.available_resources = list()
@@ -178,17 +178,24 @@ def get_available_runs(town_slot, player):
 			try : currently_owned = PlayerStuff.objects.get(player=player, item=item)
 			except ObjectDoesNotExist :
 				currently_owned = None
-				string = "You don't have any {item}.".format(item=item)
+				string = "You don't have any {item}.".format(item=item.lower())
 			else :
-				string = "You currently have {quantity} units of {item}.".format(quantity=PlayerStuff.quantity, item=item)
+				string = "You currently have {quantity} units of {item}.".format(quantity=PlayerStuff.quantity, item=item.lower())
 			development_project.available_resources.append(string)
 		development_runs.append(development_project)
 
 	# Collect upgrade runs
-	upgrade_runs = list()
+	upgrade_runs = []
 	for upgrade in Upgrade.objects.filter(feature=town_slot.feature) :
 		# insert techtree check here
 		upgrade_runs.append(upgrade)
+
+	# Collect upgrade runs
+	production_runs = []
+	for production in Production.objects.filter(feature=town_slot.feature) :
+		# insert techtree check here
+		production_runs.append(upgrade)
+
 
 	return {'development_runs': development_runs, 'upgrade_runs': upgrade_runs}
 
