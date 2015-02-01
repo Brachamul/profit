@@ -13,6 +13,7 @@ from django.contrib.auth.models import User
 from .models import *
 from maps.models import *
 from assets.models import *
+from activities.models import *
 
 @login_required
 def town_map(request, town_slug):
@@ -186,26 +187,40 @@ def get_available_runs(town_slot, player):
 
 	# Collect upgrade runs
 	upgrade_runs = []
-	for upgrade in Upgrade.objects.filter(feature=town_slot.feature) :
+	for upgrade_option in Upgrade.objects.filter(feature=town_slot.feature) :
 		# insert techtree check here
-		upgrade_runs.append(upgrade)
+		upgrade_runs.append(upgrade_option)
 
-	# Collect upgrade runs
+	# Collect production runs
 	production_runs = []
-	for production in Production.objects.filter(feature=town_slot.feature) :
+	for production_option in Production.objects.filter(feature=town_slot.feature) :
 		# insert techtree check here
-		production_runs.append(upgrade)
+		production_runs.append(production_option)
 
 
-	return {'development_runs': development_runs, 'upgrade_runs': upgrade_runs}
+	return {'development_runs': development_runs, 'upgrade_runs': upgrade_runs, 'production_runs': production_runs, }
 
 
 def activate_runmill(request, town_slot):
+	# Development Runmill
 	if request.POST.get('development_run'):
 		target_pk = request.POST.get('development_run')
 		town_slot.feature = Feature.objects.get(pk=target_pk)
 		town_slot.illustration = town_slot.feature.base_illustration
 		town_slot.save()
+		return target_pk
+	# Production Runmill
+	if request.POST.get('production_run'):
+		target_pk = request.POST.get('production_run')
+		production = Production.objects.get(pk=target_pk)
+		new_run = Run(
+			town_slot=town_slot,
+			is_production=production,
+			recurrent=production.recurrent,
+		#	pay = 
+		#	remaining_cycles = 
+			)
+		new_run.save()
 		return target_pk
 
 

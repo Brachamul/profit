@@ -95,46 +95,79 @@
 </section>
 {% endif %}<!-- for sale -->
 
-
+<!-- User is Owner Starts -->
 {% if town_slot.owner.user == user and town_slot.on_sale == None %}
+
+<!-- Available Tasks Start -->
+{% comment "come back to this to hide the block when no runs are available" %}
 {% if available_runs.production_runs != None or available_runs.service_runs != None or available_runs.boost_runs != None and town_slot.owner.user == user %}
+{% endcomment %}
 <section class="tasks">
 
 <h2>Available Tasks</h2>
 
+<!-- Production -->
 {% for production_run in available_runs.production_runs %}
-<input class="hidden" name="" type="checkbox"/>
-<label class="run" for=""><img src="{{ production_run.illustration.image.url }}"/></label>
-<div></div>
+<input class="hidden" id="production-run-{{forloop.counter}}" type="checkbox"/>
+<label class="run" for="production-run-{{forloop.counter}}">{{ production_run.name }}
+	<div>
+		<img src="{{ production_run.illustration.image.url }}" style="float: right;"/>
+		<p>{{ production_run.description }}</p>
+		<p class="data">Output : 
+			{% for output in production_run.productionoutput_set.all %}
+			<span>{{ output.quantity }} {{ output.item|lower }}</span>
+			{% endfor %}
+		</p>
+		<p class="data">Requires : 
+			<span>{{ production_run.required_amount_of_workers }} worker{{ production_run.required_amount_of_workers|pluralize }}</span>
+			{% for required_material in production_run.productionrequiredmaterial_set.all %}
+			<span>{{ required_material.quantity }} {{ required_material.item|lower }}</span>
+			{% endfor %}
+		</p>
+		<div class="anchor"></div>
+		<form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+			<input type="hidden" name="run" value="run"> <!-- activates the runmill -->
+			<input type="hidden" name="production_run" value="{{ production_run.pk }}"> <!-- what kind of run, what target ? -->
+			<input type="submit" class="action build" value="&#xe606; {{ production_run.name }}">
+		</form>
+	</div>
+</label>
 {% endfor %}
 
+<!-- Services -->
 {% for service_run in available_runs.service_runs %}
 <input class="hidden" name="" type="checkbox"/>
 <label class="run" for=""><img src="{{ service_run.illustration.image.url }}"/></label>
 {% endfor %}
 
+<!-- Boosts -->
 {% for boost_run in available_runs.boost_runs %}
 <input class="hidden" name="" type="checkbox"/>
 <label class="run" for=""><img src="{{ boost_run.illustration.image.url }}"/></label>
 {% endfor %}
 
 </section>
-{% endif %}<!-- tasks -->
+{% comment "disabled block hiding" %}
+{% endif %}
+{% endcomment %}
+<!-- Available Tasks End -->
 
+<!-- Upgrades & Developments Start -->
 {% if available_runs.development_runs != None or available_runs.upgrade_runs != None %}
 
 <section class="upgrades">
 
 <h2>Upgrades & Developments</h2>
 
+<!-- Developments -->
 {% for development_run in available_runs.development_runs %}
-<input class="hidden" id="dev-{{forloop.counter}}" type="checkbox"/>
-<label class="run" for="dev-{{forloop.counter}}">{{ development_run.becomes.name }}
+<input class="hidden" id="development-run-{{forloop.counter}}" type="checkbox"/>
+<label class="run" for="development-run-{{forloop.counter}}">{{ development_run.becomes.name }}
 	<div>
 		<img src="{{ development_run.becomes.base_illustration.image.url }}" style="float: right;"/>
 		<p>{{ development_run.becomes.description }}</p>
-		<p class="requirements">Requires : 
-			<span>{{ development_run.required_amount_of_workers }} workers</span>
+		<p class="data">Requires : 
+			<span>{{ development_run.required_amount_of_workers }} worker{{ development_run.required_amount_of_workers }}</span>
 			{% for required_material in development_run.developmentprojectrequiredmaterial_set.all %}
 			<span>{{ required_material.quantity }} {{ required_material.item|lower }}</span>
 			{% endfor %}
@@ -152,14 +185,15 @@
 </label>
 {% endfor %}
 
+<!-- Upgrades -->
 {% for upgrade_run in available_runs.upgrade_runs %}
 <input class="hidden" name="" type="checkbox"/>
 <label class="run" for=""><img src="{{ upgrade_run.illustration.image.url }}"/></label>
 {% endfor %}
 
 </section>
-{% endif %}<!-- upgrades -->
-{% endif %}<!-- user = owner -->
+{% endif %}<!-- Upgrades & Developments End -->
+{% endif %}<!-- User is Owner Ends-->
 
 
 <section style="text-align: right;">

@@ -558,11 +558,11 @@ input[type=number] {
 }
 
 
-.run .requirements { font-weight: bold; }
+.run .data { font-weight: bold; }
 /* Adds a comma after each required element */
-.run .requirements span:not(:last-child):after { content: ","; }
+.run .data span:not(:last-child):after { content: ","; }
 /* Adds a stop after the last element */
-.run .requirements span:last-child:after { content: "."; }
+.run .data span:last-child:after { content: "."; }
 
 
 

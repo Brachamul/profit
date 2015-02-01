@@ -71,7 +71,7 @@ class DevelopmentProject(models.Model):
 	becomes = models.ForeignKey(Feature, related_name='Project Result')
 	required_materials = models.ManyToManyField(Item, through='DevelopmentProjectRequiredMaterial')
 	illustration = models.ForeignKey(Illustration, null=True)
-	required_amount_of_workers = models.PositiveSmallIntegerField(default=4)
+	required_amount_of_workers = models.PositiveSmallIntegerField(default=0, blank=True, null=True)
 
 	def development_project(self):
 		return ("[%s] ⇒ [%s]" % (str(self.was), str(self.becomes)))
@@ -100,7 +100,8 @@ class Production(models.Model):
 	name = models.CharField(max_length=255, unique=True)
 	description = models.TextField(max_length=1000, blank=True)
 	output = models.ManyToManyField(Item, through='ProductionOutput')
-	workers = models.PositiveSmallIntegerField(default=0, blank=True, null=True)
+	required_amount_of_workers = models.PositiveSmallIntegerField(default=0, blank=True, null=True)
+	recurrent = models.BooleanField(default=False)
 	illustration = models.ForeignKey(Illustration, null=True)
 
 	def __str__(self):
@@ -111,6 +112,15 @@ class Production(models.Model):
 
 
 class ProductionOutput(models.Model):
+	production = models.ForeignKey(Production)
+	item = models.ForeignKey(Item)
+	quantity = models.PositiveSmallIntegerField(default=0, blank=True)
+
+	def __str__(self):
+		quantity_of_items = str(self.item) + ', ' + str(self.quantity)
+		return quantity_of_items
+
+class ProductionRequiredMaterial(models.Model):
 	production = models.ForeignKey(Production)
 	item = models.ForeignKey(Item)
 	quantity = models.PositiveSmallIntegerField(default=0, blank=True)

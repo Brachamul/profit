@@ -13,7 +13,7 @@ class Run(models.Model):
 	# A run can be either one of the following things :
 	is_development = models.ForeignKey(DevelopmentProject, blank=True, null=True)
 	is_upgrade = models.ForeignKey(Upgrade, blank=True, null=True)
-#	is_production = models.ForeignKey(Production, blank=True, null=True)
+	is_production = models.ForeignKey(Production, blank=True, null=True)
 #	is_service = models.ForeignKey(Service, blank=True, null=True)
 #	is_boost = models.ForeignKey(Boost, blank=True, null=True)
 
