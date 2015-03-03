@@ -101,7 +101,7 @@ class Production(models.Model):
 	description = models.TextField(max_length=1000, blank=True)
 	output = models.ManyToManyField(Item, through='ProductionOutput')
 	required_amount_of_workers = models.PositiveSmallIntegerField(default=0, blank=True, null=True)
-	recurrent = models.BooleanField(default=False)
+	can_be_recurrent = models.BooleanField(default=True)
 	illustration = models.ForeignKey(Illustration, null=True)
 
 	def __str__(self):

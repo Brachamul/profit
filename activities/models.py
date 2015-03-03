@@ -17,6 +17,6 @@ class Run(models.Model):
 #	is_service = models.ForeignKey(Service, blank=True, null=True)
 #	is_boost = models.ForeignKey(Boost, blank=True, null=True)
 
-	pay = models.PositiveSmallIntegerField()
-	recurrent = models.BooleanField(default=False) # Does it automatically repeat itself ?
-	remaining_cycles = models.PositiveSmallIntegerField(blank=True, null=True) # Does it have a defined runtime ?
+#	pay = models.PositiveSmallIntegerField()
+	is_recurrent = models.BooleanField(default=False) # Does it automatically repeat itself ?
+	remaining_cycles = models.PositiveSmallIntegerField(default=1) # Does it have a defined runtime ?

@@ -216,8 +216,7 @@ def activate_runmill(request, town_slot):
 		new_run = Run(
 			town_slot=town_slot,
 			is_production=production,
-			recurrent=production.recurrent,
-		#	pay = 
+		#	is_recurrent=production.recurrent,
 		#	remaining_cycles = 
 			)
 		new_run.save()
